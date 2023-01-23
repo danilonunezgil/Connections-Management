@@ -280,7 +280,7 @@ public class PostgresqlMenu {
             }
         } catch (InputMismatchException e) {
             e.getMessage();
-            System.out.println("DEBE INGRESER COMO OPCION UN NUMERO ENTERO");
+            System.out.println("DEB INGRESER COMO OPCION UN NUMERO ENTERO");
         }
     } 
 }
