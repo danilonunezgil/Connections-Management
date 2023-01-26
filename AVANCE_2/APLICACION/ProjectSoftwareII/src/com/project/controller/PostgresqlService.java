@@ -1,8 +1,8 @@
 package com.project.controller;
 
+import com.project.database.ConexionPostgresql;
 import com.project.model.item.ItemBO;
 import com.project.model.student.StudentBO;
-import com.project.database.Connexion;
 import com.project.model.friend.FriendBO;
 import com.project.model.friend.Friend;
 import com.project.model.student.InfoStudentDTO;
@@ -14,8 +14,7 @@ public class PostgresqlService{
     private final FriendBO friendBO;
     private final StudentBO studentBO;
     private final ItemBO itemBO;
-    private final Connection connection = Connexion.conectar("org.postgresql.Driver","jdbc:postgresql://localhost:5432/sistemas","postgres","4023");
-
+   
     public PostgresqlService() {
         this.friendBO = new FriendBO();
         this.studentBO = new StudentBO();
@@ -24,60 +23,60 @@ public class PostgresqlService{
 
     //CRUD PARA TABLA AMIGO
     public Friend ingresarAmigo(){
-        return friendBO.insertar(connection);
+        return friendBO.insertar(ConexionPostgresql.getInstance().conectar());
     }
     
     public List<Friend> listarAmigo(){
-        return friendBO.listar(connection);
+        return friendBO.listar(ConexionPostgresql.getInstance().conectar());
     }
     
     public Friend actualizarAmigo(Friend amigo){
-        return friendBO.actualizar(connection,amigo);
+        return friendBO.actualizar(ConexionPostgresql.getInstance().conectar(),amigo);
     }
     
     public void eliminarAmigo(Number idAmigo){
-        friendBO.eliminar(connection,idAmigo);
+        friendBO.eliminar(ConexionPostgresql.getInstance().conectar(),idAmigo);
     }
     
     public Friend buscarAmigoId(Number idAmigo){
-        return friendBO.buscarId(connection,idAmigo);
+        return friendBO.buscarId(ConexionPostgresql.getInstance().conectar(),idAmigo);
     }
     //CONTROL DE TRANSACCIONES
     
     public String savePoint(){
-        return Connexion.savePoint(connection);
+        return ConexionPostgresql.savePoint(ConexionPostgresql.getInstance().conectar());
     }
     
     public String volverSavePoint(){
-        return Connexion.volverSavePoint(connection);
+        return ConexionPostgresql.volverSavePoint(ConexionPostgresql.getInstance().conectar());
     }
     
     public String rollback(){
-        return Connexion.rollback(connection);
+        return ConexionPostgresql.rollback(ConexionPostgresql.getInstance().conectar());
     }
     
     public String commit(){
-        return Connexion.commit(connection);
+        return ConexionPostgresql.commit(ConexionPostgresql.getInstance().conectar());
     }
     
     public String desconectar(){
-        return Connexion.desconectar(connection);
+        return ConexionPostgresql.desconectar(ConexionPostgresql.getInstance().conectar());
     }
     
      //CONTROL DE FUNCIONES
     public Number promedioCarrera(Integer cod_est){
-        return studentBO.promedioCarrera(connection, cod_est);
+        return studentBO.promedioCarrera(ConexionPostgresql.getInstance().conectar(), cod_est);
     }
     
     public Integer precioPromedio(Integer cod_ele){
-        return itemBO.precioPromedioElemento(connection, cod_ele);
+        return itemBO.precioPromedioElemento(ConexionPostgresql.getInstance().conectar(), cod_ele);
     }
     
     public String compararNumeros(Integer numero1, Integer numero2){
-        return studentBO.compararNumeros(connection,numero1,numero2);
+        return studentBO.compararNumeros(ConexionPostgresql.getInstance().conectar(),numero1,numero2);
     }
     
     public List<InfoStudentDTO> informacionEstudiantes(){
-        return studentBO.informacionEstudiantes(connection);
+        return studentBO.informacionEstudiantes(ConexionPostgresql.getInstance().conectar());
     }
 }

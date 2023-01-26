@@ -31,12 +31,12 @@ public class OracleMenu {
                 menuFunProd();
                 break;
             case 3:
-                String mensaje = controlador.desconectar();
-                System.out.println(mensaje);
+                //String mensaje = controlador.desconectar();
+                //System.out.println(mensaje);
                 start.menuPrincipal();
                 break;
             case 4:
-                mensaje = controlador.desconectar();
+                String mensaje = controlador.desconectar();
                 System.out.println(mensaje);
                 System.out.println("|-----------------------------------------|");
                 System.out.println("|-----------PROGRAMA FINALIZADO-----------|");

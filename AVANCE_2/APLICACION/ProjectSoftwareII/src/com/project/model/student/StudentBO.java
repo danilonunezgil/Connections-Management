@@ -15,6 +15,7 @@ public class StudentBO {
     }
     
     public Number promedioCarrera(Connection connection,Integer cod_est) {
+        
         Number promedio = null;
         try {
             String sql = "{?=call promedio_carrera(?)}";

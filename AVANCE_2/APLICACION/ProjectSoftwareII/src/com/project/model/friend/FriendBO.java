@@ -1,5 +1,4 @@
 package com.project.model.friend;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,8 +36,8 @@ public class FriendBO {
         } catch (SQLException ex) {
             ex.getMessage();
         }
+        System.out.println(connection);
         return listadoAmigos;
-
     }
 
     public Friend insertar(Connection connection){

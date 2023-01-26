@@ -6,32 +6,56 @@ import java.sql.SQLException;
 import java.sql.Savepoint;
 import javax.swing.JOptionPane;
 
-public class Connexion {
+
+public class ConexionPostgresql {
     
+    private static ConexionPostgresql connectInstance;
     private static Connection con;
     private static Savepoint save;
+    
+    private final String classname = "org.postgresql.Driver";
+    private final String url = "jdbc:postgresql://localhost:5432/sistemas";
+    private final String user = "postgres";
+    private final String pass = "4023";
 
-    public static Connection conectar(String className,String url,String user,String password) {
+    private ConexionPostgresql() {
+        
         try {
-            Class.forName(className);
-            con = DriverManager.getConnection(url,user,password);
+            try {
+                Class.forName(classname);
+            } catch (ClassNotFoundException ex) {
+                System.out.println("Error al registrar el driver de PostgreSQL: " + ex);
+            }
+            
+            con = DriverManager.getConnection(url,user,pass);
             con.setAutoCommit(false);
             if(con != null){
                 save = con.setSavepoint();
-                System.out.println("CONECTADO A LA BASE DE DATOS CON EXITO");
+                System.out.println(con);
+                System.out.println("CONECTADO A POSTGRESQL CON EXITO");
             }
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "NO SE PUDO CONECTAR A LA BASE DATOS", "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println("NO SE PUDO CONECTAR A LA BD");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se pudo conectar a la bd", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("No se pudo conectar a la bd");
         }
+    }
+    
+    public static ConexionPostgresql getInstance(){
+        if(connectInstance == null){
+            connectInstance = new ConexionPostgresql();
+        }
+      return connectInstance;
+    }
+    
+    public Connection conectar() {
         return con;
     }
-       
+    
     public static String desconectar(Connection connection){
         String mensaje;
         try {
             connection.close();
-            mensaje = "CONEXION A LA BASE DE DATOS CERRADA";
+            mensaje = "CONEXION A POSTGRESQL CERRADA";
         } catch (SQLException ex) {
             mensaje = "ERROR:"+ ex.getMessage();
        }
@@ -85,6 +109,5 @@ public class Connexion {
             }
        }
        return mensaje;
-    
-    }
+    } 
 }
