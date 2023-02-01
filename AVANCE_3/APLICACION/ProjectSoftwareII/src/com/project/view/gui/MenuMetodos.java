@@ -5,7 +5,11 @@
 package com.project.view.gui;
 
 import com.project.controller.*;
+import com.project.dto.InfoStudentDTO;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,6 +29,7 @@ public class MenuMetodos extends javax.swing.JPanel {
             conectado_a.setText(conectadoA);
         }
         configurarSpinner();
+
     }
 
     public void configurarSpinner() {
@@ -63,11 +68,11 @@ public class MenuMetodos extends javax.swing.JPanel {
         campo_num2 = new javax.swing.JSpinner();
         comparacion_nums = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla_info = new javax.swing.JTable();
         boton_promEst = new javax.swing.JButton();
         boton_promElem = new javax.swing.JButton();
         boton_compararNums = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        cargar_info = new javax.swing.JButton();
         label_infoEst = new javax.swing.JLabel();
         titulo_connect_oracle1 = new javax.swing.JLabel();
         result_promEst = new javax.swing.JLabel();
@@ -111,23 +116,44 @@ public class MenuMetodos extends javax.swing.JPanel {
         add(campo_num1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 80, -1));
         add(campo_num2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, 80, -1));
 
-        comparacion_nums.setText("jLabel8");
-        add(comparacion_nums, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, -1, -1));
+        comparacion_nums.setText("RESULTADO COMPARACIÓN");
+        add(comparacion_nums, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_info.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "CÓDIGO", "FACULTAD", "PROGRAMA", "ESTUDIANTE", "PROMEDIO", "MATRICULA", "AÑO", "PERIODO"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 500, 230));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabla_info);
+        if (tabla_info.getColumnModel().getColumnCount() > 0) {
+            tabla_info.getColumnModel().getColumn(0).setMaxWidth(90);
+            tabla_info.getColumnModel().getColumn(4).setMaxWidth(100);
+            tabla_info.getColumnModel().getColumn(5).setMaxWidth(120);
+            tabla_info.getColumnModel().getColumn(6).setMaxWidth(90);
+            tabla_info.getColumnModel().getColumn(7).setMaxWidth(80);
+        }
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 680, 230));
 
         boton_promEst.setText("PROMEDIO EST");
         boton_promEst.addActionListener(new java.awt.event.ActionListener() {
@@ -146,10 +172,20 @@ public class MenuMetodos extends javax.swing.JPanel {
         add(boton_promElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, -1, -1));
 
         boton_compararNums.setText("COMPARAR NUMS");
+        boton_compararNums.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_compararNumsActionPerformed(evt);
+            }
+        });
         add(boton_compararNums, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
 
-        jButton4.setText("jButton4");
-        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, -1, -1));
+        cargar_info.setText("CARGAR INFO");
+        cargar_info.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargar_infoActionPerformed(evt);
+            }
+        });
+        add(cargar_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, -1, -1));
 
         label_infoEst.setText("INFORMACIÓN ESTUDIANTES");
         add(label_infoEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, -1, -1));
@@ -168,7 +204,7 @@ public class MenuMetodos extends javax.swing.JPanel {
 
     private void boton_promElemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_promElemActionPerformed
         // TODO add your handling code here:
-        Number promedioElem = 0;
+        Integer promedioElem = 0;
         if (conectado_a.getText() == "Oracle") {
             promedioElem = OracleService.getInstance().precioPromedio(Integer.parseInt(campo_promElem.getValue().toString()));
             result_promElem.setText(promedioElem.toString());
@@ -180,14 +216,50 @@ public class MenuMetodos extends javax.swing.JPanel {
 
     private void boton_promEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_promEstActionPerformed
         // TODO add your handling code here:
+        Number promedio = 0;
         if (conectado_a.getText() == "Oracle") {
-            Number promedio = OracleService.getInstance().promedioCarrera(Integer.parseInt(campo_promEst.getValue().toString()));
+            promedio = OracleService.getInstance().promedioCarrera(Integer.parseInt(campo_promEst.getValue().toString()));
             result_promEst.setText(promedio.toString());
         } else if (conectado_a.getText() == "PostgreSQL") {
-            Number promedio = PostgresqlService.getInstance().promedioCarrera(Integer.parseInt(campo_promEst.getValue().toString()));
+            promedio = PostgresqlService.getInstance().promedioCarrera(Integer.parseInt(campo_promEst.getValue().toString()));
             result_promEst.setText(promedio.toString());
         }
     }//GEN-LAST:event_boton_promEstActionPerformed
+
+    private void boton_compararNumsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_compararNumsActionPerformed
+        // TODO add your handling code here:
+        String comparacion = "";
+        if (conectado_a.getText() == "Oracle") {
+            comparacion = OracleService.getInstance().compararNumeros(Integer.parseInt(campo_num1.getValue().toString()), Integer.parseInt(campo_num2.getValue().toString()));
+            comparacion_nums.setText(comparacion);
+        } else if (conectado_a.getText() == "PostgreSQL") {
+            comparacion = PostgresqlService.getInstance().compararNumeros(Integer.parseInt(campo_num1.getValue().toString()), Integer.parseInt(campo_num2.getValue().toString()));
+            comparacion_nums.setText(comparacion);
+        }
+    }//GEN-LAST:event_boton_compararNumsActionPerformed
+
+    private void cargar_infoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargar_infoActionPerformed
+        // TODO add your handling code here:
+        List<InfoStudentDTO> informacion_estudiantes = new ArrayList<>();
+        informacion_estudiantes = OracleService.getInstance().informacionEstudiantes();
+
+        Object[][] datos = new Object[informacion_estudiantes.size()][8];
+        int i = 0;
+        for (InfoStudentDTO estudiante : informacion_estudiantes) {
+            datos[i][0] = estudiante.getCodigo();
+            datos[i][1] = estudiante.getFacultad();
+            datos[i][2] = estudiante.getPrograma();
+            datos[i][3] = estudiante.getEstudiante();
+            datos[i][4] = estudiante.getPromedio();
+            datos[i][5] = estudiante.getMatriculado();
+            datos[i][6] = estudiante.getAno();
+            datos[i][7] = estudiante.getPeriodo();
+            i++;
+        }
+        
+        String[] nombreColumnas = {"CÓDIGO","FACULTAD","PROGRAMAS","ESTUDIANTE","PROMEDIO","MATRICULADO","AÑO","PERIODO"};
+        tabla_info.setModel(new DefaultTableModel(datos,nombreColumnas));
+    }//GEN-LAST:event_cargar_infoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -199,13 +271,12 @@ public class MenuMetodos extends javax.swing.JPanel {
     private javax.swing.JSpinner campo_num2;
     private javax.swing.JSpinner campo_promElem;
     private javax.swing.JSpinner campo_promEst;
+    private javax.swing.JButton cargar_info;
     private javax.swing.JLabel comparacion_nums;
     private javax.swing.JLabel conectado_a;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel label_codElem;
     private javax.swing.JLabel label_codEst;
     private javax.swing.JLabel label_infoEst;
@@ -214,6 +285,7 @@ public class MenuMetodos extends javax.swing.JPanel {
     private javax.swing.JLabel label_promedioElem;
     private javax.swing.JLabel result_promElem;
     private javax.swing.JLabel result_promEst;
+    private javax.swing.JTable tabla_info;
     private javax.swing.JLabel titulo_connect_oracle1;
     // End of variables declaration//GEN-END:variables
 }

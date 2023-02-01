@@ -254,7 +254,6 @@ public class Start extends javax.swing.JFrame {
             contenido.revalidate();
             contenido.repaint();
             estado_conexion.setText(PostgresqlService.getInstance().toString());
-            System.out.println(PostgresqlService.getInstance().toString()); 
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione primero una opción");
         }
@@ -276,7 +275,6 @@ public class Start extends javax.swing.JFrame {
             contenido.revalidate();
             contenido.repaint();
             estado_conexion.setText(OracleService.getInstance().toString());
-            System.out.println(OracleService.getInstance().toString());
             
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione primero una opción");
