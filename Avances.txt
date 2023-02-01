@@ -1,0 +1,47 @@
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+AVANCE 1 (fecha de entrega 19 enero 2023)
+---------------------------------------------------------------------------------------
+
+En postgresql 
+T2, T4 somos el grupo 3
+
+Aplicacion hecha en java (ya hemos hecho)
+agregar dos opciones
+
+conectar a oracle (llamar procedimiento y funciones almacenados) 
+conecta al motor postgresql (llamar procedimiento y funciones almacenados)
+
+minimo una funcion y un procedimiento recomendado llamarlos con parametros
+
+exposicion comoo esta estructurado, como funciona el motor por debajo en nuestro caso
+postgres, la exposicion es para despues (componente administrativo)
+
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+AVANCE 2 (fecha de entrega 23 enero 2023)
+---------------------------------------------------------------------------------------
+
+Generar otro proyecto que tenga los siguientes PAQUETES:
+
+-Modelo
+	-elementos (dentro de cada paquete van los objetos)
+	-estudiantes (dentro de cada paquete van los objetos)
+-Control
+	-servicios (lo que nos pidió que hicieramos)
+-Vista 
+	-consola (llamado a servicios)
+-BaseDeDatos
+
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+AVANCE 3 (fecha de entrega 2 febrero 2023)
+---------------------------------------------------------------------------------------
+
+aplicar singleton a controladores
+
+acomodar para que la base de datos trabaje con los dto y no con los objetos puros
+transferir los datos con dto
+
+implementar los tres tipos de objetos
+convertir app de consola a app de escritorio
