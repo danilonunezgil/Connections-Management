@@ -1,5 +1,6 @@
-package com.project.model.student;
+package com.project.dao;
 
+import com.project.dto.InfoStudentDTO;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,6 +30,7 @@ public class EstudianteDAO {
             statement.execute();
             promedio = statement.getBigDecimal(1);
             statement.close();
+            System.out.println(connection);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -51,6 +53,7 @@ public class EstudianteDAO {
             statement.execute();
             comparacion = statement.getString(1);
             statement.close();
+            System.out.println(connection);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -83,6 +86,7 @@ public class EstudianteDAO {
             }
             resultado.close();
             statement.close();
+            System.out.println(connection);
         } catch (SQLException ex) {
             ex.getMessage();
         }

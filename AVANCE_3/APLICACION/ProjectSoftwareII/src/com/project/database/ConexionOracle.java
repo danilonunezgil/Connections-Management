@@ -14,9 +14,9 @@ public class ConexionOracle {
     private static Savepoint save;
     
     private final String classname = "oracle.jdbc.driver.OracleDriver";
-    private final String url = "jdbc:oracle:thin:@danno:1521:XE";
-    private final String user = "danilo";
-    private final String pass = "4032";
+    private final String url = "jdbc:oracle:thin:@beelz:1521:XE";
+    private final String user = "edgar";
+    private final String pass = "4023";
     
    private ConexionOracle() {
         try {
@@ -30,7 +30,7 @@ public class ConexionOracle {
             con.setAutoCommit(false);
             if(con != null){
                 save = con.setSavepoint();
-                System.out.println(con);
+                //System.out.println(con);
                 System.out.println("CONECTADO A ORACLE CON EXITO");
             }
         } catch (SQLException e) {

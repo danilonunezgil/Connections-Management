@@ -1,14 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.project.model.friend;
+package com.project.model;
 
-/**
- *
- * @author danilonunezgil
- */
-public class AmigoDTO {
+public class Amigo {
+
     private Number id;
     private String nombre;
     private String apellido;
@@ -16,10 +9,10 @@ public class AmigoDTO {
     private String direccion;
     private String correo;
 
-    public AmigoDTO() {
+    public Amigo() {
     }
 
-    public AmigoDTO(Number id, String nombre, String apellido, String telefono, String direccion, String correo) {
+    public Amigo(Number id, String nombre, String apellido, String telefono, String direccion, String correo) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -28,15 +21,13 @@ public class AmigoDTO {
         this.correo = correo;
     }
 
-    public AmigoDTO(String nombre, String apellido, String telefono, String direccion, String correo) {
+    public Amigo(String nombre, String apellido, String telefono, String direccion, String correo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.direccion = direccion;
         this.correo = correo;
     }
-    
-    
 
     public Number getId() {
         return id;
@@ -88,7 +79,7 @@ public class AmigoDTO {
 
     @Override
     public String toString() {
-        return "AmigoDTO{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", direccion=" + direccion + ", correo=" + correo + '}';
+        return "Amigo{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", direccion=" + direccion + ", correo=" + correo + '}';
     }
     
 }

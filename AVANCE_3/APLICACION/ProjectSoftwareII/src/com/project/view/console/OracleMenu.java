@@ -1,15 +1,14 @@
 package com.project.view.console;
 
 import com.project.controller.OracleService;
-import com.project.model.friend.AmigoDTO;
-import com.project.model.student.InfoStudentDTO;
+import com.project.dto.AmigoDTO;
+import com.project.dto.InfoStudentDTO;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class OracleMenu {
 
-    private final OracleService controlador = new OracleService();
     private static final Scanner leer = new Scanner(System.in);
     private static final MainMenu start = new MainMenu();
 
@@ -36,7 +35,7 @@ public class OracleMenu {
                 start.menuPrincipal();
                 break;
             case 4:
-                String mensaje = controlador.desconectar();
+                String mensaje = OracleService.getInstance().desconectar();
                 System.out.println(mensaje);
                 System.out.println("|-----------------------------------------|");
                 System.out.println("|-----------PROGRAMA FINALIZADO-----------|");
@@ -65,14 +64,14 @@ public class OracleMenu {
             case 1:
                 System.out.print("INGRESE EL CODIGO DEL ESTUDIANTE: ");
                 int cod_est = leer.nextInt();
-                Number promedio = controlador.promedioCarrera(cod_est);
+                Number promedio = OracleService.getInstance().promedioCarrera(cod_est);
                 System.out.println("EL PROMEDIO DE CARRERA ES: " + promedio);
                 menuFunProd();
                 break;
             case 2:
                 System.out.print("INGRESE EL CODIGO DEL ELEMENTO: ");
                 int cod_ele = leer.nextInt();
-                Integer precio_promedio = controlador.precioPromedio(cod_ele);
+                Integer precio_promedio = OracleService.getInstance().precioPromedio(cod_ele);
                 System.out.println("EL PRECIO PROMEDIO ES: " + precio_promedio);
                 menuFunProd();
                 break;
@@ -81,24 +80,25 @@ public class OracleMenu {
                 int numero1 = leer.nextInt();
                 System.out.print("INGRESE EL SEGUNDO NUMERO: ");
                 int numero2 = leer.nextInt();
-                String comparacion = controlador.compararNumeros(numero1, numero2);
+                String comparacion = OracleService.getInstance().compararNumeros(numero1, numero2);
                 System.out.println(comparacion);
                 menuFunProd();
                 break;
             case 4:
                 System.out.println("INFORMACION ESTUDIANTES: ");
-                List<InfoStudentDTO> infoEstudiantes = controlador.informacionEstudiantes();
+                List<InfoStudentDTO> infoEstudiantesDTO = OracleService.getInstance().informacionEstudiantes();
                 System.out.printf("|%12s|%22s|%36s|%22s|%12s|%12s|%12s|%12s%n", "CODIGO", "FACULTAD", "PROGRAMA", "ESTUDIANTE", "PROMEDIO", "MATRICULADO", "ANO", "PERIODO");
-                for (InfoStudentDTO infoEstudiante : infoEstudiantes) {
-                    System.out.printf("|%12s|%22s|%36s|%22s|%12s|%12s|%12s|%12s|%n", infoEstudiante.getCodigo(), infoEstudiante.getFacultad(), infoEstudiante.getPrograma(), infoEstudiante.getEstudiante(), infoEstudiante.getPromedio(), infoEstudiante.getMatriculado(), infoEstudiante.getAno(), infoEstudiante.getPeriodo());
+                for (InfoStudentDTO infoEstudianteDTO : infoEstudiantesDTO) {
+                    System.out.printf("|%12s|%22s|%36s|%22s|%12s|%12s|%12s|%12s|%n", infoEstudianteDTO.getCodigo(), infoEstudianteDTO.getFacultad(), infoEstudianteDTO.getPrograma(), infoEstudianteDTO.getEstudiante(), infoEstudianteDTO.getPromedio(), infoEstudianteDTO.getMatriculado(), infoEstudianteDTO.getAno(), infoEstudianteDTO.getPeriodo());
                 }
                 menuFunProd();
                 break;
+
             case 5:
                 menu();
                 break;
             case 6:
-                String mensaje = controlador.desconectar();
+                String mensaje = OracleService.getInstance().desconectar();
                 System.out.println(mensaje);
                 System.out.println("|-----------------------------------------|");
                 System.out.println("|-----------PROGRAMA FINALIZADO-----------|");
@@ -111,7 +111,7 @@ public class OracleMenu {
         }
     }
 
-    public void menuActualizarAmigo(AmigoDTO amigoVO) {
+    public void menuActualizarAmigo(AmigoDTO amigoDTO) {
 
         System.out.println("|-----------------------------------------|");
         System.out.println("|----------MENU ACTUALIZAR AMIGO----------|");
@@ -129,42 +129,42 @@ public class OracleMenu {
             case 1:
                 System.out.print("INGRESE EL NUEVO NOMBRE: ");
                 String nombre = leer.next();
-                amigoVO.setNombre(nombre);
-                menuActualizarAmigo(amigoVO);
+                amigoDTO.setNombre(nombre);
+                menuActualizarAmigo(amigoDTO);
                 break;
 
             case 2:
                 System.out.print("INGRESE EL NUEVO APELLIDO: ");
                 String apellido = leer.next();
-                amigoVO.setApellido(apellido);
-                menuActualizarAmigo(amigoVO);
+                amigoDTO.setApellido(apellido);
+                menuActualizarAmigo(amigoDTO);
                 break;
 
             case 3:
                 System.out.print("INGRESE EL NUEVO TELEFONO: ");
                 String telefono = leer.next();
-                amigoVO.setTelefono(telefono);
-                menuActualizarAmigo(amigoVO);
+                amigoDTO.setTelefono(telefono);
+                menuActualizarAmigo(amigoDTO);
                 break;
 
             case 4:
                 System.out.print("INGRESE LA NUEVA DIRECCION: ");
                 String direccion = leer.next();
-                amigoVO.setDireccion(direccion);
-                menuActualizarAmigo(amigoVO);
+                amigoDTO.setDireccion(direccion);
+                menuActualizarAmigo(amigoDTO);
                 break;
 
             case 5:
                 System.out.print("INGRESE EL NUEVO CORREO: ");
                 String correo = leer.next();
-                amigoVO.setCorreo(correo);
-                menuActualizarAmigo(amigoVO);
+                amigoDTO.setCorreo(correo);
+                menuActualizarAmigo(amigoDTO);
                 break;
 
             case 6:
                 System.out.println("DATOS ACTUALIZADOS: ");
-                controlador.actualizarAmigo(amigoVO);
-                System.out.println(amigoVO.toString());
+                OracleService.getInstance().actualizarAmigo(amigoDTO);
+                System.out.println(amigoDTO.toString());
                 menuTransaccion();
                 break;
 
@@ -194,7 +194,7 @@ public class OracleMenu {
             int opc = leer.nextInt();
             switch (opc) {
                 case 0:
-                    String mensaje = controlador.desconectar();
+                    String mensaje = OracleService.getInstance().desconectar();
                     System.out.println(mensaje);
                     System.out.println("|-----------------------------------------|");
                     System.out.println("|-----------PROGRAMA FINALIZADO-----------|");
@@ -202,7 +202,7 @@ public class OracleMenu {
                     break;
                 case 1:
                     System.out.println("TABLA AMIGOS: ");
-                    List<AmigoDTO> amigos = controlador.listarAmigo();
+                    List<AmigoDTO> amigos = OracleService.getInstance().listarAmigo();
                     System.out.printf("|%12s|%12s|%12s|%12s|%12s|%12s%n", "ID", "NOMBRE", "APELLIDO", "TELEFONO", "DIRECCION", "CORREO");
                     for (AmigoDTO amigo : amigos) {
                         System.out.printf("|%12s|%12s|%12s|%12s|%12s|%12s|%n", amigo.getId(), amigo.getNombre(), amigo.getApellido(), amigo.getTelefono(), amigo.getDireccion(), amigo.getCorreo());
@@ -212,19 +212,19 @@ public class OracleMenu {
 
                 case 2:
                     System.out.println("NUEVO REGISTRO: ");
-                    AmigoDTO amigo = controlador.ingresarAmigo();
+                    AmigoDTO amigoDTO = OracleService.getInstance().ingresarAmigo();
                     System.out.printf("|%12s|%12s|%12s|%12s|%12s%n", "NOMBRE", "APELLIDO", "TELEFONO", "DIRECCION", "CORREO");
-                    System.out.printf("|%12s|%12s|%12s|%12s|%12s|%n", amigo.getNombre(), amigo.getApellido(), amigo.getTelefono(), amigo.getDireccion(), amigo.getCorreo());
+                    System.out.printf("|%12s|%12s|%12s|%12s|%12s|%n", amigoDTO.getNombre(), amigoDTO.getApellido(), amigoDTO.getTelefono(), amigoDTO.getDireccion(), amigoDTO.getCorreo());
                     menuTransaccion();
                     break;
 
                 case 3:
                     System.out.print("INGRESE EL ID DEL AMIGO A ACTUALIZAR: ");
                     idAmigo = leer.nextInt();
-                    amigo = controlador.buscarAmigoId(idAmigo);
-                    if (idAmigo.equals(amigo.getId())) {
-                        System.out.println(amigo.toString());
-                        menuActualizarAmigo(amigo);
+                    amigoDTO = OracleService.getInstance().buscarAmigoId(idAmigo);
+                    if (idAmigo.equals(amigoDTO.getId())) {
+                        System.out.println(amigoDTO.toString());
+                        menuActualizarAmigo(amigoDTO);
                     } else {
                         System.out.println("NO HAY UN AMIGO CON ESE ID");
                         menuTransaccion();
@@ -234,11 +234,11 @@ public class OracleMenu {
                 case 4:
                     System.out.print("INGRESE EL ID DEL AMIGO A ELIMINAR: ");
                     idAmigo = leer.nextInt();
-                    amigo = controlador.buscarAmigoId(idAmigo);
-                    if (idAmigo.equals(amigo.getId())) {
-                        controlador.eliminarAmigo(idAmigo);
+                    amigoDTO = OracleService.getInstance().buscarAmigoId(idAmigo);
+                    if (idAmigo.equals(amigoDTO.getId())) {
+                        OracleService.getInstance().eliminarAmigo(idAmigo);
                         System.out.println("AMIGO ELIMINADO: ");
-                        System.out.println(amigo.toString());
+                        System.out.println(amigoDTO.toString());
                         menuTransaccion();
                     } else {
                         System.out.println("NO HAY UN AMIGO CON ESE ID");
@@ -247,25 +247,25 @@ public class OracleMenu {
                     break;
 
                 case 5:
-                    mensaje = controlador.savePoint();
+                    mensaje = OracleService.getInstance().savePoint();
                     System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 6:
-                    mensaje = controlador.volverSavePoint();
+                    mensaje = OracleService.getInstance().volverSavePoint();
                     System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 7:
-                    mensaje = controlador.rollback();
+                    mensaje = OracleService.getInstance().rollback();
                     System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 8:
-                    mensaje = controlador.commit();
+                    mensaje = OracleService.getInstance().commit();
                     System.out.println(mensaje);
                     menuTransaccion();
                     break;

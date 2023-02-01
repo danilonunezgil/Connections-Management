@@ -1,4 +1,4 @@
-package com.project.model.student;
+package com.project.dto;
 
 public class InfoStudentDTO {
     
@@ -88,6 +88,4 @@ public class InfoStudentDTO {
     public void setPeriodo(Integer periodo) {
         this.periodo = periodo;
     }
-    
-    
 }

@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.project.model.element;
+package com.project.model;
 
-/**
- *
- * @author danilonunezgil
- */
 public class Elemento {
     private Integer codigo;
     private String elemento;
@@ -180,6 +172,5 @@ public class Elemento {
     public String toString() {
         return "Elemento{" + "codigo=" + codigo + ", elemento=" + elemento + ", devolutivo=" + devolutivo + ", talla=" + talla + ", uso=" + uso + ", materiales=" + materiales + ", mantenimiento=" + mantenimiento + ", usos=" + usos + ", norma=" + norma + ", atenuacion=" + atenuacion + ", serial=" + serial + ", tallas=" + tallas + ", unidad=" + unidad + ", ruta=" + ruta + ", precio_actual=" + precio_actual + ", cantidad_elementos=" + cantidad_elementos + '}';
     }
-    
-    
+   
 }
