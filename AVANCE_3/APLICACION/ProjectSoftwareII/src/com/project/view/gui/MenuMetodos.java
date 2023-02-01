@@ -241,8 +241,12 @@ public class MenuMetodos extends javax.swing.JPanel {
     private void cargar_infoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargar_infoActionPerformed
         // TODO add your handling code here:
         List<InfoStudentDTO> informacion_estudiantes = new ArrayList<>();
-        informacion_estudiantes = OracleService.getInstance().informacionEstudiantes();
+        if (conectado_a.getText() == "Oracle") {
+            informacion_estudiantes = OracleService.getInstance().informacionEstudiantes();
+        } else if (conectado_a.getText() == "PostgreSQL") {
+            informacion_estudiantes = PostgresqlService.getInstance().informacionEstudiantes();
 
+        }
         Object[][] datos = new Object[informacion_estudiantes.size()][8];
         int i = 0;
         for (InfoStudentDTO estudiante : informacion_estudiantes) {
@@ -256,9 +260,9 @@ public class MenuMetodos extends javax.swing.JPanel {
             datos[i][7] = estudiante.getPeriodo();
             i++;
         }
-        
-        String[] nombreColumnas = {"CÓDIGO","FACULTAD","PROGRAMAS","ESTUDIANTE","PROMEDIO","MATRICULADO","AÑO","PERIODO"};
-        tabla_info.setModel(new DefaultTableModel(datos,nombreColumnas));
+
+        String[] nombreColumnas = {"CÓDIGO", "FACULTAD", "PROGRAMAS", "ESTUDIANTE", "PROMEDIO", "MATRICULADO", "AÑO", "PERIODO"};
+        tabla_info.setModel(new DefaultTableModel(datos, nombreColumnas));
     }//GEN-LAST:event_cargar_infoActionPerformed
 
 
