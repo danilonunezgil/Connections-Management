@@ -4,6 +4,11 @@
  */
 package com.project.view.gui;
 
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 /**
  *
  * @author danilonunezgil
@@ -15,6 +20,21 @@ public class Start extends javax.swing.JFrame {
      */
     public Start() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setTitle("PROYECTO PROFUNDIZACIÓN SOFTWARE II");
+
+        pintarLogo("/com/project/view/gui/images/java-oracle-logo.png", 155, 156, logo_java);
+        pintarLogo("/com/project/view/gui/images/unillanos-logo.png", 241, 90, logo_u);
+        pintarLogo("/com/project/view/gui/images/software_logo.png", 400, 400, logo_software);
+        //pintarLogo("/com/project/view/gui/images/postgres-logo.jpg", 241, 90, logo_postgres);
+
+    }
+
+    public void pintarLogo(String ruta, int ancho, int altura, JLabel etiqueta) {
+        ImageIcon imagen1 = new ImageIcon(getClass().getResource(ruta));
+        Icon fondo1 = new ImageIcon(imagen1.getImage().getScaledInstance(ancho, altura, Image.SCALE_DEFAULT));
+        etiqueta.setIcon(fondo1);
+        this.repaint();
     }
 
     /**
@@ -26,21 +46,129 @@ public class Start extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        logo_java = new javax.swing.JLabel();
+        logo_u = new javax.swing.JLabel();
+        jLabel_main_menu = new javax.swing.JLabel();
+        boton_oracle = new javax.swing.JButton();
+        boton_postgres = new javax.swing.JButton();
+        boton_cerrar = new javax.swing.JButton();
+        titulo_admdata = new javax.swing.JLabel();
+        titulo_admdata2 = new javax.swing.JLabel();
+        titulo_admdata3 = new javax.swing.JLabel();
+        titulo_admdata7 = new javax.swing.JLabel();
+        logo_software = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1087, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+
+        logo_java.setText("logo_java");
+
+        jLabel_main_menu.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel_main_menu.setText("MENÚ PRINCIPAL");
+
+        boton_oracle.setText("ORACLE");
+
+        boton_postgres.setText("POSTGRESQL");
+        boton_postgres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_postgresActionPerformed(evt);
+            }
+        });
+
+        boton_cerrar.setText("CERRAR");
+        boton_cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_cerrarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(logo_u, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(boton_postgres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(boton_oracle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(boton_cerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel_main_menu))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(logo_java, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(14, 14, 14))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 569, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(logo_u, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
+                .addComponent(jLabel_main_menu)
+                .addGap(42, 42, 42)
+                .addComponent(boton_oracle)
+                .addGap(33, 33, 33)
+                .addComponent(boton_postgres)
+                .addGap(34, 34, 34)
+                .addComponent(boton_cerrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(logo_java, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 620));
+
+        titulo_admdata.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
+        titulo_admdata.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titulo_admdata.setText("DATOS");
+        jPanel1.add(titulo_admdata, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 420, 50));
+
+        titulo_admdata2.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
+        titulo_admdata2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titulo_admdata2.setText("DE");
+        jPanel1.add(titulo_admdata2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 440, 40));
+
+        titulo_admdata3.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
+        titulo_admdata3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titulo_admdata3.setText("SOFTWARE");
+        jPanel1.add(titulo_admdata3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 450, 60));
+
+        titulo_admdata7.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
+        titulo_admdata7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titulo_admdata7.setText("ADMINISTRACIÓN");
+        jPanel1.add(titulo_admdata7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 450, 60));
+
+        logo_software.setText("jLabel1");
+        jPanel1.add(logo_software, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, 400, 400));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1026, 612));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void boton_postgresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_postgresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_postgresActionPerformed
+
+    private void boton_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_cerrarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_boton_cerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +206,18 @@ public class Start extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton boton_cerrar;
+    private javax.swing.JButton boton_oracle;
+    private javax.swing.JButton boton_postgres;
+    private javax.swing.JLabel jLabel_main_menu;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel logo_java;
+    private javax.swing.JLabel logo_software;
+    private javax.swing.JLabel logo_u;
+    private javax.swing.JLabel titulo_admdata;
+    private javax.swing.JLabel titulo_admdata2;
+    private javax.swing.JLabel titulo_admdata3;
+    private javax.swing.JLabel titulo_admdata7;
     // End of variables declaration//GEN-END:variables
 }
