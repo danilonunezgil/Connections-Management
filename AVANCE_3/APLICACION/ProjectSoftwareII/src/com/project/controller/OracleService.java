@@ -27,7 +27,7 @@ public class OracleService {
         }
         return oracleSingleton;
     }
-
+    
     //CRUD PARA TABLA AMIGO
     public AmigoDTO ingresarAmigo(){
         return amigoDAO.insertar(ConexionOracle.getInstance().conectar());
