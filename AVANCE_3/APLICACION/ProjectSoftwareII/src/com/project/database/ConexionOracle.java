@@ -46,7 +46,7 @@ public class ConexionOracle {
       return connectInstance;
     }
     
-    public Connection conectar() {
+    public static Connection conectar() {
         return con;
     }
 

@@ -4,6 +4,9 @@
  */
 package com.project.view.gui;
 
+import com.project.controller.*;
+import javax.swing.SpinnerNumberModel;
+
 /**
  *
  * @author danilonunezgil
@@ -13,10 +16,35 @@ public class MenuMetodos extends javax.swing.JPanel {
     /**
      * Creates new form MenuDB
      */
-    public MenuMetodos() {
+    public MenuMetodos(String conectadoA) {
         initComponents();
+
+        if (conectadoA == "Oracle") {
+            conectado_a.setText(conectadoA);
+        } else if (conectadoA == "PostgreSQL") {
+            conectado_a.setText(conectadoA);
+        }
+        configurarSpinner();
     }
 
+    public void configurarSpinner() {
+        SpinnerNumberModel nm = new SpinnerNumberModel();
+        SpinnerNumberModel nm1 = new SpinnerNumberModel();
+        nm.setMinimum(0);
+        nm1.setMinimum(0);
+        campo_promEst.setModel(nm);
+        campo_promEst.setValue(1);
+        campo_promElem.setModel(nm1);
+        campo_promElem.setValue(1);
+
+    }
+
+    public void llamarFuncionPromedio(String db){
+        if(db == "Oracle"){
+            
+            
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,63 +55,69 @@ public class MenuMetodos extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        titulo_connect_oracle = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jLabel3 = new javax.swing.JLabel();
-        jSpinner2 = new javax.swing.JSpinner();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        conectado_a = new javax.swing.JLabel();
+        label_nums = new javax.swing.JLabel();
+        label_promedioElem = new javax.swing.JLabel();
+        campo_promElem = new javax.swing.JSpinner();
+        label_codEst = new javax.swing.JLabel();
+        campo_promEst = new javax.swing.JSpinner();
+        label_prom = new javax.swing.JLabel();
+        label_codElem = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jSpinner3 = new javax.swing.JSpinner();
-        jSpinner4 = new javax.swing.JSpinner();
-        jLabel8 = new javax.swing.JLabel();
+        campo_num1 = new javax.swing.JSpinner();
+        campo_num2 = new javax.swing.JSpinner();
+        comparacion_nums = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        boton_promEst = new javax.swing.JButton();
+        boton_promElem = new javax.swing.JButton();
+        boton_compararNums = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        label_infoEst = new javax.swing.JLabel();
+        titulo_connect_oracle1 = new javax.swing.JLabel();
+        result_promEst = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(730, 610));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        titulo_connect_oracle.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
-        titulo_connect_oracle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo_connect_oracle.setText("CONECTADO A ORACLE");
-        add(titulo_connect_oracle, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 450, 60));
+        conectado_a.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
+        conectado_a.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        conectado_a.setText("DB");
+        add(conectado_a, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 230, 60));
 
-        jLabel1.setText("INGRESE LOS NÚMEROS ENTEROS:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, -1, -1));
+        label_nums.setText("INGRESE LOS NÚMEROS ENTEROS:");
+        add(label_nums, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, -1, -1));
 
-        jLabel2.setText("EL PRECIO PROMEDIO ES: ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, -1));
-        add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 80, -1));
+        label_promedioElem.setText("EL PRECIO PROMEDIO ES: ");
+        add(label_promedioElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, -1));
 
-        jLabel3.setText("INGRESE EL CÓDIGO DEL ESTUDIANTE:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
-        add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 80, -1));
+        campo_promElem.setValue(1);
+        add(campo_promElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 80, -1));
 
-        jLabel4.setText("EL PROMEDIO DE CARRERA ES: ");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+        label_codEst.setText("INGRESE EL CÓDIGO DEL ESTUDIANTE:");
+        add(label_codEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
-        jLabel5.setText("INGRESE EL CÓDIGO DEL ELEMENTO:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, -1));
+        campo_promEst.setValue(1);
+        add(campo_promEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 80, -1));
+
+        label_prom.setText("EL PROMEDIO DE CARRERA ES: ");
+        add(label_prom, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+
+        label_codElem.setText("INGRESE EL CÓDIGO DEL ELEMENTO:");
+        add(label_codElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, -1));
 
         jLabel6.setText("NUM1");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
 
         jLabel7.setText("NUM2");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, -1, -1));
-        add(jSpinner3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 80, -1));
-        add(jSpinner4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, 80, -1));
+        add(campo_num1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 80, -1));
+        add(campo_num2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, 80, -1));
 
-        jLabel8.setText("jLabel8");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, -1, -1));
+        comparacion_nums.setText("jLabel8");
+        add(comparacion_nums, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,55 +132,81 @@ public class MenuMetodos extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 500, 230));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 500, 230));
 
-        jButton1.setText("jButton1");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
-
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        boton_promEst.setText("PROMEDIO EST");
+        boton_promEst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                boton_promEstActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, -1, -1));
+        add(boton_promEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
 
-        jButton3.setText("jButton3");
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 160, -1, -1));
+        boton_promElem.setText("PROMEDIO ELEM");
+        boton_promElem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_promElemActionPerformed(evt);
+            }
+        });
+        add(boton_promElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, -1, -1));
+
+        boton_compararNums.setText("COMPARAR NUMS");
+        add(boton_compararNums, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
 
         jButton4.setText("jButton4");
-        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, -1, -1));
+        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, -1, -1));
 
-        jLabel9.setText("INFORMACIÓN ESTUDIANTES");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
+        label_infoEst.setText("INFORMACIÓN ESTUDIANTES");
+        add(label_infoEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, -1, -1));
+
+        titulo_connect_oracle1.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
+        titulo_connect_oracle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titulo_connect_oracle1.setText("CONECTADO A ---> ");
+        add(titulo_connect_oracle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 450, 60));
+
+        result_promEst.setText("RESULTADO");
+        add(result_promEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void boton_promElemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_promElemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        
+    }//GEN-LAST:event_boton_promElemActionPerformed
+
+    private void boton_promEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_promEstActionPerformed
+        // TODO add your handling code here:
+        if (conectado_a.getText() == "Oracle") {
+            result_promEst.setText(OracleService.getInstance().promedioCarrera(Integer.parseInt(campo_promEst.getValue().toString())).toString());
+        } else if (conectado_a.getText() == "PostgreSQL") {
+            result_promEst.setText(PostgresqlService.getInstance().promedioCarrera(Integer.parseInt(campo_promEst.getValue().toString())).toString());
+
+        }
+    }//GEN-LAST:event_boton_promEstActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton boton_compararNums;
+    private javax.swing.JButton boton_promElem;
+    private javax.swing.JButton boton_promEst;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JSpinner campo_num1;
+    private javax.swing.JSpinner campo_num2;
+    private javax.swing.JSpinner campo_promElem;
+    private javax.swing.JSpinner campo_promEst;
+    private javax.swing.JLabel comparacion_nums;
+    private javax.swing.JLabel conectado_a;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JSpinner jSpinner3;
-    private javax.swing.JSpinner jSpinner4;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel titulo_connect_oracle;
+    private javax.swing.JLabel label_codElem;
+    private javax.swing.JLabel label_codEst;
+    private javax.swing.JLabel label_infoEst;
+    private javax.swing.JLabel label_nums;
+    private javax.swing.JLabel label_prom;
+    private javax.swing.JLabel label_promedioElem;
+    private javax.swing.JLabel result_promEst;
+    private javax.swing.JLabel titulo_connect_oracle1;
     // End of variables declaration//GEN-END:variables
 }

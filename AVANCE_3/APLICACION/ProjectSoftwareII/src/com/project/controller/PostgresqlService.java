@@ -4,9 +4,11 @@ import com.project.database.ConexionPostgresql;
 import com.project.dao.ElementoDAO;
 import com.project.dao.EstudianteDAO;
 import com.project.dao.AmigoDAO;
+import com.project.database.ConexionOracle;
 import com.project.dto.AmigoDTO;
 import com.project.dto.InfoStudentDTO;
 import java.util.List;
+import java.sql.Connection;
 
 public class PostgresqlService{
     
@@ -27,7 +29,11 @@ public class PostgresqlService{
         }
         return postgresqlSingleton;
     }
-
+    
+    public static Connection conectarPostgres(){
+        return ConexionPostgresql.getInstance().conectar();
+    }
+    
     //CRUD PARA TABLA AMIGO
     public AmigoDTO ingresarAmigo(){
         return amigoDAO.insertar(ConexionPostgresql.getInstance().conectar());

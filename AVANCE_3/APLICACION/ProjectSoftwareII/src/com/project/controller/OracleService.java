@@ -7,10 +7,15 @@ import com.project.dto.AmigoDTO;
 import com.project.dao.EstudianteDAO;
 import com.project.dto.InfoStudentDTO;
 import java.util.List;
+import java.sql.Connection;
 
 public class OracleService {
     
     private static OracleService oracleSingleton;
+
+    public static boolean getConnection() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     private final AmigoDAO amigoDAO;
     private final EstudianteDAO estudianteDAO;
     private final ElementoDAO elementoDAO;
@@ -26,6 +31,10 @@ public class OracleService {
             oracleSingleton = new OracleService();
         }
         return oracleSingleton;
+    }
+    
+    public static Connection conectarOracle(){
+        return ConexionOracle.getInstance().conectar();
     }
     
     //CRUD PARA TABLA AMIGO
