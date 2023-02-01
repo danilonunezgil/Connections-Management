@@ -35,8 +35,8 @@ public class PostgresqlMenu {
                 start.menuPrincipal();
                 break;
             case 4:
-                String mensaje = PostgresqlService.getInstance().desconectar();
-                System.out.println(mensaje);
+                //String mensaje = PostgresqlService.getInstance().desconectar();
+                //System.out.println(mensaje);
                 System.out.println("|-----------------------------------------|");
                 System.out.println("|-----------PROGRAMA FINALIZADO-----------|");
                 System.out.println("|-----------------------------------------|");
@@ -98,8 +98,8 @@ public class PostgresqlMenu {
                 menu();
                 break;
             case 6:
-                String mensaje = PostgresqlService.getInstance().desconectar();
-                System.out.println(mensaje);
+                //String mensaje = PostgresqlService.getInstance().desconectar();
+                //System.out.println(mensaje);
                 System.out.println("|-----------------------------------------|");
                 System.out.println("|-----------PROGRAMA FINALIZADO-----------|");
                 System.out.println("|-----------------------------------------|");
@@ -194,8 +194,8 @@ public class PostgresqlMenu {
             int opc = leer.nextInt();
             switch (opc) {
                 case 0:
-                    String mensaje = PostgresqlService.getInstance().desconectar();
-                    System.out.println(mensaje);
+                    //String mensaje = PostgresqlService.getInstance().desconectar();
+                    //System.out.println(mensaje);
                     System.out.println("|-----------------------------------------|");
                     System.out.println("|-----------PROGRAMA FINALIZADO-----------|");
                     System.out.println("|-----------------------------------------|");
@@ -249,26 +249,26 @@ public class PostgresqlMenu {
                     break;
 
                 case 5:
-                    mensaje = PostgresqlService.getInstance().savePoint();
-                    System.out.println(mensaje);
+                    //mensaje = PostgresqlService.getInstance().savePoint();
+                    //System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 6:
-                    mensaje = PostgresqlService.getInstance().volverSavePoint();
-                    System.out.println(mensaje);
+                    //mensaje = PostgresqlService.getInstance().volverSavePoint();
+                    //System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 7:
-                    mensaje = PostgresqlService.getInstance().rollback();
-                    System.out.println(mensaje);
+                    //mensaje = PostgresqlService.getInstance().rollback();
+                    //System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 8:
-                    mensaje = PostgresqlService.getInstance().commit();
-                    System.out.println(mensaje);
+                    //mensaje = PostgresqlService.getInstance().commit();
+                    //System.out.println(mensaje);
                     menuTransaccion();
                     break;
                 case 9:

@@ -1,13 +1,11 @@
 package com.project.controller;
 
-import com.project.database.ConexionPostgresql;
 import com.project.dao.ElementoDAO;
 import com.project.dao.EstudianteDAO;
 import com.project.dao.AmigoDAO;
 import com.project.dto.AmigoDTO;
 import com.project.dto.InfoStudentDTO;
 import java.util.List;
-import java.sql.Connection;
 
 public class PostgresqlService{
     
@@ -29,66 +27,62 @@ public class PostgresqlService{
         return postgresqlSingleton;
     }
     
-    public static Connection conectarPostgres(){
-        return ConexionPostgresql.getInstance().conectar();
-    }
-    
     //CRUD PARA TABLA AMIGO
     public AmigoDTO ingresarAmigo(){
-        return amigoDAO.insertar(ConexionPostgresql.getInstance().conectar());
+        return amigoDAO.insertar(PostgresqlService.class);
     }
     
     public List<AmigoDTO> listarAmigo(){
-        return amigoDAO.listar(ConexionPostgresql.getInstance().conectar());
+        return amigoDAO.listar(PostgresqlService.class);
     }
     
     public AmigoDTO actualizarAmigo(AmigoDTO amigo){
-        return amigoDAO.actualizar(ConexionPostgresql.getInstance().conectar(),amigo);
+        return amigoDAO.actualizar(PostgresqlService.class,amigo);
     }
     
     public void eliminarAmigo(Number idAmigo){
-        amigoDAO.eliminar(ConexionPostgresql.getInstance().conectar(),idAmigo);
+        amigoDAO.eliminar(PostgresqlService.class,idAmigo);
     }
     
     public AmigoDTO buscarAmigoId(Number idAmigo){
-        return amigoDAO.buscarId(ConexionPostgresql.getInstance().conectar(),idAmigo);
+        return amigoDAO.buscarId(PostgresqlService.class,idAmigo);
     }
     //CONTROL DE TRANSACCIONES
-    
+    /*
     public String savePoint(){
-        return ConexionPostgresql.savePoint(ConexionPostgresql.getInstance().conectar());
+        return ConexionPostgresql.savePoint(PostgresqlService.class);
     }
     
     public String volverSavePoint(){
-        return ConexionPostgresql.volverSavePoint(ConexionPostgresql.getInstance().conectar());
+        return ConexionPostgresql.volverSavePoint(PostgresqlService.class);
     }
     
     public String rollback(){
-        return ConexionPostgresql.rollback(ConexionPostgresql.getInstance().conectar());
+        return ConexionPostgresql.rollback(PostgresqlService.class);
     }
     
     public String commit(){
-        return ConexionPostgresql.commit(ConexionPostgresql.getInstance().conectar());
+        return ConexionPostgresql.commit(PostgresqlService.class);
     }
     
     public String desconectar(){
-        return ConexionPostgresql.desconectar(ConexionPostgresql.getInstance().conectar());
-    }
+        return ConexionPostgresql.desconectar(PostgresqlService.class);
+    }*/
     
      //CONTROL DE FUNCIONES
     public Number promedioCarrera(Integer cod_est){
-        return estudianteDAO.promedioCarrera(ConexionPostgresql.getInstance().conectar(), cod_est);
+        return estudianteDAO.promedioCarrera(PostgresqlService.class, cod_est);
     }
     
     public Integer precioPromedio(Integer cod_ele){
-        return elementoDAO.precioPromedioElemento(ConexionPostgresql.getInstance().conectar(), cod_ele);
+        return elementoDAO.precioPromedioElemento(PostgresqlService.class, cod_ele);
     }
     
     public String compararNumeros(Integer numero1, Integer numero2){
-        return estudianteDAO.compararNumeros(ConexionPostgresql.getInstance().conectar(),numero1,numero2);
+        return estudianteDAO.compararNumeros(PostgresqlService.class,numero1,numero2);
     }
     
     public List<InfoStudentDTO> informacionEstudiantes(){
-        return estudianteDAO.informacionEstudiantes(ConexionPostgresql.getInstance().conectar());
+        return estudianteDAO.informacionEstudiantes(PostgresqlService.class);
     }
 }

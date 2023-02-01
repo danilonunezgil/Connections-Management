@@ -47,7 +47,7 @@ public class ConexionPostgresql {
       return connectInstance;
     }
     
-    public Connection conectar() {
+    public Connection conexion() {
         return con;
     }
     

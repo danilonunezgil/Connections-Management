@@ -1,27 +1,35 @@
 package com.project.dao;
+
+import com.project.controller.OracleService;
+import com.project.controller.PostgresqlService;
+import com.project.database.ConexionOracle;
 import com.project.dto.AmigoDTO;
 import java.sql.Connection;
+import com.project.database.ConexionPostgresql;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class AmigoDAO {
-    
- 
+
     public AmigoDAO() {
     }
-    
-    public List<AmigoDTO> listar(Connection connection){
-        
+
+    public List<AmigoDTO> listar(Class servicio) {
+
         ArrayList<AmigoDTO> listadoAmigos = new ArrayList<>();
         String consulta = "select id, nombre, apellido, telefono, direccion, correo from amigos";
+        Connection connection = null;
+        if (servicio.equals(PostgresqlService.class)) {
+            connection = ConexionPostgresql.getInstance().conexion();
+        } else if (servicio.equals(OracleService.class)) {
+            connection = ConexionOracle.getInstance().conexion();
+        }
         try {
             PreparedStatement statement = connection.prepareStatement(consulta);
             ResultSet resultado = statement.executeQuery();
-
             while (resultado.next()) {
                 AmigoDTO amigoVO = new AmigoDTO();
                 amigoVO.setId(resultado.getInt(1));
@@ -41,9 +49,15 @@ public class AmigoDAO {
         return listadoAmigos;
     }
 
-    public AmigoDTO insertar(Connection connection){
+    public AmigoDTO insertar(Class servicio) {
         AmigoDTO amigo = generarRandom();
         String consulta = "insert into amigos(nombre,apellido, telefono, direccion, correo) values(?,?,?,?,?)";
+        Connection connection = null;
+        if (servicio.equals(PostgresqlService.class)) {
+            connection = ConexionPostgresql.getInstance().conexion();
+        } else if (servicio.equals(OracleService.class)) {
+            connection = ConexionOracle.getInstance().conexion();
+        }
         try {
             PreparedStatement statement = connection.prepareStatement(consulta);
             statement.setString(1, amigo.getNombre());
@@ -54,13 +68,13 @@ public class AmigoDAO {
             statement.executeUpdate();
             statement.close();
             System.out.println(connection);
-        } catch (SQLException ex) { 
+        } catch (SQLException ex) {
             ex.getMessage();
         }
         return amigo;
     }
-   
-    public AmigoDTO generarRandom(){
+
+    public AmigoDTO generarRandom() {
         String[] nombresRand = {"Javier", "Manuel", "Rodrigo", "Camilo", "Lucrecia", "Manuela", "Juliana", "Paola", "Pandy", "Fernanda"};
         String[] apellidosRand = {"Lozada", "Gonzalez", "Nunez", "Gil", "Botero", "Perez", "Reyes", "Gomez", "Hernandez", "Pabon"};
         String[] telefonos = {"3102823922", "3102823921", "3102823923", "3102823925", "3102823920", "3102823929", "3102823927", "3102823925", "3102823926", "3102823900"};
@@ -71,9 +85,14 @@ public class AmigoDAO {
         return amigo;
     }
 
-    public AmigoDTO buscarId(Connection connection,Number idAmigo) {
-   
+    public AmigoDTO buscarId(Class servicio, Number idAmigo) {
         AmigoDTO amigoVO = new AmigoDTO();
+        Connection connection = null;
+        if (servicio.equals(PostgresqlService.class)) {
+            connection = ConexionPostgresql.getInstance().conexion();
+        } else if (servicio.equals(OracleService.class)) {
+            connection = ConexionOracle.getInstance().conexion();
+        }
         try {
             String consulta = "select * from amigos where id = " + idAmigo;
             PreparedStatement statement = connection.prepareStatement(consulta);
@@ -94,8 +113,13 @@ public class AmigoDAO {
         return amigoVO;
     }
 
-    public AmigoDTO actualizar(Connection connection,AmigoDTO amigoVO) {
-        
+    public AmigoDTO actualizar(Class servicio, AmigoDTO amigoVO) {
+        Connection connection = null;
+        if (servicio.equals(PostgresqlService.class)) {
+            connection = ConexionPostgresql.getInstance().conexion();
+        } else if (servicio.equals(OracleService.class)) {
+            connection = ConexionOracle.getInstance().conexion();
+        }
         try {
             String consulta = "update amigos set nombre = '" + amigoVO.getNombre() + "', apellido = '" + amigoVO.getApellido()
                     + "', telefono = '" + amigoVO.getTelefono() + "', direccion = '" + amigoVO.getDireccion() + "', correo = '" + amigoVO.getCorreo()
@@ -110,7 +134,13 @@ public class AmigoDAO {
         return amigoVO;
     }
 
-    public void eliminar(Connection connection,Number idAmigo) {
+    public void eliminar(Class servicio, Number idAmigo) {
+        Connection connection = null;
+        if (servicio.equals(PostgresqlService.class)) {
+            connection = ConexionPostgresql.getInstance().conexion();
+        } else if (servicio.equals(OracleService.class)) {
+            connection = ConexionOracle.getInstance().conexion();
+        }
         try {
             String consulta = "delete from amigos where id = " + idAmigo;
             PreparedStatement statement = connection.prepareStatement(consulta);
@@ -121,4 +151,5 @@ public class AmigoDAO {
             e.getMessage();
         }
     }
+
 }

@@ -35,8 +35,8 @@ public class OracleMenu {
                 start.menuPrincipal();
                 break;
             case 4:
-                String mensaje = OracleService.getInstance().desconectar();
-                System.out.println(mensaje);
+                //String mensaje = OracleService.getInstance().desconectar();
+                //System.out.println(mensaje);
                 System.out.println("|-----------------------------------------|");
                 System.out.println("|-----------PROGRAMA FINALIZADO-----------|");
                 System.out.println("|-----------------------------------------|");
@@ -98,8 +98,8 @@ public class OracleMenu {
                 menu();
                 break;
             case 6:
-                String mensaje = OracleService.getInstance().desconectar();
-                System.out.println(mensaje);
+                //String mensaje = OracleService.getInstance().desconectar();
+                //System.out.println(mensaje);
                 System.out.println("|-----------------------------------------|");
                 System.out.println("|-----------PROGRAMA FINALIZADO-----------|");
                 System.out.println("|-----------------------------------------|");
@@ -194,8 +194,8 @@ public class OracleMenu {
             int opc = leer.nextInt();
             switch (opc) {
                 case 0:
-                    String mensaje = OracleService.getInstance().desconectar();
-                    System.out.println(mensaje);
+                    //String mensaje = OracleService.getInstance().desconectar();
+                    //System.out.println(mensaje);
                     System.out.println("|-----------------------------------------|");
                     System.out.println("|-----------PROGRAMA FINALIZADO-----------|");
                     System.out.println("|-----------------------------------------|");
@@ -247,26 +247,26 @@ public class OracleMenu {
                     break;
 
                 case 5:
-                    mensaje = OracleService.getInstance().savePoint();
-                    System.out.println(mensaje);
+                    //mensaje = OracleService.getInstance().savePoint();
+                    //System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 6:
-                    mensaje = OracleService.getInstance().volverSavePoint();
-                    System.out.println(mensaje);
+                    //mensaje = OracleService.getInstance().volverSavePoint();
+                    //System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 7:
-                    mensaje = OracleService.getInstance().rollback();
-                    System.out.println(mensaje);
+                    //mensaje = OracleService.getInstance().rollback();
+                    //System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 8:
-                    mensaje = OracleService.getInstance().commit();
-                    System.out.println(mensaje);
+                    //mensaje = OracleService.getInstance().commit();
+                    //System.out.println(mensaje);
                     menuTransaccion();
                     break;
                 case 9:
