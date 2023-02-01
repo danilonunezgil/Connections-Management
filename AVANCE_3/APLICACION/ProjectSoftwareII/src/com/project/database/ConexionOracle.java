@@ -23,7 +23,7 @@ public class ConexionOracle {
             try {
                 Class.forName(classname);
             } catch (ClassNotFoundException ex) {
-                System.out.println("Error al registrar el driver de ORACLE: " + ex);
+                System.out.println("Error al registrar el driver de PostgreSQL: " + ex);
             }
             
             con = DriverManager.getConnection(url,user,pass);
@@ -46,7 +46,7 @@ public class ConexionOracle {
       return connectInstance;
     }
     
-    public Connection conectar() {
+    public static Connection conectar() {
         return con;
     }
 
