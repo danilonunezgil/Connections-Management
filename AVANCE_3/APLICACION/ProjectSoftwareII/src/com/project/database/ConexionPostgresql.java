@@ -16,7 +16,7 @@ public class ConexionPostgresql {
     private final String classname = "org.postgresql.Driver";
     private final String url = "jdbc:postgresql://localhost:5432/sistemas";
     private final String user = "postgres";
-    private final String pass = "4023";
+    private final String pass = "password";
 
     private ConexionPostgresql() {
         

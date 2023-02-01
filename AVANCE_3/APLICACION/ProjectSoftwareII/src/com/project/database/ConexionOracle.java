@@ -14,16 +14,16 @@ public class ConexionOracle {
     private static Savepoint save;
     
     private final String classname = "oracle.jdbc.driver.OracleDriver";
-    private final String url = "jdbc:oracle:thin:@beelz:1521:XE";
-    private final String user = "edgar";
-    private final String pass = "4023";
+    private final String url = "jdbc:oracle:thin:@localhost:1521:XE";
+    private final String user = "admin";
+    private final String pass = "password";
     
    private ConexionOracle() {
         try {
             try {
                 Class.forName(classname);
             } catch (ClassNotFoundException ex) {
-                System.out.println("Error al registrar el driver de PostgreSQL: " + ex);
+                System.out.println("Error al registrar el driver de ORACLE: " + ex);
             }
             
             con = DriverManager.getConnection(url,user,pass);
