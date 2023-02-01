@@ -156,7 +156,7 @@ public class Start extends javax.swing.JFrame {
         logo_software.setText("jLabel1");
         jPanel1.add(logo_software, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, 400, 400));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1026, 612));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 612));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
