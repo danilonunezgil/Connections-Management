@@ -12,10 +12,6 @@ import java.sql.Connection;
 public class OracleService {
     
     private static OracleService oracleSingleton;
-
-    public static boolean getConnection() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     private final AmigoDAO amigoDAO;
     private final EstudianteDAO estudianteDAO;
     private final ElementoDAO elementoDAO;

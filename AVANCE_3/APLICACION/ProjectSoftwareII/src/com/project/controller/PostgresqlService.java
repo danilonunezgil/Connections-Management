@@ -4,7 +4,6 @@ import com.project.database.ConexionPostgresql;
 import com.project.dao.ElementoDAO;
 import com.project.dao.EstudianteDAO;
 import com.project.dao.AmigoDAO;
-import com.project.database.ConexionOracle;
 import com.project.dto.AmigoDTO;
 import com.project.dto.InfoStudentDTO;
 import java.util.List;
