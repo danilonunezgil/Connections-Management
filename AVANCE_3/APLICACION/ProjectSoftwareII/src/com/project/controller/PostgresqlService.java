@@ -1,45 +1,52 @@
 package com.project.controller;
 
 import com.project.database.ConexionPostgresql;
-import com.project.model.element.ElementoDAO;
-import com.project.model.student.EstudianteDAO;
-import com.project.model.friend.AmigoDAO;
-import com.project.model.friend.Amigo;
-import com.project.model.friend.AmigoDTO;
-import com.project.model.student.InfoStudentDTO;
+import com.project.dao.ElementoDAO;
+import com.project.dao.EstudianteDAO;
+import com.project.dao.AmigoDAO;
+import com.project.dto.AmigoDTO;
+import com.project.dto.InfoStudentDTO;
 import java.util.List;
 
 public class PostgresqlService{
     
-    private final AmigoDAO friendBO;
-    private final EstudianteDAO studentBO;
-    private final ElementoDAO itemBO;
-   
-    public PostgresqlService() {
-        this.friendBO = new AmigoDAO();
-        this.studentBO = new EstudianteDAO();
-        this.itemBO = new ElementoDAO();
+    private static PostgresqlService postgresqlSingleton;
+    private final AmigoDAO amigoDAO;
+    private final EstudianteDAO estudianteDAO;
+    private final ElementoDAO elementoDAO;
+    
+    private PostgresqlService(){
+        this.amigoDAO = new AmigoDAO();
+        this.estudianteDAO = new EstudianteDAO();
+        this.elementoDAO = new ElementoDAO();
+    }
+    
+    public static PostgresqlService getInstance(){
+        if(postgresqlSingleton == null){
+            postgresqlSingleton = new PostgresqlService();
+        }
+        return postgresqlSingleton;
     }
 
     //CRUD PARA TABLA AMIGO
     public AmigoDTO ingresarAmigo(){
-        return friendBO.insertar(ConexionPostgresql.getInstance().conectar());
+        return amigoDAO.insertar(ConexionPostgresql.getInstance().conectar());
     }
     
     public List<AmigoDTO> listarAmigo(){
-        return friendBO.listar(ConexionPostgresql.getInstance().conectar());
+        return amigoDAO.listar(ConexionPostgresql.getInstance().conectar());
     }
     
     public AmigoDTO actualizarAmigo(AmigoDTO amigo){
-        return friendBO.actualizar(ConexionPostgresql.getInstance().conectar(),amigo);
+        return amigoDAO.actualizar(ConexionPostgresql.getInstance().conectar(),amigo);
     }
     
     public void eliminarAmigo(Number idAmigo){
-        friendBO.eliminar(ConexionPostgresql.getInstance().conectar(),idAmigo);
+        amigoDAO.eliminar(ConexionPostgresql.getInstance().conectar(),idAmigo);
     }
     
     public AmigoDTO buscarAmigoId(Number idAmigo){
-        return friendBO.buscarId(ConexionPostgresql.getInstance().conectar(),idAmigo);
+        return amigoDAO.buscarId(ConexionPostgresql.getInstance().conectar(),idAmigo);
     }
     //CONTROL DE TRANSACCIONES
     
@@ -65,18 +72,18 @@ public class PostgresqlService{
     
      //CONTROL DE FUNCIONES
     public Number promedioCarrera(Integer cod_est){
-        return studentBO.promedioCarrera(ConexionPostgresql.getInstance().conectar(), cod_est);
+        return estudianteDAO.promedioCarrera(ConexionPostgresql.getInstance().conectar(), cod_est);
     }
     
     public Integer precioPromedio(Integer cod_ele){
-        return itemBO.precioPromedioElemento(ConexionPostgresql.getInstance().conectar(), cod_ele);
+        return elementoDAO.precioPromedioElemento(ConexionPostgresql.getInstance().conectar(), cod_ele);
     }
     
     public String compararNumeros(Integer numero1, Integer numero2){
-        return studentBO.compararNumeros(ConexionPostgresql.getInstance().conectar(),numero1,numero2);
+        return estudianteDAO.compararNumeros(ConexionPostgresql.getInstance().conectar(),numero1,numero2);
     }
     
     public List<InfoStudentDTO> informacionEstudiantes(){
-        return studentBO.informacionEstudiantes(ConexionPostgresql.getInstance().conectar());
+        return estudianteDAO.informacionEstudiantes(ConexionPostgresql.getInstance().conectar());
     }
 }

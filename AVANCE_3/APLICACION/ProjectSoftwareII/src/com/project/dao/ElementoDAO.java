@@ -1,4 +1,4 @@
-package com.project.model.element;
+package com.project.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -24,6 +24,7 @@ public class ElementoDAO {
             statement.execute();
             precio_promedio = statement.getInt(1);
             statement.close();
+            System.out.println(connection);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

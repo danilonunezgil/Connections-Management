@@ -1,4 +1,5 @@
-package com.project.model.friend;
+package com.project.dao;
+import com.project.dto.AmigoDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,10 +34,10 @@ public class AmigoDAO {
             }
             resultado.close();
             statement.close();
+            System.out.println(connection);
         } catch (SQLException ex) {
             ex.getMessage();
         }
-        System.out.println(connection);
         return listadoAmigos;
     }
 
@@ -52,6 +53,7 @@ public class AmigoDAO {
             statement.setString(5, amigo.getCorreo());
             statement.executeUpdate();
             statement.close();
+            System.out.println(connection);
         } catch (SQLException ex) { 
             ex.getMessage();
         }
@@ -101,6 +103,7 @@ public class AmigoDAO {
             PreparedStatement statement = connection.prepareStatement(consulta);
             statement.executeUpdate();
             statement.close();
+            System.out.println(connection);
         } catch (SQLException e) {
             e.getMessage();
         }
@@ -113,10 +116,9 @@ public class AmigoDAO {
             PreparedStatement statement = connection.prepareStatement(consulta);
             statement.executeUpdate();
             statement.close();
+            System.out.println(connection);
         } catch (SQLException e) {
             e.getMessage();
         }
     }
-    
-    
 }
