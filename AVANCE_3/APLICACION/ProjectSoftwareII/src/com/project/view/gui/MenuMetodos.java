@@ -204,7 +204,7 @@ public class MenuMetodos extends javax.swing.JPanel {
 
         titulo_connect_oracle1.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
         titulo_connect_oracle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo_connect_oracle1.setText("CONECTADO A ---> ");
+        titulo_connect_oracle1.setText("CONECTADO A  ---> ");
         add(titulo_connect_oracle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 450, 60));
 
         result_promEst.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
