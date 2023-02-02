@@ -106,8 +106,8 @@ public class Amigo {
         return AmigoDAO.getInstance().listar(servicio);
     }
     
-    public Amigo actualizar(Class servicio,AmigoDTO amigo){
-        return AmigoDAO.getInstance().actualizar(servicio,(Amigo)amigo);
+    public Amigo actualizar(Class servicio,AmigoDTO amigoDTO){
+        return AmigoDAO.getInstance().actualizar(servicio,amigoDTO);
     }
     
     public void eliminar(Class servicio,Number idAmigo){

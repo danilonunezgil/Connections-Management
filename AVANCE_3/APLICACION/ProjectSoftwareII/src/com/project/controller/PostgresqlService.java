@@ -6,6 +6,7 @@ import com.project.model.Estudiante;
 import com.project.dto.AmigoDTO;
 import com.project.dto.InfoStudentDTO;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PostgresqlService {
 
@@ -27,28 +28,30 @@ public class PostgresqlService {
         return postgresqlSingleton;
     }
 
-    //CRUD PARA TABLA AMIGO
-    public AmigoDTO ingresarAmigo() {
-        return (AmigoDTO) amigo.crear(PostgresqlService.class);
+   //CRUD PARA TABLA AMIGO
+    public AmigoDTO ingresarAmigo(){
+        AmigoDTO amigoDTO = new AmigoDTO( amigo.crear(PostgresqlService.class));
+        return amigoDTO;
     }
-
-    public List<AmigoDTO> listarAmigo() {
-        List<?> listaAmigos = amigo.listar(PostgresqlService.class);
-        return (List<AmigoDTO>) listaAmigos;
+    
+    public List<AmigoDTO> listarAmigo(){
+        List<Amigo> lista = amigo.listar(PostgresqlService.class);
+        return lista.stream().map(AmigoDTO::new).collect(Collectors.toList());
     }
-
-    public AmigoDTO actualizarAmigo(AmigoDTO amigo) {
-        return (AmigoDTO) amigo.actualizar(PostgresqlService.class, amigo);
+    
+    public AmigoDTO actualizarAmigo(AmigoDTO amigo){
+        AmigoDTO amigoDTO = new AmigoDTO(amigo.actualizar(PostgresqlService.class,amigo));
+        return amigoDTO ;
     }
-
-    public void eliminarAmigo(Number idAmigo) {
-        amigo.eliminar(OracleService.class, idAmigo);
+    
+    public void eliminarAmigo(Number idAmigo){
+        amigo.eliminar(PostgresqlService.class,idAmigo);
     }
-
-    public AmigoDTO buscarAmigoId(Number idAmigo) {
-        return (AmigoDTO) amigo.buscarId(PostgresqlService.class, idAmigo);
+    
+    public AmigoDTO buscarAmigoId(Number idAmigo){
+        AmigoDTO amigoDTO = new AmigoDTO(amigo.buscarId(PostgresqlService.class,idAmigo));
+        return amigoDTO;
     }
-
     //CONTROL DE TRANSACCIONES
     /*
     public String savePoint(){

@@ -5,7 +5,9 @@ import com.project.model.Elemento;
 import com.project.model.Estudiante;
 import com.project.dto.AmigoDTO;
 import com.project.dto.InfoStudentDTO;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OracleService {
     
@@ -29,16 +31,18 @@ public class OracleService {
     
     //CRUD PARA TABLA AMIGO
     public AmigoDTO ingresarAmigo(){
-        return (AmigoDTO)amigo.crear(OracleService.class);
+        AmigoDTO amigoDTO = new AmigoDTO( amigo.crear(OracleService.class));
+        return amigoDTO;
     }
     
     public List<AmigoDTO> listarAmigo(){
-        List<?> listaAmigos = amigo.listar(OracleService.class);
-        return (List<AmigoDTO>)listaAmigos;
+        List<Amigo> lista = amigo.listar(OracleService.class);
+        return lista.stream().map(AmigoDTO::new).collect(Collectors.toList());
     }
     
     public AmigoDTO actualizarAmigo(AmigoDTO amigo){
-        return (AmigoDTO)amigo.actualizar(OracleService.class,amigo);
+        AmigoDTO amigoDTO = new AmigoDTO(amigo.actualizar(OracleService.class,amigo));
+        return amigoDTO ;
     }
     
     public void eliminarAmigo(Number idAmigo){
@@ -46,7 +50,8 @@ public class OracleService {
     }
     
     public AmigoDTO buscarAmigoId(Number idAmigo){
-        return (AmigoDTO)amigo.buscarId(OracleService.class,idAmigo);
+        AmigoDTO amigoDTO = new AmigoDTO(amigo.buscarId(OracleService.class,idAmigo));
+        return amigoDTO;
     }
     
     //CONTROL DE TRANSACCIONES

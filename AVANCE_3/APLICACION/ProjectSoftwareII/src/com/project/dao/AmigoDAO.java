@@ -4,6 +4,7 @@ import com.project.controller.OracleService;
 import com.project.controller.PostgresqlService;
 import com.project.database.ConexionOracle;
 import com.project.database.ConexionPostgresql;
+import com.project.dto.AmigoDTO;
 import java.sql.Connection;
 import com.project.model.Amigo;
 import java.sql.PreparedStatement;
