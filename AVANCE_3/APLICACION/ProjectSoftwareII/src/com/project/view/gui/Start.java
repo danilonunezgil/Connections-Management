@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> c15421731677fce6b21a9e54a3d0e101d30acb77
 package com.project.view.gui;
 
 import java.awt.BorderLayout;
