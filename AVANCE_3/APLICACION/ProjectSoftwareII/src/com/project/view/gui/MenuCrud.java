@@ -22,7 +22,7 @@ public class MenuCrud extends javax.swing.JPanel {
         } else if (conectadoA == "PostgreSQL") {
             conectado_a.setText(conectadoA);
         }
-        boton_actualizarAmigo.setEnabled(false);
+        //boton_actualizarAmigo.setEnabled(false);
     }
 
     public void refrescarTabla() {
@@ -92,7 +92,15 @@ public class MenuCrud extends javax.swing.JPanel {
             new String [] {
                 "ID", "NOMBRE", "APELLIDO", "TELEFONO", "DIRECCIÓN", "CORREO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabla_amigos);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 520, 290));
@@ -114,6 +122,11 @@ public class MenuCrud extends javax.swing.JPanel {
         add(boton_amigoAleat, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
 
         boton_actualizarAmigo.setText("ACTUALIZAR AMIGO");
+        boton_actualizarAmigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_actualizarAmigoActionPerformed(evt);
+            }
+        });
         add(boton_actualizarAmigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
 
         boton_eliminarAmigo.setText("ELIMINAR AMIGO");
@@ -186,8 +199,10 @@ public class MenuCrud extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (conectado_a.getText() == "Oracle") {
             OracleService.getInstance().eliminarAmigo(Integer.parseInt(campo_idAmigo.getValue().toString()));
+            refrescarTabla();
         } else if (conectado_a.getText() == "PostgreSQL") {
             PostgresqlService.getInstance().eliminarAmigo(Integer.parseInt(campo_idAmigo.getValue().toString()));
+            refrescarTabla();
         }
     }//GEN-LAST:event_boton_eliminarAmigoActionPerformed
 
@@ -223,10 +238,12 @@ public class MenuCrud extends javax.swing.JPanel {
         if (conectado_a.getText() == "Oracle") {
             mensaje = OracleService.getInstance().rollbackAmigos();
             JOptionPane.showMessageDialog(null, mensaje);
+            refrescarTabla();
 
         } else if (conectado_a.getText() == "PostgreSQL") {
             mensaje = PostgresqlService.getInstance().rollbackAmigos();
             JOptionPane.showMessageDialog(null, mensaje);
+            refrescarTabla();
         }
     }//GEN-LAST:event_boton_rollbackActionPerformed
 
@@ -236,13 +253,18 @@ public class MenuCrud extends javax.swing.JPanel {
         if (conectado_a.getText() == "Oracle") {
             mensaje = OracleService.getInstance().commitAmigos();
             JOptionPane.showMessageDialog(null, mensaje);
-            refrescarTabla();
         } else if (conectado_a.getText() == "PostgreSQL") {
             mensaje = PostgresqlService.getInstance().commitAmigos();
             JOptionPane.showMessageDialog(null, mensaje);
-            refrescarTabla();
         }
     }//GEN-LAST:event_boton_commitActionPerformed
+
+    private void boton_actualizarAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_actualizarAmigoActionPerformed
+        // TODO add your handling code here:
+        VentanaEmergente ve = new VentanaEmergente();
+        ve.setVisible(true);
+        ve.setLocationRelativeTo(null);
+    }//GEN-LAST:event_boton_actualizarAmigoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
