@@ -52,27 +52,27 @@ public class PostgresqlService {
         AmigoDTO amigoDTO = new AmigoDTO(amigo.buscarId(PostgresqlService.class,idAmigo));
         return amigoDTO;
     }
-    //CONTROL DE TRANSACCIONES
+     //CONTROL DE TRANSACCIONES
+    public String savePointAmigos(){
+        return amigo.savePointAmigos(PostgresqlService.class);
+    }
+    
+    public String volverSaveAmigos(){
+        return amigo.volverSaveAmigos(PostgresqlService.class);
+    }
+    
+    public String rollbackAmigos(){
+        return amigo.rollbackAmigos(PostgresqlService.class);
+    }
+    
+    public String commitAmigos(){
+        return amigo.commitAmigos(PostgresqlService.class);
+    }
     /*
-    public String savePoint(){
-        return ConexionPostgresql.savePoint(PostgresqlService.class);
-    }
-    
-    public String volverSavePoint(){
-        return ConexionPostgresql.volverSavePoint(PostgresqlService.class);
-    }
-    
-    public String rollback(){
-        return ConexionPostgresql.rollback(PostgresqlService.class);
-    }
-    
-    public String commit(){
-        return ConexionPostgresql.commit(PostgresqlService.class);
-    }
-    
     public String desconectar(){
-        return ConexionPostgresql.desconectar(PostgresqlService.class);
-    }*/
+        return ConexionOracle.desconectar(PostgresqlService.class);
+    }
+    */
     //CONTROL DE FUNCIONES
     public Number promedioCarrera(Integer cod_est) {
         return estudiante.promedioCarrera(PostgresqlService.class, cod_est);

@@ -247,26 +247,26 @@ public class OracleMenu {
                     break;
 
                 case 5:
-                    //mensaje = OracleService.getInstance().savePoint();
-                    //System.out.println(mensaje);
+                    String mensaje = OracleService.getInstance().savePointAmigos();
+                    System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 6:
-                    //mensaje = OracleService.getInstance().volverSavePoint();
-                    //System.out.println(mensaje);
+                    mensaje = OracleService.getInstance().volverSaveAmigos();
+                    System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 7:
-                    //mensaje = OracleService.getInstance().rollback();
-                    //System.out.println(mensaje);
+                    mensaje = OracleService.getInstance().rollbackAmigos();
+                    System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 8:
-                    //mensaje = OracleService.getInstance().commit();
-                    //System.out.println(mensaje);
+                    mensaje = OracleService.getInstance().commitAmigos();
+                    System.out.println(mensaje);
                     menuTransaccion();
                     break;
                 case 9:

@@ -149,5 +149,57 @@ public class AmigoDAO {
             e.getMessage();
         }
     }
+    
+    public String savePoint(Class servicio){
+        Connection connection = null;
+        String rt = null;
+        if (servicio.equals(PostgresqlService.class)) {
+            connection = ConexionPostgresql.getInstance().conexion();
+            rt = ConexionPostgresql.savePoint(connection);
+        } else if (servicio.equals(OracleService.class)) {
+            connection = ConexionOracle.getInstance().conexion();
+            rt = ConexionOracle.savePoint(connection);
+        }
+        return rt;
+    }
+    
+    public String volverSave(Class servicio){
+        Connection connection = null;
+        String rt = null;
+        if (servicio.equals(PostgresqlService.class)) {
+            connection = ConexionPostgresql.getInstance().conexion();
+            rt = ConexionPostgresql.volverSavePoint(connection);
+        } else if (servicio.equals(OracleService.class)) {
+            connection = ConexionOracle.getInstance().conexion();
+            rt = ConexionOracle.volverSavePoint(connection);
+        }
+        return rt;
+    }
+    
+    public String rollback(Class servicio){
+        Connection connection = null;
+        String rt = null;
+        if (servicio.equals(PostgresqlService.class)) {
+            connection = ConexionPostgresql.getInstance().conexion();
+            rt = ConexionPostgresql.rollback(connection);
+        } else if (servicio.equals(OracleService.class)) {
+            connection = ConexionOracle.getInstance().conexion();
+            rt = ConexionOracle.rollback(connection);
+        }
+        return rt;
+    }
+    
+    public String commit(Class servicio){
+        Connection connection = null;
+        String rt = null;
+        if (servicio.equals(PostgresqlService.class)) {
+            connection = ConexionPostgresql.getInstance().conexion();
+            rt = ConexionPostgresql.savePoint(connection);
+        } else if (servicio.equals(OracleService.class)) {
+            connection = ConexionOracle.getInstance().conexion();
+            rt = ConexionOracle.commit(connection);
+        }
+        return rt;
+    }
 
 }

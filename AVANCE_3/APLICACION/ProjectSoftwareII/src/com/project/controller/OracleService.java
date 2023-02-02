@@ -5,7 +5,6 @@ import com.project.model.Elemento;
 import com.project.model.Estudiante;
 import com.project.dto.AmigoDTO;
 import com.project.dto.InfoStudentDTO;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,25 +54,24 @@ public class OracleService {
     }
     
     //CONTROL DE TRANSACCIONES
+    public String savePointAmigos(){
+        return amigo.savePointAmigos(OracleService.class);
+    }
+    
+    public String volverSaveAmigos(){
+        return amigo.volverSaveAmigos(OracleService.class);
+    }
+    
+    public String rollbackAmigos(){
+        return amigo.rollbackAmigos(OracleService.class);
+    }
+    
+    public String commitAmigos(){
+        return amigo.commitAmigos(OracleService.class);
+    }
     /*
-    public String savePoint(){
-        return ConexionOracle.savePoint(ConexionOracle.getInstance().conectar());
-    }
-    
-    public String volverSavePoint(){
-        return ConexionOracle.volverSavePoint(ConexionOracle.getInstance().conectar());
-    }
-    
-    public String rollback(){
-        return ConexionOracle.rollback(ConexionOracle.getInstance().conectar());
-    }
-    
-    public String commit(){
-        return ConexionOracle.commit(ConexionOracle.getInstance().conectar());
-    }
-    
     public String desconectar(){
-        return ConexionOracle.desconectar(ConexionOracle.getInstance().conectar());
+        return ConexionOracle.desconectar(OracleService.class);
     }
     */
     //CONTROL DE FUNCIONES

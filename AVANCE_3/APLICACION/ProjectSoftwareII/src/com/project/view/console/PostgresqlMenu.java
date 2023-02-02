@@ -249,26 +249,26 @@ public class PostgresqlMenu {
                     break;
 
                 case 5:
-                    //mensaje = PostgresqlService.getInstance().savePoint();
-                    //System.out.println(mensaje);
+                    String mensaje = PostgresqlService.getInstance().savePointAmigos();
+                    System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 6:
-                    //mensaje = PostgresqlService.getInstance().volverSavePoint();
-                    //System.out.println(mensaje);
+                    mensaje = PostgresqlService.getInstance().volverSaveAmigos();
+                    System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 7:
-                    //mensaje = PostgresqlService.getInstance().rollback();
-                    //System.out.println(mensaje);
+                    mensaje = PostgresqlService.getInstance().rollbackAmigos();
+                    System.out.println(mensaje);
                     menuTransaccion();
                     break;
 
                 case 8:
-                    //mensaje = PostgresqlService.getInstance().commit();
-                    //System.out.println(mensaje);
+                    mensaje = PostgresqlService.getInstance().commitAmigos();
+                    System.out.println(mensaje);
                     menuTransaccion();
                     break;
                 case 9:

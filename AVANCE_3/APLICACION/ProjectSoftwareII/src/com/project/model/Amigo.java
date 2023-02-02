@@ -117,4 +117,20 @@ public class Amigo {
     public Amigo buscarId(Class servicio,Number idAmigo){
         return AmigoDAO.getInstance().buscarId(servicio,idAmigo);
     }
+    
+    public String savePointAmigos(Class servicio){
+        return AmigoDAO.getInstance().savePoint(servicio);
+    }
+    
+    public String volverSaveAmigos(Class servicio){
+        return AmigoDAO.getInstance().volverSave(servicio);
+    }
+    
+    public String rollbackAmigos(Class servicio){
+        return AmigoDAO.getInstance().rollback(servicio);
+    }
+    
+    public String commitAmigos(Class servicio){
+        return AmigoDAO.getInstance().commit(servicio);
+    }
 }
