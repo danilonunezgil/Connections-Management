@@ -16,7 +16,16 @@ import java.util.List;
 
 public class EstudianteDAO {
 
-    public EstudianteDAO() {
+    private static EstudianteDAO estudianteDAO;
+
+    private EstudianteDAO() {
+    }
+
+    public static EstudianteDAO getInstance() {
+        if (estudianteDAO == null) {
+            estudianteDAO = new EstudianteDAO();
+        }
+        return estudianteDAO;
     }
 
     public Number promedioCarrera(Class servicio, Integer cod_est) {

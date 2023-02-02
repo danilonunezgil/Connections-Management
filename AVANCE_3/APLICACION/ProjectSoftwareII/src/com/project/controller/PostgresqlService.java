@@ -1,88 +1,92 @@
 package com.project.controller;
 
-import com.project.dao.ElementoDAO;
-import com.project.dao.EstudianteDAO;
-import com.project.dao.AmigoDAO;
+import com.project.model.Amigo;
+import com.project.model.Elemento;
+import com.project.model.Estudiante;
 import com.project.dto.AmigoDTO;
 import com.project.dto.InfoStudentDTO;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class PostgresqlService{
-    
+public class PostgresqlService {
+
     private static PostgresqlService postgresqlSingleton;
-    private final AmigoDAO amigoDAO;
-    private final EstudianteDAO estudianteDAO;
-    private final ElementoDAO elementoDAO;
-    
-    private PostgresqlService(){
-        this.amigoDAO = new AmigoDAO();
-        this.estudianteDAO = new EstudianteDAO();
-        this.elementoDAO = new ElementoDAO();
+    private final Amigo amigo;
+    private final Estudiante estudiante;
+    private final Elemento elemento;
+
+    private PostgresqlService() {
+        this.amigo = new Amigo();
+        this.estudiante = new Estudiante();
+        this.elemento = new Elemento();
     }
-    
-    public static PostgresqlService getInstance(){
-        if(postgresqlSingleton == null){
+
+    public static PostgresqlService getInstance() {
+        if (postgresqlSingleton == null) {
             postgresqlSingleton = new PostgresqlService();
         }
         return postgresqlSingleton;
     }
-    
-    //CRUD PARA TABLA AMIGO
+
+   //CRUD PARA TABLA AMIGO
     public AmigoDTO ingresarAmigo(){
-        return amigoDAO.insertar(PostgresqlService.class);
+        AmigoDTO amigoDTO = new AmigoDTO( amigo.crear(PostgresqlService.class));
+        return amigoDTO;
     }
     
     public List<AmigoDTO> listarAmigo(){
-        return amigoDAO.listar(PostgresqlService.class);
+        List<Amigo> lista = amigo.listar(PostgresqlService.class);
+        return lista.stream().map(AmigoDTO::new).collect(Collectors.toList());
     }
     
     public AmigoDTO actualizarAmigo(AmigoDTO amigo){
-        return amigoDAO.actualizar(PostgresqlService.class,amigo);
+        AmigoDTO amigoDTO = new AmigoDTO(amigo.actualizar(PostgresqlService.class,amigo));
+        return amigoDTO ;
     }
     
     public void eliminarAmigo(Number idAmigo){
-        amigoDAO.eliminar(PostgresqlService.class,idAmigo);
+        amigo.eliminar(PostgresqlService.class,idAmigo);
     }
     
     public AmigoDTO buscarAmigoId(Number idAmigo){
-        return amigoDAO.buscarId(PostgresqlService.class,idAmigo);
+        AmigoDTO amigoDTO = new AmigoDTO(amigo.buscarId(PostgresqlService.class,idAmigo));
+        return amigoDTO;
     }
-    //CONTROL DE TRANSACCIONES
+     //CONTROL DE TRANSACCIONES
+    public String savePointAmigos(){
+        return amigo.savePointAmigos(PostgresqlService.class);
+    }
+    
+    public String volverSaveAmigos(){
+        return amigo.volverSaveAmigos(PostgresqlService.class);
+    }
+    
+    public String rollbackAmigos(){
+        return amigo.rollbackAmigos(PostgresqlService.class);
+    }
+    
+    public String commitAmigos(){
+        return amigo.commitAmigos(PostgresqlService.class);
+    }
     /*
-    public String savePoint(){
-        return ConexionPostgresql.savePoint(PostgresqlService.class);
-    }
-    
-    public String volverSavePoint(){
-        return ConexionPostgresql.volverSavePoint(PostgresqlService.class);
-    }
-    
-    public String rollback(){
-        return ConexionPostgresql.rollback(PostgresqlService.class);
-    }
-    
-    public String commit(){
-        return ConexionPostgresql.commit(PostgresqlService.class);
-    }
-    
     public String desconectar(){
-        return ConexionPostgresql.desconectar(PostgresqlService.class);
-    }*/
-    
-     //CONTROL DE FUNCIONES
-    public Number promedioCarrera(Integer cod_est){
-        return estudianteDAO.promedioCarrera(PostgresqlService.class, cod_est);
+        return ConexionOracle.desconectar(PostgresqlService.class);
     }
-    
-    public Integer precioPromedio(Integer cod_ele){
-        return elementoDAO.precioPromedioElemento(PostgresqlService.class, cod_ele);
+    */
+    //CONTROL DE FUNCIONES
+    public Number promedioCarrera(Integer cod_est) {
+        return estudiante.promedioCarrera(PostgresqlService.class, cod_est);
     }
-    
-    public String compararNumeros(Integer numero1, Integer numero2){
-        return estudianteDAO.compararNumeros(PostgresqlService.class,numero1,numero2);
+
+    public Integer precioPromedio(Integer cod_ele) {
+        return elemento.precioPromedio(PostgresqlService.class, cod_ele);
     }
-    
-    public List<InfoStudentDTO> informacionEstudiantes(){
-        return estudianteDAO.informacionEstudiantes(PostgresqlService.class);
+
+    public String compararNumeros(Integer numero1, Integer numero2) {
+        return estudiante.compararNumeros(PostgresqlService.class, numero1, numero2);
+    }
+
+    public List<InfoStudentDTO> informacionEstudiantes() {
+        return estudiante.informacionEstudiantes(PostgresqlService.class);
     }
 }

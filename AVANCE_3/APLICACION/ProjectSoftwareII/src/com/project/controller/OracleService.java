@@ -1,23 +1,24 @@
 package com.project.controller;
 
-import com.project.dao.ElementoDAO;
-import com.project.dao.AmigoDAO;
+import com.project.model.Amigo;
+import com.project.model.Elemento;
+import com.project.model.Estudiante;
 import com.project.dto.AmigoDTO;
-import com.project.dao.EstudianteDAO;
 import com.project.dto.InfoStudentDTO;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OracleService {
     
     private static OracleService oracleSingleton;
-    private final AmigoDAO amigoDAO;
-    private final EstudianteDAO estudianteDAO;
-    private final ElementoDAO elementoDAO;
+    private final Amigo amigo;
+    private final Estudiante estudiante;
+    private final Elemento elemento;
 
     private OracleService() {
-        this.amigoDAO = new AmigoDAO();
-        this.estudianteDAO = new EstudianteDAO();
-        this.elementoDAO = new ElementoDAO();
+        this.amigo = new Amigo();
+        this.estudiante = new Estudiante();
+        this.elemento = new Elemento();
     }
     
     public static OracleService getInstance(){
@@ -29,62 +30,65 @@ public class OracleService {
     
     //CRUD PARA TABLA AMIGO
     public AmigoDTO ingresarAmigo(){
-        return amigoDAO.insertar(OracleService.class);
+        AmigoDTO amigoDTO = new AmigoDTO( amigo.crear(OracleService.class));
+        return amigoDTO;
     }
     
     public List<AmigoDTO> listarAmigo(){
-        return amigoDAO.listar(OracleService.class);
+        List<Amigo> lista = amigo.listar(OracleService.class);
+        return lista.stream().map(AmigoDTO::new).collect(Collectors.toList());
     }
     
     public AmigoDTO actualizarAmigo(AmigoDTO amigo){
-        return amigoDAO.actualizar(OracleService.class,amigo);
+        AmigoDTO amigoDTO = new AmigoDTO(amigo.actualizar(OracleService.class,amigo));
+        return amigoDTO ;
     }
     
     public void eliminarAmigo(Number idAmigo){
-        amigoDAO.eliminar(OracleService.class,idAmigo);
+        amigo.eliminar(OracleService.class,idAmigo);
     }
     
     public AmigoDTO buscarAmigoId(Number idAmigo){
-        return amigoDAO.buscarId(OracleService.class,idAmigo);
+        AmigoDTO amigoDTO = new AmigoDTO(amigo.buscarId(OracleService.class,idAmigo));
+        return amigoDTO;
     }
     
     //CONTROL DE TRANSACCIONES
+    public String savePointAmigos(){
+        return amigo.savePointAmigos(OracleService.class);
+    }
+    
+    public String volverSaveAmigos(){
+        return amigo.volverSaveAmigos(OracleService.class);
+    }
+    
+    public String rollbackAmigos(){
+        return amigo.rollbackAmigos(OracleService.class);
+    }
+    
+    public String commitAmigos(){
+        return amigo.commitAmigos(OracleService.class);
+    }
     /*
-    public String savePoint(){
-        return ConexionOracle.savePoint(ConexionOracle.getInstance().conectar());
-    }
-    
-    public String volverSavePoint(){
-        return ConexionOracle.volverSavePoint(ConexionOracle.getInstance().conectar());
-    }
-    
-    public String rollback(){
-        return ConexionOracle.rollback(ConexionOracle.getInstance().conectar());
-    }
-    
-    public String commit(){
-        return ConexionOracle.commit(ConexionOracle.getInstance().conectar());
-    }
-    
     public String desconectar(){
-        return ConexionOracle.desconectar(ConexionOracle.getInstance().conectar());
+        return ConexionOracle.desconectar(OracleService.class);
     }
     */
     //CONTROL DE FUNCIONES
     
     public Number promedioCarrera(Integer cod_est){
-        return estudianteDAO.promedioCarrera(OracleService.class, cod_est);
+        return estudiante.promedioCarrera(OracleService.class, cod_est);
     }
     
     public Integer precioPromedio(Integer cod_ele){
-        return elementoDAO.precioPromedioElemento(OracleService.class, cod_ele);
+        return elemento.precioPromedio(OracleService.class, cod_ele);
     }
     
     public String compararNumeros(Integer numero1, Integer numero2){
-        return estudianteDAO.compararNumeros(OracleService.class,numero1,numero2);
+        return estudiante.compararNumeros(OracleService.class,numero1,numero2);
     }
     
     public List<InfoStudentDTO> informacionEstudiantes(){
-        return estudianteDAO.informacionEstudiantes(OracleService.class);
+        return estudiante.informacionEstudiantes(OracleService.class);
     }
 }

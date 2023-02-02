@@ -10,10 +10,19 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 public class ElementoDAO {
-
-    public ElementoDAO() {
+    
+    private static ElementoDAO elementoDAO;
+    
+    private ElementoDAO() {
     }
-
+    
+    public static ElementoDAO getInstance(){
+        if(elementoDAO == null){
+            elementoDAO = new ElementoDAO();
+        }
+        return elementoDAO;
+    }
+    
     public Integer precioPromedioElemento(Class servicio, Integer cod_ele) {
         Integer precio_promedio = null;
         Connection connection = null;

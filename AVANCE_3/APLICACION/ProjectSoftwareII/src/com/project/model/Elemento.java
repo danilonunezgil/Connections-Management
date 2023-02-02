@@ -1,6 +1,9 @@
 package com.project.model;
 
+import com.project.dao.ElementoDAO;
+
 public class Elemento {
+
     private Integer codigo;
     private String elemento;
     private String devolutivo;
@@ -172,5 +175,8 @@ public class Elemento {
     public String toString() {
         return "Elemento{" + "codigo=" + codigo + ", elemento=" + elemento + ", devolutivo=" + devolutivo + ", talla=" + talla + ", uso=" + uso + ", materiales=" + materiales + ", mantenimiento=" + mantenimiento + ", usos=" + usos + ", norma=" + norma + ", atenuacion=" + atenuacion + ", serial=" + serial + ", tallas=" + tallas + ", unidad=" + unidad + ", ruta=" + ruta + ", precio_actual=" + precio_actual + ", cantidad_elementos=" + cantidad_elementos + '}';
     }
-   
+
+    public Integer precioPromedio(Class servicio, Integer cod_ele) {
+        return ElementoDAO.getInstance().precioPromedioElemento(servicio, cod_ele);
+    }
 }
