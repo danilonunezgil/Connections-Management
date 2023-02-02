@@ -5,6 +5,7 @@ import com.project.controller.PostgresqlService;
 import com.project.dto.AmigoDTO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,6 +25,30 @@ public class MenuCrud extends javax.swing.JPanel {
         boton_actualizarAmigo.setEnabled(false);
     }
 
+    public void refrescarTabla() {
+        List<AmigoDTO> amigos = new ArrayList<>();
+        if (conectado_a.getText() == "Oracle") {
+            amigos = OracleService.getInstance().listarAmigo();
+        } else if (conectado_a.getText() == "PostgreSQL") {
+            amigos = PostgresqlService.getInstance().listarAmigo();
+        }
+
+        Object[][] datos = new Object[amigos.size()][6];
+        int i = 0;
+        for (AmigoDTO amigo : amigos) {
+            datos[i][0] = amigo.getId();
+            datos[i][1] = amigo.getNombre();
+            datos[i][2] = amigo.getApellido();
+            datos[i][3] = amigo.getTelefono();
+            datos[i][4] = amigo.getDireccion();
+            datos[i][5] = amigo.getCorreo();
+            i++;
+        }
+
+        String[] nombreColumnas = {"ID", "NOMBRE", "APELLIDO", "TELEFONO", "DIRECCIÓN", "CORREO"};
+        tabla_amigos.setModel(new DefaultTableModel(datos, nombreColumnas));
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -38,10 +63,10 @@ public class MenuCrud extends javax.swing.JPanel {
         boton_eliminarAmigo = new javax.swing.JButton();
         label_IDAmigo = new javax.swing.JLabel();
         campo_idAmigo = new javax.swing.JSpinner();
-        boton_savePoint = new javax.swing.JButton();
         boton_cargarPoint = new javax.swing.JButton();
         boton_commit = new javax.swing.JButton();
         boton_rollback = new javax.swing.JButton();
+        boton_savePoint = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(693, 610));
@@ -103,43 +128,42 @@ public class MenuCrud extends javax.swing.JPanel {
         add(label_IDAmigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, -1, -1));
         add(campo_idAmigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 90, -1));
 
-        boton_savePoint.setText("SAVE POINT");
-        add(boton_savePoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, -1, -1));
-
         boton_cargarPoint.setText("CARGAR SAVE POINT");
-        add(boton_cargarPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
+        boton_cargarPoint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_cargarPointActionPerformed(evt);
+            }
+        });
+        add(boton_cargarPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, -1, -1));
 
         boton_commit.setText("COMMIT");
+        boton_commit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_commitActionPerformed(evt);
+            }
+        });
         add(boton_commit, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, -1, -1));
 
         boton_rollback.setText("ROLLBACK");
-        add(boton_rollback, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, -1, -1));
+        boton_rollback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_rollbackActionPerformed(evt);
+            }
+        });
+        add(boton_rollback, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, -1, -1));
+
+        boton_savePoint.setText("SAVE POINT");
+        boton_savePoint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_savePointActionPerformed(evt);
+            }
+        });
+        add(boton_savePoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void boton_mostrarAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrarAmigosActionPerformed
         // TODO add your handling code here:
-        List<AmigoDTO> amigos = new ArrayList<>();
-        if (conectado_a.getText() == "Oracle") {
-            amigos = OracleService.getInstance().listarAmigo();
-        } else if (conectado_a.getText() == "PostgreSQL") {
-            amigos = PostgresqlService.getInstance().listarAmigo();
-        }
-
-        Object[][] datos = new Object[amigos.size()][6];
-        int i = 0;
-        for (AmigoDTO amigo : amigos) {
-            datos[i][0] = amigo.getId();
-            datos[i][1] = amigo.getNombre();
-            datos[i][2] = amigo.getApellido();
-            datos[i][3] = amigo.getTelefono();
-            datos[i][4] = amigo.getDireccion();
-            datos[i][5] = amigo.getCorreo();
-            i++;
-        }
-
-        String[] nombreColumnas = {"ID", "NOMBRE", "APELLIDO", "TELEFONO", "DIRECCIÓN", "CORREO"};
-        tabla_amigos.setModel(new DefaultTableModel(datos, nombreColumnas));
-
+        refrescarTabla();
     }//GEN-LAST:event_boton_mostrarAmigosActionPerformed
 
     private void boton_amigoAleatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_amigoAleatActionPerformed
@@ -147,8 +171,13 @@ public class MenuCrud extends javax.swing.JPanel {
         AmigoDTO amigo = null;
         if (conectado_a.getText() == "Oracle") {
             amigo = OracleService.getInstance().ingresarAmigo();
+            JOptionPane.showMessageDialog(null, "AMIGO INGRESADO: " + amigo.toString());
+            refrescarTabla();
         } else if (conectado_a.getText() == "PostgreSQL") {
             amigo = PostgresqlService.getInstance().ingresarAmigo();
+            JOptionPane.showMessageDialog(null, "AMIGO INGRESADO: " + amigo.toString());
+            refrescarTabla();
+
         }
         System.out.println(amigo.getNombre() + " " + amigo.getApellido());
     }//GEN-LAST:event_boton_amigoAleatActionPerformed
@@ -159,9 +188,61 @@ public class MenuCrud extends javax.swing.JPanel {
             OracleService.getInstance().eliminarAmigo(Integer.parseInt(campo_idAmigo.getValue().toString()));
         } else if (conectado_a.getText() == "PostgreSQL") {
             PostgresqlService.getInstance().eliminarAmigo(Integer.parseInt(campo_idAmigo.getValue().toString()));
-
         }
     }//GEN-LAST:event_boton_eliminarAmigoActionPerformed
+
+    private void boton_cargarPointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_cargarPointActionPerformed
+        // TODO add your handling code here:
+        String mensaje = "";
+        if (conectado_a.getText() == "Oracle") {
+            mensaje = OracleService.getInstance().volverSaveAmigos();
+            JOptionPane.showMessageDialog(null, mensaje);
+            refrescarTabla();
+        } else if (conectado_a.getText() == "PostgreSQL") {
+            mensaje = PostgresqlService.getInstance().volverSaveAmigos();
+            JOptionPane.showMessageDialog(null, mensaje);
+            refrescarTabla();
+        }
+    }//GEN-LAST:event_boton_cargarPointActionPerformed
+
+    private void boton_savePointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_savePointActionPerformed
+        // TODO add your handling code here:
+        String mensaje = "";
+        if (conectado_a.getText() == "Oracle") {
+            mensaje = OracleService.getInstance().savePointAmigos();
+            JOptionPane.showMessageDialog(null, mensaje);
+        } else if (conectado_a.getText() == "PostgreSQL") {
+            mensaje = PostgresqlService.getInstance().savePointAmigos();
+            JOptionPane.showMessageDialog(null, mensaje);
+        }
+    }//GEN-LAST:event_boton_savePointActionPerformed
+
+    private void boton_rollbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_rollbackActionPerformed
+        // TODO add your handling code here:
+        String mensaje = "";
+        if (conectado_a.getText() == "Oracle") {
+            mensaje = OracleService.getInstance().rollbackAmigos();
+            JOptionPane.showMessageDialog(null, mensaje);
+
+        } else if (conectado_a.getText() == "PostgreSQL") {
+            mensaje = PostgresqlService.getInstance().rollbackAmigos();
+            JOptionPane.showMessageDialog(null, mensaje);
+        }
+    }//GEN-LAST:event_boton_rollbackActionPerformed
+
+    private void boton_commitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_commitActionPerformed
+        // TODO add your handling code here:
+        String mensaje = "";
+        if (conectado_a.getText() == "Oracle") {
+            mensaje = OracleService.getInstance().commitAmigos();
+            JOptionPane.showMessageDialog(null, mensaje);
+            refrescarTabla();
+        } else if (conectado_a.getText() == "PostgreSQL") {
+            mensaje = PostgresqlService.getInstance().commitAmigos();
+            JOptionPane.showMessageDialog(null, mensaje);
+            refrescarTabla();
+        }
+    }//GEN-LAST:event_boton_commitActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -194,7 +194,7 @@ public class AmigoDAO {
         String rt = null;
         if (servicio.equals(PostgresqlService.class)) {
             connection = ConexionPostgresql.getInstance().conexion();
-            rt = ConexionPostgresql.savePoint(connection);
+            rt = ConexionPostgresql.commit(connection);
         } else if (servicio.equals(OracleService.class)) {
             connection = ConexionOracle.getInstance().conexion();
             rt = ConexionOracle.commit(connection);
