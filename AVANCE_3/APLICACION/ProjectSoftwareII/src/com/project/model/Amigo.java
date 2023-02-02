@@ -1,5 +1,9 @@
 package com.project.model;
 
+import com.project.dao.AmigoDAO;
+import com.project.dto.AmigoDTO;
+import java.util.List;
+
 public class Amigo {
 
     private Number id;
@@ -11,7 +15,7 @@ public class Amigo {
 
     public Amigo() {
     }
-
+    
     public Amigo(Number id, String nombre, String apellido, String telefono, String direccion, String correo) {
         this.id = id;
         this.nombre = nombre;
@@ -82,4 +86,51 @@ public class Amigo {
         return "Amigo{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", direccion=" + direccion + ", correo=" + correo + '}';
     }
     
+    //CRUD PARA TABLA AMIGO
+    public Amigo crear(Class servicio){
+        return AmigoDAO.getInstance().insertar(servicio,generarRandom());
+    }
+    
+    public Amigo generarRandom() {
+        String[] nombresRand = {"Javier", "Manuel", "Rodrigo", "Camilo", "Lucrecia", "Manuela", "Juliana", "Paola", "Pandy", "Fernanda"};
+        String[] apellidosRand = {"Lozada", "Gonzalez", "Nunez", "Gil", "Botero", "Perez", "Reyes", "Gomez", "Hernandez", "Pabon"};
+        String[] telefonos = {"3102823922", "3102823921", "3102823923", "3102823925", "3102823920", "3102823929", "3102823927", "3102823925", "3102823926", "3102823900"};
+        String[] direcciones = {"Calle 2", "calle 1", "calle13", "Calle principal", "calle 98", "calle 67", "calle 79", "Calle 09", "calle 21", "calle 314"};
+        String[] correos = {"1@unillanos.edu.co", "2@unillanos.edu.co", "3@unillanos.edu.co", "4@unillanos.edu.co", "5@unillanos.edu.co", "6@unillanos.edu.co", "7@unillanos.edu.co", "8@unillanos.edu.co", "9@unillanos.edu.co", "12@unillanos.edu.co"};
+        Amigo amigo = new Amigo(nombresRand[(int) (Math.random() * 10)], apellidosRand[(int) (Math.random() * 10)], telefonos[(int) (Math.random() * 10)], direcciones[(int) (Math.random() * 10)], correos[(int) (Math.random() * 10)]);
+
+        return amigo;
+    }
+
+    public List<Amigo> listar(Class servicio){
+        return AmigoDAO.getInstance().listar(servicio);
+    }
+    
+    public Amigo actualizar(Class servicio,AmigoDTO amigoDTO){
+        return AmigoDAO.getInstance().actualizar(servicio,amigoDTO);
+    }
+    
+    public void eliminar(Class servicio,Number idAmigo){
+        AmigoDAO.getInstance().eliminar(servicio,idAmigo);
+    }
+    
+    public Amigo buscarId(Class servicio,Number idAmigo){
+        return AmigoDAO.getInstance().buscarId(servicio,idAmigo);
+    }
+    
+    public String savePointAmigos(Class servicio){
+        return AmigoDAO.getInstance().savePoint(servicio);
+    }
+    
+    public String volverSaveAmigos(Class servicio){
+        return AmigoDAO.getInstance().volverSave(servicio);
+    }
+    
+    public String rollbackAmigos(Class servicio){
+        return AmigoDAO.getInstance().rollback(servicio);
+    }
+    
+    public String commitAmigos(Class servicio){
+        return AmigoDAO.getInstance().commit(servicio);
+    }
 }

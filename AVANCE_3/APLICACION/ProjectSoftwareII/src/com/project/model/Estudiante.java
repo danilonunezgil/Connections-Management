@@ -1,6 +1,10 @@
 package com.project.model;
 
+
+import com.project.dao.EstudianteDAO;
+import com.project.dto.InfoStudentDTO;
 import java.util.Date;
+import java.util.List;
 
 public class Estudiante {
     private Integer codigo;
@@ -93,5 +97,17 @@ public class Estudiante {
     @Override
     public String toString() {
         return "Estudiante{" + "codigo=" + codigo + ", nombres=" + nombres + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", telefono=" + telefono + ", facultad=" + facultad + ", programa=" + programa + ", fecha_inicio=" + fecha_inicio + '}';
+    }
+    
+    public Number promedioCarrera(Class servicio,Integer cod_est){
+        return EstudianteDAO.getInstance().promedioCarrera(servicio, cod_est);
+    }
+    
+    public List<InfoStudentDTO> informacionEstudiantes(Class servicio){
+        return EstudianteDAO.getInstance().informacionEstudiantes(servicio);
+    }
+    
+    public String compararNumeros(Class servicio,Integer numero1, Integer numero2){
+        return EstudianteDAO.getInstance().compararNumeros(servicio,numero1,numero2);
     }
 }
