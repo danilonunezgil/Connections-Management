@@ -59,6 +59,7 @@ public class MenuMetodos extends javax.swing.JPanel {
         label_promedioElem = new javax.swing.JLabel();
         campo_promElem = new javax.swing.JSpinner();
         label_codEst = new javax.swing.JLabel();
+        label_codEst1 = new javax.swing.JLabel();
         campo_promEst = new javax.swing.JSpinner();
         label_prom = new javax.swing.JLabel();
         label_codElem = new javax.swing.JLabel();
@@ -77,6 +78,12 @@ public class MenuMetodos extends javax.swing.JPanel {
         titulo_connect_oracle1 = new javax.swing.JLabel();
         result_promEst = new javax.swing.JLabel();
         result_promElem = new javax.swing.JLabel();
+        label_codElem1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        label_infoEst1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(730, 610));
@@ -88,36 +95,41 @@ public class MenuMetodos extends javax.swing.JPanel {
         add(conectado_a, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 230, 60));
 
         label_nums.setText("INGRESE LOS NÚMEROS ENTEROS:");
-        add(label_nums, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, -1, -1));
+        add(label_nums, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, -1, -1));
 
         label_promedioElem.setText("EL PRECIO PROMEDIO ES: ");
-        add(label_promedioElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, -1));
+        add(label_promedioElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, -1, -1));
 
         campo_promElem.setValue(1);
-        add(campo_promElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 80, -1));
+        add(campo_promElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 80, -1));
 
-        label_codEst.setText("INGRESE EL CÓDIGO DEL ESTUDIANTE:");
-        add(label_codEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        label_codEst.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_codEst.setText("ESTUDIANTE");
+        add(label_codEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, -1, -1));
+
+        label_codEst1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_codEst1.setText("INGRESE EL CÓDIGO DEL");
+        add(label_codEst1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
 
         campo_promEst.setValue(1);
-        add(campo_promEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 80, -1));
+        add(campo_promEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 80, -1));
 
         label_prom.setText("EL PROMEDIO DE CARRERA ES: ");
-        add(label_prom, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+        add(label_prom, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, -1, -1));
 
-        label_codElem.setText("INGRESE EL CÓDIGO DEL ELEMENTO:");
-        add(label_codElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, -1));
+        label_codElem.setText("ELEMENTO DE PROTECCIÓN");
+        add(label_codElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, -1));
 
         jLabel6.setText("NUM1");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, -1, -1));
 
         jLabel7.setText("NUM2");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, -1, -1));
-        add(campo_num1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 80, -1));
-        add(campo_num2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, 80, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, -1, -1));
+        add(campo_num1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 80, -1));
+        add(campo_num2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, 80, -1));
 
         comparacion_nums.setText("RESULTADO COMPARACIÓN");
-        add(comparacion_nums, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, -1, -1));
+        add(comparacion_nums, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
 
         tabla_info.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -153,23 +165,23 @@ public class MenuMetodos extends javax.swing.JPanel {
             tabla_info.getColumnModel().getColumn(7).setMaxWidth(80);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 680, 230));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 680, 230));
 
-        boton_promEst.setText("PROMEDIO EST");
+        boton_promEst.setText("PROMEDIO ESTUDIANTE");
         boton_promEst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton_promEstActionPerformed(evt);
             }
         });
-        add(boton_promEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+        add(boton_promEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, -1, -1));
 
-        boton_promElem.setText("PROMEDIO ELEM");
+        boton_promElem.setText("PROMEDIO ELEMENTO");
         boton_promElem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton_promElemActionPerformed(evt);
             }
         });
-        add(boton_promElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, -1, -1));
+        add(boton_promElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, -1, -1));
 
         boton_compararNums.setText("COMPARAR NUMS");
         boton_compararNums.addActionListener(new java.awt.event.ActionListener() {
@@ -177,7 +189,7 @@ public class MenuMetodos extends javax.swing.JPanel {
                 boton_compararNumsActionPerformed(evt);
             }
         });
-        add(boton_compararNums, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
+        add(boton_compararNums, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, -1, -1));
 
         cargar_info.setText("CARGAR INFO");
         cargar_info.addActionListener(new java.awt.event.ActionListener() {
@@ -185,21 +197,45 @@ public class MenuMetodos extends javax.swing.JPanel {
                 cargar_infoActionPerformed(evt);
             }
         });
-        add(cargar_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, -1, -1));
+        add(cargar_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, -1, -1));
 
-        label_infoEst.setText("INFORMACIÓN ESTUDIANTES");
-        add(label_infoEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, -1, -1));
+        label_infoEst.setText("ESTUDIANTES");
+        add(label_infoEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 280, -1, -1));
 
         titulo_connect_oracle1.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
         titulo_connect_oracle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo_connect_oracle1.setText("CONECTADO A ---> ");
         add(titulo_connect_oracle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 450, 60));
 
+        result_promEst.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         result_promEst.setText("RESULTADO");
-        add(result_promEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, -1, -1));
+        add(result_promEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, -1, -1));
 
+        result_promElem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         result_promElem.setText("RESULTADO");
-        add(result_promElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, -1, -1));
+        add(result_promElem, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, -1, -1));
+
+        label_codElem1.setText("INGRESE EL CÓDIGO DEL");
+        add(label_codElem1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("PROCEDIMIENTOS");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("------>");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+
+        label_infoEst1.setText("INFORMACIÓN");
+        add(label_infoEst1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("FUNCIONES");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setText("------>");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void boton_promElemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_promElemActionPerformed
@@ -278,12 +314,19 @@ public class MenuMetodos extends javax.swing.JPanel {
     private javax.swing.JButton cargar_info;
     private javax.swing.JLabel comparacion_nums;
     private javax.swing.JLabel conectado_a;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_codElem;
+    private javax.swing.JLabel label_codElem1;
     private javax.swing.JLabel label_codEst;
+    private javax.swing.JLabel label_codEst1;
     private javax.swing.JLabel label_infoEst;
+    private javax.swing.JLabel label_infoEst1;
     private javax.swing.JLabel label_nums;
     private javax.swing.JLabel label_prom;
     private javax.swing.JLabel label_promedioElem;
