@@ -120,6 +120,7 @@ public class Start extends javax.swing.JFrame {
 
         label_est.setText("ESTADO DE LA CONEXIÓN:");
 
+        estado_conexion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         estado_conexion.setText("NO CONECTADO");
 
         javax.swing.GroupLayout panel_opcionesLayout = new javax.swing.GroupLayout(panel_opciones);
@@ -127,31 +128,32 @@ public class Start extends javax.swing.JFrame {
         panel_opcionesLayout.setHorizontalGroup(
             panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_opcionesLayout.createSequentialGroup()
-                .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(estado_conexion, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panel_opcionesLayout.createSequentialGroup()
-                            .addGap(38, 38, 38)
-                            .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(opc_crud)
-                                    .addComponent(opc_metodos))
-                                .addComponent(jLabel_main_menu)))
-                        .addGroup(panel_opcionesLayout.createSequentialGroup()
-                            .addGap(15, 15, 15)
-                            .addComponent(logo_u, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panel_opcionesLayout.createSequentialGroup()
-                            .addGap(58, 58, 58)
+                .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_opcionesLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(panel_opcionesLayout.createSequentialGroup()
-                                    .addGap(6, 6, 6)
-                                    .addComponent(label_est))
-                                .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(logo_java, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(boton_postgres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(boton_oracle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(boton_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                .addComponent(opc_crud)
+                                .addComponent(opc_metodos))
+                            .addComponent(jLabel_main_menu)))
+                    .addGroup(panel_opcionesLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(logo_u, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_opcionesLayout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_opcionesLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(label_est))
+                            .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(logo_java, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(boton_postgres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(boton_oracle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(boton_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(panel_opcionesLayout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(estado_conexion, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         panel_opcionesLayout.setVerticalGroup(
@@ -246,6 +248,7 @@ public class Start extends javax.swing.JFrame {
     private void boton_postgresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_postgresActionPerformed
         // TODO add your handling code here:
         if (opc_metodos.isSelected()) {
+            estado_conexion.setText("FUNCIONANDO");
             MenuMetodos mdb = new MenuMetodos("PostgreSQL");
             mdb.setSize(760, 610);
             mdb.setLocation(0, 0);
@@ -253,7 +256,15 @@ public class Start extends javax.swing.JFrame {
             contenido.add(mdb, BorderLayout.CENTER);
             contenido.revalidate();
             contenido.repaint();
-            estado_conexion.setText(PostgresqlService.getInstance().toString());
+        } else if (opc_crud.isSelected()) {
+            estado_conexion.setText("FUNCIONANDO");
+            MenuCrud mdb = new MenuCrud();
+            mdb.setSize(760, 610);
+            mdb.setLocation(0, 0);
+            contenido.removeAll();
+            contenido.add(mdb, BorderLayout.CENTER);
+            contenido.revalidate();
+            contenido.repaint();
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione primero una opción");
         }
@@ -267,6 +278,7 @@ public class Start extends javax.swing.JFrame {
     private void boton_oracleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_oracleActionPerformed
         // TODO add your handling code here:
         if (opc_metodos.isSelected()) {
+            estado_conexion.setText("FUNCIONANDO");
             MenuMetodos mdb = new MenuMetodos("Oracle");
             mdb.setSize(760, 610);
             mdb.setLocation(0, 0);
@@ -274,8 +286,16 @@ public class Start extends javax.swing.JFrame {
             contenido.add(mdb, BorderLayout.CENTER);
             contenido.revalidate();
             contenido.repaint();
-            estado_conexion.setText(OracleService.getInstance().toString());
-            
+
+        } else if (opc_crud.isSelected()) {
+            estado_conexion.setText("FUNCIONANDO");
+            MenuCrud mdb = new MenuCrud();
+            mdb.setSize(760, 610);
+            mdb.setLocation(0, 0);
+            contenido.removeAll();
+            contenido.add(mdb, BorderLayout.CENTER);
+            contenido.revalidate();
+            contenido.repaint();
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione primero una opción");
         }
@@ -283,9 +303,7 @@ public class Start extends javax.swing.JFrame {
 
     private void opc_crudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc_crudActionPerformed
         // TODO add your handling code here:
-        if (opc_crud.isSelected()) {
-            boton_oracle.setEnabled(true);
-        }
+
     }//GEN-LAST:event_opc_crudActionPerformed
 
     private void opc_metodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc_metodosActionPerformed
