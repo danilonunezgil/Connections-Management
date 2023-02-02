@@ -3,9 +3,9 @@ package com.project.dao;
 import com.project.controller.OracleService;
 import com.project.controller.PostgresqlService;
 import com.project.database.ConexionOracle;
-import com.project.dto.AmigoDTO;
-import java.sql.Connection;
 import com.project.database.ConexionPostgresql;
+import java.sql.Connection;
+import com.project.model.Amigo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,9 +17,9 @@ public class AmigoDAO {
     public AmigoDAO() {
     }
 
-    public List<AmigoDTO> listar(Class servicio) {
+    public List<Amigo> listar(Class servicio) {
 
-        ArrayList<AmigoDTO> listadoAmigos = new ArrayList<>();
+        ArrayList<Amigo> listadoAmigos = new ArrayList<>();
         String consulta = "select id, nombre, apellido, telefono, direccion, correo from amigos";
         Connection connection = null;
         if (servicio.equals(PostgresqlService.class)) {
@@ -31,14 +31,14 @@ public class AmigoDAO {
             PreparedStatement statement = connection.prepareStatement(consulta);
             ResultSet resultado = statement.executeQuery();
             while (resultado.next()) {
-                AmigoDTO amigoVO = new AmigoDTO();
-                amigoVO.setId(resultado.getInt(1));
-                amigoVO.setNombre(resultado.getString(2));
-                amigoVO.setApellido(resultado.getString(3));
-                amigoVO.setTelefono(resultado.getString(4));
-                amigoVO.setDireccion(resultado.getString(5));
-                amigoVO.setCorreo(resultado.getString(6));
-                listadoAmigos.add(amigoVO);
+                Amigo amigo = new Amigo();
+                amigo.setId(resultado.getInt(1));
+                amigo.setNombre(resultado.getString(2));
+                amigo.setApellido(resultado.getString(3));
+                amigo.setTelefono(resultado.getString(4));
+                amigo.setDireccion(resultado.getString(5));
+                amigo.setCorreo(resultado.getString(6));
+                listadoAmigos.add(amigo);
             }
             resultado.close();
             statement.close();
@@ -49,8 +49,7 @@ public class AmigoDAO {
         return listadoAmigos;
     }
 
-    public AmigoDTO insertar(Class servicio) {
-        AmigoDTO amigo = generarRandom();
+    public Amigo insertar(Class servicio,Amigo amigo) {
         String consulta = "insert into amigos(nombre,apellido, telefono, direccion, correo) values(?,?,?,?,?)";
         Connection connection = null;
         if (servicio.equals(PostgresqlService.class)) {
@@ -74,19 +73,8 @@ public class AmigoDAO {
         return amigo;
     }
 
-    public AmigoDTO generarRandom() {
-        String[] nombresRand = {"Javier", "Manuel", "Rodrigo", "Camilo", "Lucrecia", "Manuela", "Juliana", "Paola", "Pandy", "Fernanda"};
-        String[] apellidosRand = {"Lozada", "Gonzalez", "Nunez", "Gil", "Botero", "Perez", "Reyes", "Gomez", "Hernandez", "Pabon"};
-        String[] telefonos = {"3102823922", "3102823921", "3102823923", "3102823925", "3102823920", "3102823929", "3102823927", "3102823925", "3102823926", "3102823900"};
-        String[] direcciones = {"Calle 2", "calle 1", "calle13", "Calle principal", "calle 98", "calle 67", "calle 79", "Calle 09", "calle 21", "calle 314"};
-        String[] correos = {"1@unillanos.edu.co", "2@unillanos.edu.co", "3@unillanos.edu.co", "4@unillanos.edu.co", "5@unillanos.edu.co", "6@unillanos.edu.co", "7@unillanos.edu.co", "8@unillanos.edu.co", "9@unillanos.edu.co", "12@unillanos.edu.co"};
-        AmigoDTO amigo = new AmigoDTO(nombresRand[(int) (Math.random() * 10)], apellidosRand[(int) (Math.random() * 10)], telefonos[(int) (Math.random() * 10)], direcciones[(int) (Math.random() * 10)], correos[(int) (Math.random() * 10)]);
-
-        return amigo;
-    }
-
-    public AmigoDTO buscarId(Class servicio, Number idAmigo) {
-        AmigoDTO amigoVO = new AmigoDTO();
+    public Amigo buscarId(Class servicio, Number idAmigo) {
+        Amigo amigo = new Amigo();
         Connection connection = null;
         if (servicio.equals(PostgresqlService.class)) {
             connection = ConexionPostgresql.getInstance().conexion();
@@ -98,22 +86,22 @@ public class AmigoDAO {
             PreparedStatement statement = connection.prepareStatement(consulta);
             ResultSet resultado = statement.executeQuery();
             if (resultado.next()) {
-                amigoVO.setId(resultado.getInt(1));
-                amigoVO.setNombre(resultado.getString(2));
-                amigoVO.setApellido(resultado.getString(3));
-                amigoVO.setTelefono(resultado.getString(4));
-                amigoVO.setDireccion(resultado.getString(5));
-                amigoVO.setCorreo(resultado.getString(6));
+                amigo.setId(resultado.getInt(1));
+                amigo.setNombre(resultado.getString(2));
+                amigo.setApellido(resultado.getString(3));
+                amigo.setTelefono(resultado.getString(4));
+                amigo.setDireccion(resultado.getString(5));
+                amigo.setCorreo(resultado.getString(6));
             }
             resultado.close();
             statement.close();
         } catch (SQLException e) {
             e.getMessage();
         }
-        return amigoVO;
+        return amigo;
     }
 
-    public AmigoDTO actualizar(Class servicio, AmigoDTO amigoVO) {
+    public Amigo actualizar(Class servicio, Amigo amigo) {
         Connection connection = null;
         if (servicio.equals(PostgresqlService.class)) {
             connection = ConexionPostgresql.getInstance().conexion();
@@ -121,9 +109,9 @@ public class AmigoDAO {
             connection = ConexionOracle.getInstance().conexion();
         }
         try {
-            String consulta = "update amigos set nombre = '" + amigoVO.getNombre() + "', apellido = '" + amigoVO.getApellido()
-                    + "', telefono = '" + amigoVO.getTelefono() + "', direccion = '" + amigoVO.getDireccion() + "', correo = '" + amigoVO.getCorreo()
-                    + "' where id = " + amigoVO.getId();
+            String consulta = "update amigos set nombre = '" + amigo.getNombre() + "', apellido = '" + amigo.getApellido()
+                    + "', telefono = '" + amigo.getTelefono() + "', direccion = '" + amigo.getDireccion() + "', correo = '" + amigo.getCorreo()
+                    + "' where id = " + amigo.getId();
             PreparedStatement statement = connection.prepareStatement(consulta);
             statement.executeUpdate();
             statement.close();
@@ -131,7 +119,7 @@ public class AmigoDAO {
         } catch (SQLException e) {
             e.getMessage();
         }
-        return amigoVO;
+        return amigo;
     }
 
     public void eliminar(Class servicio, Number idAmigo) {
