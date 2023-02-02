@@ -88,8 +88,7 @@ public class Amigo {
     
     //CRUD PARA TABLA AMIGO
     public Amigo crear(Class servicio){
-        AmigoDAO amigoDAO = new AmigoDAO();
-        return amigoDAO.insertar(servicio,generarRandom());
+        return AmigoDAO.getInstance().insertar(servicio,generarRandom());
     }
     
     public Amigo generarRandom() {
@@ -104,23 +103,18 @@ public class Amigo {
     }
 
     public List<Amigo> listar(Class servicio){
-        AmigoDAO amigoDAO = new AmigoDAO();
-        return amigoDAO.listar(servicio);
+        return AmigoDAO.getInstance().listar(servicio);
     }
     
     public Amigo actualizar(Class servicio,AmigoDTO amigo){
-        AmigoDAO amigoDAO = new AmigoDAO();
-        return amigoDAO.actualizar(servicio,(Amigo)amigo);
+        return AmigoDAO.getInstance().actualizar(servicio,(Amigo)amigo);
     }
     
     public void eliminar(Class servicio,Number idAmigo){
-        AmigoDAO amigoDAO = new AmigoDAO();
-        amigoDAO.eliminar(servicio,idAmigo);
+        AmigoDAO.getInstance().eliminar(servicio,idAmigo);
     }
     
     public Amigo buscarId(Class servicio,Number idAmigo){
-        AmigoDAO amigoDAO = new AmigoDAO();
-        return amigoDAO.buscarId(servicio,idAmigo);
+        return AmigoDAO.getInstance().buscarId(servicio,idAmigo);
     }
-  
 }

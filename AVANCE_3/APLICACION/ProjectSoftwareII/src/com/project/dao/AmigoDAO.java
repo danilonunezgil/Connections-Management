@@ -13,10 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AmigoDAO {
+    
+    private static AmigoDAO amigoDAO;
 
-    public AmigoDAO() {
+    private AmigoDAO() { 
     }
-
+    
+    public static AmigoDAO getInstance(){
+        if(amigoDAO == null){
+            amigoDAO = new AmigoDAO();
+        }
+        return amigoDAO;
+    }
+   
     public List<Amigo> listar(Class servicio) {
 
         ArrayList<Amigo> listadoAmigos = new ArrayList<>();

@@ -177,7 +177,6 @@ public class Elemento {
     }
 
     public Integer precioPromedio(Class servicio, Integer cod_ele) {
-        ElementoDAO elementoDAO = new ElementoDAO();
-        return elementoDAO.precioPromedioElemento(servicio, cod_ele);
+        return ElementoDAO.getInstance().precioPromedioElemento(servicio, cod_ele);
     }
 }
