@@ -1,4 +1,3 @@
-
 package com.project.view.gui;
 
 import java.awt.BorderLayout;
