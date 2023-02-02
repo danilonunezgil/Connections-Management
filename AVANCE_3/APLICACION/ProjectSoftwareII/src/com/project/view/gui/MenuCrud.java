@@ -13,8 +13,13 @@ public class MenuCrud extends javax.swing.JPanel {
     /**
      * Creates new form MenuCrud
      */
-    public MenuCrud() {
+    public MenuCrud(String conectadoA) {
         initComponents();
+        if (conectadoA == "Oracle") {
+            conectado_a.setText(conectadoA);
+        } else if (conectadoA == "PostgreSQL") {
+            conectado_a.setText(conectadoA);
+        }
     }
 
     /**
@@ -26,17 +31,94 @@ public class MenuCrud extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jRadioButton1 = new javax.swing.JRadioButton();
+        titulo_connect_oracle1 = new javax.swing.JLabel();
+        conectado_a = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        boton_mostrarAmigos = new javax.swing.JButton();
+        boton_amigoAleat = new javax.swing.JButton();
+        boton_actualizarAmigo = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(693, 610));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jRadioButton1.setText("jRadioButton1");
-        add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, -1, -1));
+        titulo_connect_oracle1.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
+        titulo_connect_oracle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titulo_connect_oracle1.setText("CONECTADO A  ---> ");
+        add(titulo_connect_oracle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 450, 60));
+
+        conectado_a.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
+        conectado_a.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        conectado_a.setText("DB");
+        add(conectado_a, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 230, 60));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 520, 300));
+
+        boton_mostrarAmigos.setText("MOSTRAR AMIGOS");
+        add(boton_mostrarAmigos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
+
+        boton_amigoAleat.setText("INSERTAR AMIGO ALEATORIO");
+        add(boton_amigoAleat, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
+
+        boton_actualizarAmigo.setText("ACTUALIZAR AMIGO");
+        add(boton_actualizarAmigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
+
+        jButton1.setText("ELIMINAR AMIGO");
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, -1, -1));
+
+        jLabel1.setText("ID AMIGO");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, -1, -1));
+        add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, -1, -1));
+
+        jButton2.setText("SAVE POINT");
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, -1, -1));
+
+        jButton3.setText("CARGAR SAVE POINT");
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
+
+        jButton4.setText("COMMIT");
+        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, -1, -1));
+
+        jButton5.setText("ROLLBACK");
+        add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JButton boton_actualizarAmigo;
+    private javax.swing.JButton boton_amigoAleat;
+    private javax.swing.JButton boton_mostrarAmigos;
+    private javax.swing.JLabel conectado_a;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel titulo_connect_oracle1;
     // End of variables declaration//GEN-END:variables
 }

@@ -197,10 +197,10 @@ public class MenuMetodos extends javax.swing.JPanel {
                 cargar_infoActionPerformed(evt);
             }
         });
-        add(cargar_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, -1, -1));
+        add(cargar_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 300, -1, -1));
 
         label_infoEst.setText("ESTUDIANTES");
-        add(label_infoEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 280, -1, -1));
+        add(label_infoEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, -1, -1));
 
         titulo_connect_oracle1.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
         titulo_connect_oracle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -227,7 +227,7 @@ public class MenuMetodos extends javax.swing.JPanel {
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
 
         label_infoEst1.setText("INFORMACIÓN");
-        add(label_infoEst1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, -1));
+        add(label_infoEst1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 260, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("FUNCIONES");

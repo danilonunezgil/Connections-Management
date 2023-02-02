@@ -258,7 +258,7 @@ public class Start extends javax.swing.JFrame {
             contenido.repaint();
         } else if (opc_crud.isSelected()) {
             estado_conexion.setText("FUNCIONANDO");
-            MenuCrud mdb = new MenuCrud();
+            MenuCrud mdb = new MenuCrud("PostgreSQL");
             mdb.setSize(760, 610);
             mdb.setLocation(0, 0);
             contenido.removeAll();
@@ -289,7 +289,7 @@ public class Start extends javax.swing.JFrame {
 
         } else if (opc_crud.isSelected()) {
             estado_conexion.setText("FUNCIONANDO");
-            MenuCrud mdb = new MenuCrud();
+            MenuCrud mdb = new MenuCrud("Oracle");
             mdb.setSize(760, 610);
             mdb.setLocation(0, 0);
             contenido.removeAll();
