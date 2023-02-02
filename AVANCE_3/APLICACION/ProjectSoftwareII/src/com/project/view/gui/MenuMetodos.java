@@ -10,9 +10,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class MenuMetodos extends javax.swing.JPanel {
 
-    /**
-     * Creates new form MenuDB
-     */
     public MenuMetodos(String conectadoA) {
         initComponents();
 

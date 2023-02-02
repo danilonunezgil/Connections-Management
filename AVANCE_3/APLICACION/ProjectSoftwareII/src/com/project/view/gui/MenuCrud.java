@@ -53,6 +53,7 @@ public class MenuCrud extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         titulo_connect_oracle1 = new javax.swing.JLabel();
         conectado_a = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -67,6 +68,10 @@ public class MenuCrud extends javax.swing.JPanel {
         boton_commit = new javax.swing.JButton();
         boton_rollback = new javax.swing.JButton();
         boton_savePoint = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+
+        jLabel2.setText("OPCIONES (CRUD)");
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(693, 610));
@@ -103,7 +108,7 @@ public class MenuCrud extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tabla_amigos);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 520, 290));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 520, 290));
 
         boton_mostrarAmigos.setText("MOSTRAR AMIGOS");
         boton_mostrarAmigos.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +116,7 @@ public class MenuCrud extends javax.swing.JPanel {
                 boton_mostrarAmigosActionPerformed(evt);
             }
         });
-        add(boton_mostrarAmigos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
+        add(boton_mostrarAmigos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
 
         boton_amigoAleat.setText("INSERTAR AMIGO ALEATORIO");
         boton_amigoAleat.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +124,7 @@ public class MenuCrud extends javax.swing.JPanel {
                 boton_amigoAleatActionPerformed(evt);
             }
         });
-        add(boton_amigoAleat, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
+        add(boton_amigoAleat, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, -1, -1));
 
         boton_actualizarAmigo.setText("ACTUALIZAR AMIGO");
         boton_actualizarAmigo.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +132,7 @@ public class MenuCrud extends javax.swing.JPanel {
                 boton_actualizarAmigoActionPerformed(evt);
             }
         });
-        add(boton_actualizarAmigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
+        add(boton_actualizarAmigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
 
         boton_eliminarAmigo.setText("ELIMINAR AMIGO");
         boton_eliminarAmigo.addActionListener(new java.awt.event.ActionListener() {
@@ -135,11 +140,11 @@ public class MenuCrud extends javax.swing.JPanel {
                 boton_eliminarAmigoActionPerformed(evt);
             }
         });
-        add(boton_eliminarAmigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, -1, -1));
+        add(boton_eliminarAmigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, -1, -1));
 
         label_IDAmigo.setText("ID AMIGO");
-        add(label_IDAmigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, -1, -1));
-        add(campo_idAmigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 90, -1));
+        add(label_IDAmigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, -1, -1));
+        add(campo_idAmigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 90, -1));
 
         boton_cargarPoint.setText("CARGAR SAVE POINT");
         boton_cargarPoint.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +152,7 @@ public class MenuCrud extends javax.swing.JPanel {
                 boton_cargarPointActionPerformed(evt);
             }
         });
-        add(boton_cargarPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, -1, -1));
+        add(boton_cargarPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, -1, -1));
 
         boton_commit.setText("COMMIT");
         boton_commit.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +160,7 @@ public class MenuCrud extends javax.swing.JPanel {
                 boton_commitActionPerformed(evt);
             }
         });
-        add(boton_commit, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, -1, -1));
+        add(boton_commit, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, -1, -1));
 
         boton_rollback.setText("ROLLBACK");
         boton_rollback.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +168,7 @@ public class MenuCrud extends javax.swing.JPanel {
                 boton_rollbackActionPerformed(evt);
             }
         });
-        add(boton_rollback, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, -1, -1));
+        add(boton_rollback, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, -1, -1));
 
         boton_savePoint.setText("SAVE POINT");
         boton_savePoint.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +176,15 @@ public class MenuCrud extends javax.swing.JPanel {
                 boton_savePointActionPerformed(evt);
             }
         });
-        add(boton_savePoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, -1, -1));
+        add(boton_savePoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 120, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("TRANSACCIONES");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("OPCIONES (CRUD)");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void boton_mostrarAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrarAmigosActionPerformed
@@ -199,9 +212,11 @@ public class MenuCrud extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (conectado_a.getText() == "Oracle") {
             OracleService.getInstance().eliminarAmigo(Integer.parseInt(campo_idAmigo.getValue().toString()));
+            JOptionPane.showMessageDialog(null, "Amigo eliminado con éxito");
             refrescarTabla();
         } else if (conectado_a.getText() == "PostgreSQL") {
             PostgresqlService.getInstance().eliminarAmigo(Integer.parseInt(campo_idAmigo.getValue().toString()));
+            JOptionPane.showMessageDialog(null, "Amigo eliminado con éxito");
             refrescarTabla();
         }
     }//GEN-LAST:event_boton_eliminarAmigoActionPerformed
@@ -261,9 +276,30 @@ public class MenuCrud extends javax.swing.JPanel {
 
     private void boton_actualizarAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_actualizarAmigoActionPerformed
         // TODO add your handling code here:
-        VentanaEmergente ve = new VentanaEmergente();
-        ve.setVisible(true);
-        ve.setLocationRelativeTo(null);
+        int idAmigo = Integer.parseInt(campo_idAmigo.getValue().toString());
+        if (conectado_a.getText() == "Oracle") {
+            System.out.println(OracleService.getInstance().buscarAmigoId(idAmigo));
+            AmigoDTO amigo = OracleService.getInstance().buscarAmigoId(idAmigo);
+            
+            if (amigo.getId() == null && amigo.getNombre() == null && amigo.getApellido() == null) {
+                JOptionPane.showMessageDialog(null, "No existe algún amigo con ese ID");
+            } else {
+                VentanaEmergente ve = new VentanaEmergente(amigo,"Oracle");
+                ve.setVisible(true);
+                ve.setLocationRelativeTo(null);
+            }
+        } else if (conectado_a.getText() == "PostgreSQL") {
+            System.out.println(PostgresqlService.getInstance().buscarAmigoId(idAmigo));
+            AmigoDTO amigo = PostgresqlService.getInstance().buscarAmigoId(idAmigo);
+
+            if (amigo.getId() == null && amigo.getNombre() == null && amigo.getApellido() == null) {
+                JOptionPane.showMessageDialog(null, "No existe algún amigo con ese ID");
+            } else {
+                VentanaEmergente ve = new VentanaEmergente(amigo,"PosgreSQL");
+                ve.setVisible(true);
+                ve.setLocationRelativeTo(null);
+            }
+        }
     }//GEN-LAST:event_boton_actualizarAmigoActionPerformed
 
 
@@ -278,6 +314,9 @@ public class MenuCrud extends javax.swing.JPanel {
     private javax.swing.JButton boton_savePoint;
     private javax.swing.JSpinner campo_idAmigo;
     private javax.swing.JLabel conectado_a;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_IDAmigo;
     private javax.swing.JTable tabla_amigos;
