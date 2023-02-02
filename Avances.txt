@@ -45,3 +45,25 @@ transferir los datos con dto
 
 implementar los tres tipos de objetos
 convertir app de consola a app de escritorio
+
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+AVANCE 4 (fecha de entrega 16 febrero 2023)
+---------------------------------------------------------------------------------------
+1. Adicionar al objeto de dominio del estudiante una foto, archivo binario (imagen)
+Se hacen las dos al tiempo:
+La imagen se almacena en un directorio (el directorio lo escogemos)
+La imagen se almacena en en la base de datos
+
+2. Leer o mostrar la imagen almacenada
+Tipo de dato BINARIO ahí se almacenan las imagenes en oracle se llama BLOB
+
+3. Encapsular en una librería el modelo y el controlador
+
+	3.1. Crear una aplicación por consola que llame a la librería y consume sus serivicios del controlador
+	
+	3.2. Crear una aplicación por gui que llame a la librería y consume sus serivicios del controlador
+
+ambas interfaces se hace el llamado al controlador
+entregar librería y un listado de métodos (servicios de controlador)
+también documentación respecto a DAO
