@@ -1,7 +1,5 @@
 package com.project.dao;
 
-import com.project.controller.OracleService;
-import com.project.controller.PostgresqlService;
 import com.project.database.ConexionOracle;
 import com.project.database.ConexionPostgresql;
 import java.sql.CallableStatement;
@@ -12,6 +10,9 @@ import java.sql.Types;
 public class ElementoDAO {
     
     private static ElementoDAO elementoDAO;
+    private static final String postgresql = "com.project.controller.PostgresqlService";
+    private static final String oracle = "com.project.controller.OracleService";
+
     
     private ElementoDAO() {
     }
@@ -23,14 +24,20 @@ public class ElementoDAO {
         return elementoDAO;
     }
     
-    public Integer precioPromedioElemento(Class servicio, Integer cod_ele) {
-        Integer precio_promedio = null;
+    
+    public Connection validaMotor(String servicio) {
         Connection connection = null;
-        if (servicio.equals(PostgresqlService.class)) {
+        if (postgresql.equals(servicio)) {
             connection = ConexionPostgresql.getInstance().conexion();
-        } else if (servicio.equals(OracleService.class)) {
+        } else if (oracle.equals(servicio)) {
             connection = ConexionOracle.getInstance().conexion();
         }
+        return connection;
+    }
+    
+    public Integer precioPromedioElemento(String servicio, Integer cod_ele) {
+        Integer precio_promedio = null;
+        Connection connection = validaMotor(servicio);
         try {
             String sql = "{?=call precio_promedio_elemento(?)}";
             // Se prepara el Statement

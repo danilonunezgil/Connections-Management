@@ -17,6 +17,7 @@ public class VentanaEmergente extends javax.swing.JFrame {
         conectado_a = db;
         this.setTitle("Menú Actualizar Amigo");
         cargarDatosAmigo(amigo);
+        
     }
 
     public void cargarDatosAmigo(AmigoDTO amigo) {
