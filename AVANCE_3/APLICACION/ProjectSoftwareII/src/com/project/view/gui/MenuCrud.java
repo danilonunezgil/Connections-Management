@@ -16,9 +16,9 @@ public class MenuCrud extends javax.swing.JPanel {
         nm.setMinimum(1);
         campo_idAmigo.setModel(nm);
         campo_idAmigo.setValue(1);
-        if (conectadoA == "Oracle") {
+        if ("Oracle".equals(conectadoA)) {
             conectado_a.setText(conectadoA);
-        } else if (conectadoA == "PostgreSQL") {
+        } else if ("PostgreSQL".equals(conectadoA)) {
             conectado_a.setText(conectadoA);
         }
         boton_actualizarAmigo.setEnabled(false);
@@ -119,9 +119,9 @@ public class MenuCrud extends javax.swing.JPanel {
     private void boton_mostrarAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrarAmigosActionPerformed
         // TODO add your handling code here:
         List<AmigoDTO> amigos = new ArrayList<>();
-        if (conectado_a.getText() == "Oracle") {
+        if ("Oracle".equals(conectado_a.getText())) {
             amigos = OracleService.getInstance().listarAmigo();
-        } else if (conectado_a.getText() == "PostgreSQL") {
+        } else if ("PostgreSQL".equals(conectado_a.getText())) {
             amigos = PostgresqlService.getInstance().listarAmigo();
         }
 
@@ -145,9 +145,9 @@ public class MenuCrud extends javax.swing.JPanel {
     private void boton_amigoAleatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_amigoAleatActionPerformed
         // TODO add your handling code here:
         AmigoDTO amigo = null;
-        if (conectado_a.getText() == "Oracle") {
+        if ("Oracle".equals(conectado_a.getText())) {
             amigo = OracleService.getInstance().ingresarAmigo();
-        } else if (conectado_a.getText() == "PostgreSQL") {
+        } else if ("PostgreSQL".equals(conectado_a.getText())) {
             amigo = PostgresqlService.getInstance().ingresarAmigo();
         }
         System.out.println(amigo.getNombre() + " " + amigo.getApellido());
@@ -155,10 +155,10 @@ public class MenuCrud extends javax.swing.JPanel {
 
     private void boton_eliminarAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_eliminarAmigoActionPerformed
         // TODO add your handling code here:
-        if (conectado_a.getText() == "Oracle") {
-            OracleService.getInstance().eliminarAmigo(Integer.parseInt(campo_idAmigo.getValue().toString()));
-        } else if (conectado_a.getText() == "PostgreSQL") {
-            PostgresqlService.getInstance().eliminarAmigo(Integer.parseInt(campo_idAmigo.getValue().toString()));
+        if ("Oracle".equals(conectado_a.getText())) {
+            OracleService.getInstance().eliminarAmigo(Integer.valueOf(campo_idAmigo.getValue().toString()));
+        } else if ("PostgreSQL".equals(conectado_a.getText())) {
+            PostgresqlService.getInstance().eliminarAmigo(Integer.valueOf(campo_idAmigo.getValue().toString()));
 
         }
     }//GEN-LAST:event_boton_eliminarAmigoActionPerformed
