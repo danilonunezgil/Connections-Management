@@ -1,7 +1,5 @@
 package com.project.dao;
 
-import com.project.controller.OracleService;
-import com.project.controller.PostgresqlService;
 import com.project.database.ConexionOracle;
 import com.project.database.ConexionPostgresql;
 import com.project.dto.InfoStudentDTO;
@@ -17,7 +15,9 @@ import java.util.List;
 public class EstudianteDAO {
 
     private static EstudianteDAO estudianteDAO;
-
+    private static final String postgresql = "com.project.controller.PostgresqlService";
+    private static final String oracle = "com.project.controller.OracleService";
+    
     private EstudianteDAO() {
     }
 
@@ -27,16 +27,22 @@ public class EstudianteDAO {
         }
         return estudianteDAO;
     }
-
-    public Number promedioCarrera(Class servicio, Integer cod_est) {
-
-        Number promedio = null;
+    
+    public Connection validaMotor(String servicio) {
         Connection connection = null;
-        if (servicio.equals(PostgresqlService.class)) {
+        if (postgresql.equals(servicio)) {
             connection = ConexionPostgresql.getInstance().conexion();
-        } else if (servicio.equals(OracleService.class)) {
+        } else if (oracle.equals(servicio)) {
             connection = ConexionOracle.getInstance().conexion();
         }
+        return connection;
+    }
+    
+    public Number promedioCarrera(String servicio, Integer cod_est) {
+
+        Number promedio = null;
+        Connection connection = validaMotor(servicio);
+
         try {
             String sql = "{?=call promedio_carrera(?)}";
             // Se prepara el Statement
@@ -56,14 +62,9 @@ public class EstudianteDAO {
         return promedio;
     }
 
-    public String compararNumeros(Class servicio, Integer num1, Integer num2) {
+    public String compararNumeros(String servicio, Integer num1, Integer num2) {
         String comparacion = null;
-        Connection connection = null;
-        if (servicio.equals(PostgresqlService.class)) {
-            connection = ConexionPostgresql.getInstance().conexion();
-        } else if (servicio.equals(OracleService.class)) {
-            connection = ConexionOracle.getInstance().conexion();
-        }
+        Connection connection = validaMotor(servicio);
         try {
             String sql = "call comparar_numeros(?,?,?)";
             // Se prepara el Statement
@@ -85,17 +86,12 @@ public class EstudianteDAO {
         return comparacion;
     }
 
-    public List<InfoStudentDTO> informacionEstudiantes(Class servicio) {
+    public List<InfoStudentDTO> informacionEstudiantes(String servicio) {
 
         ArrayList<InfoStudentDTO> listadoInfoEstudiantes = new ArrayList<>();
         String consulta = "select codigo, facultad, programa, estudiante, promedio, matriculado, ano, periodo from tmp_estudiantes";
         String sql = "call informacion_estudiantes()";
-        Connection connection = null;
-        if (servicio.equals(PostgresqlService.class)) {
-            connection = ConexionPostgresql.getInstance().conexion();
-        } else if (servicio.equals(OracleService.class)) {
-            connection = ConexionOracle.getInstance().conexion();
-        }
+        Connection connection = validaMotor(servicio);
         try {
             CallableStatement st = connection.prepareCall(sql);
             st.execute();

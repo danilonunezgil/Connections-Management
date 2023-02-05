@@ -1,10 +1,7 @@
 package com.project.dao;
 
-import com.project.controller.OracleService;
-import com.project.controller.PostgresqlService;
 import com.project.database.ConexionOracle;
 import com.project.database.ConexionPostgresql;
-import com.project.dto.AmigoDTO;
 import java.sql.Connection;
 import com.project.model.Amigo;
 import java.sql.PreparedStatement;
@@ -14,29 +11,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AmigoDAO {
-    
-    private static AmigoDAO amigoDAO;
 
-    private AmigoDAO() { 
+    private static AmigoDAO amigoDAO;
+    private static final String postgresql = "com.project.controller.PostgresqlService";
+    private static final String oracle = "com.project.controller.OracleService";
+
+    private AmigoDAO() {
     }
-    
-    public static AmigoDAO getInstance(){
-        if(amigoDAO == null){
+
+    public static AmigoDAO getInstance() {
+        if (amigoDAO == null) {
             amigoDAO = new AmigoDAO();
         }
         return amigoDAO;
     }
-   
-    public List<Amigo> listar(Class servicio) {
+
+    public Connection validaMotor(String servicio) {
+        Connection connection = null;
+        if (postgresql.equals(servicio)) {
+            connection = ConexionPostgresql.getInstance().conexion();
+        } else if (oracle.equals(servicio)) {
+            connection = ConexionOracle.getInstance().conexion();
+        }
+        return connection;
+    }
+
+    public List<Amigo> listar(String clase) {
 
         ArrayList<Amigo> listadoAmigos = new ArrayList<>();
         String consulta = "select id, nombre, apellido, telefono, direccion, correo from amigos";
-        Connection connection = null;
-        if (servicio.equals(PostgresqlService.class)) {
-            connection = ConexionPostgresql.getInstance().conexion();
-        } else if (servicio.equals(OracleService.class)) {
-            connection = ConexionOracle.getInstance().conexion();
-        }
+        Connection connection = validaMotor(clase);
         try {
             PreparedStatement statement = connection.prepareStatement(consulta);
             ResultSet resultado = statement.executeQuery();
@@ -59,14 +63,9 @@ public class AmigoDAO {
         return listadoAmigos;
     }
 
-    public Amigo insertar(Class servicio,Amigo amigo) {
+    public Amigo insertar(String clase, Amigo amigo) {
         String consulta = "insert into amigos(nombre,apellido, telefono, direccion, correo) values(?,?,?,?,?)";
-        Connection connection = null;
-        if (servicio.equals(PostgresqlService.class)) {
-            connection = ConexionPostgresql.getInstance().conexion();
-        } else if (servicio.equals(OracleService.class)) {
-            connection = ConexionOracle.getInstance().conexion();
-        }
+        Connection connection = validaMotor(clase);
         try {
             PreparedStatement statement = connection.prepareStatement(consulta);
             statement.setString(1, amigo.getNombre());
@@ -83,14 +82,9 @@ public class AmigoDAO {
         return amigo;
     }
 
-    public Amigo buscarId(Class servicio, Number idAmigo) {
+    public Amigo buscarId(String clase, Number idAmigo) {
         Amigo amigo = new Amigo();
-        Connection connection = null;
-        if (servicio.equals(PostgresqlService.class)) {
-            connection = ConexionPostgresql.getInstance().conexion();
-        } else if (servicio.equals(OracleService.class)) {
-            connection = ConexionOracle.getInstance().conexion();
-        }
+        Connection connection = validaMotor(clase);
         try {
             String consulta = "select * from amigos where id = " + idAmigo;
             PreparedStatement statement = connection.prepareStatement(consulta);
@@ -111,13 +105,8 @@ public class AmigoDAO {
         return amigo;
     }
 
-    public Amigo actualizar(Class servicio, Amigo amigo) {
-        Connection connection = null;
-        if (servicio.equals(PostgresqlService.class)) {
-            connection = ConexionPostgresql.getInstance().conexion();
-        } else if (servicio.equals(OracleService.class)) {
-            connection = ConexionOracle.getInstance().conexion();
-        }
+    public Amigo actualizar(String clase, Amigo amigo) {
+        Connection connection = validaMotor(clase);
         try {
             String consulta = "update amigos set nombre = '" + amigo.getNombre() + "', apellido = '" + amigo.getApellido()
                     + "', telefono = '" + amigo.getTelefono() + "', direccion = '" + amigo.getDireccion() + "', correo = '" + amigo.getCorreo()
@@ -132,13 +121,8 @@ public class AmigoDAO {
         return amigo;
     }
 
-    public void eliminar(Class servicio, Number idAmigo) {
-        Connection connection = null;
-        if (servicio.equals(PostgresqlService.class)) {
-            connection = ConexionPostgresql.getInstance().conexion();
-        } else if (servicio.equals(OracleService.class)) {
-            connection = ConexionOracle.getInstance().conexion();
-        }
+    public void eliminar(String clase, Number idAmigo) {
+        Connection connection = validaMotor(clase);
         try {
             String consulta = "delete from amigos where id = " + idAmigo;
             PreparedStatement statement = connection.prepareStatement(consulta);
@@ -149,57 +133,56 @@ public class AmigoDAO {
             e.getMessage();
         }
     }
-    
-    public String savePoint(Class servicio){
+
+    public String savePoint(String clase) {
         Connection connection = null;
         String rt = null;
-        if (servicio.equals(PostgresqlService.class)) {
+        if (postgresql.equals(clase)) {
             connection = ConexionPostgresql.getInstance().conexion();
             rt = ConexionPostgresql.savePoint(connection);
-        } else if (servicio.equals(OracleService.class)) {
+        } else if (oracle.equals(clase)) {
             connection = ConexionOracle.getInstance().conexion();
             rt = ConexionOracle.savePoint(connection);
         }
         return rt;
     }
-    
-    public String volverSave(Class servicio){
+
+    public String volverSave(String clase) {
         Connection connection = null;
         String rt = null;
-        if (servicio.equals(PostgresqlService.class)) {
+        if (oracle.equals(clase)) {
             connection = ConexionPostgresql.getInstance().conexion();
             rt = ConexionPostgresql.volverSavePoint(connection);
-        } else if (servicio.equals(OracleService.class)) {
+        } else if (postgresql.equals(clase)) {
             connection = ConexionOracle.getInstance().conexion();
             rt = ConexionOracle.volverSavePoint(connection);
         }
         return rt;
     }
-    
-    public String rollback(Class servicio){
+
+    public String rollback(String clase) {
         Connection connection = null;
         String rt = null;
-        if (servicio.equals(PostgresqlService.class)) {
+        if (oracle.equals(clase)) {
             connection = ConexionPostgresql.getInstance().conexion();
             rt = ConexionPostgresql.rollback(connection);
-        } else if (servicio.equals(OracleService.class)) {
+        } else if (postgresql.equals(clase)) {
             connection = ConexionOracle.getInstance().conexion();
             rt = ConexionOracle.rollback(connection);
         }
         return rt;
     }
-    
-    public String commit(Class servicio){
+
+    public String commit(String clase) {
         Connection connection = null;
         String rt = null;
-        if (servicio.equals(PostgresqlService.class)) {
+        if (oracle.equals(clase)) {
             connection = ConexionPostgresql.getInstance().conexion();
             rt = ConexionPostgresql.commit(connection);
-        } else if (servicio.equals(OracleService.class)) {
+        } else if (postgresql.equals(clase)) {
             connection = ConexionOracle.getInstance().conexion();
             rt = ConexionOracle.commit(connection);
         }
         return rt;
     }
-
 }

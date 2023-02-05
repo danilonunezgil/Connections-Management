@@ -12,7 +12,7 @@ public class Amigo {
     private String telefono;
     private String direccion;
     private String correo;
-
+    
     public Amigo() {
     }
     
@@ -88,7 +88,7 @@ public class Amigo {
     
     //CRUD PARA TABLA AMIGO
     public Amigo crear(Class servicio){
-        return AmigoDAO.getInstance().insertar(servicio,generarRandom());
+        return AmigoDAO.getInstance().insertar(servicio.getName(),generarRandom());
     }
     
     public Amigo generarRandom() {
@@ -103,34 +103,34 @@ public class Amigo {
     }
 
     public List<Amigo> listar(Class servicio){
-        return AmigoDAO.getInstance().listar(servicio);
+        return AmigoDAO.getInstance().listar( servicio.getName());
     }
     
     public Amigo actualizar(Class servicio,AmigoDTO amigoDTO){
-        return AmigoDAO.getInstance().actualizar(servicio,amigoDTO);
+        return AmigoDAO.getInstance().actualizar(servicio.getName(),amigoDTO);
     }
     
     public void eliminar(Class servicio,Number idAmigo){
-        AmigoDAO.getInstance().eliminar(servicio,idAmigo);
+        AmigoDAO.getInstance().eliminar(servicio.getName(),idAmigo);
     }
     
     public Amigo buscarId(Class servicio,Number idAmigo){
-        return AmigoDAO.getInstance().buscarId(servicio,idAmigo);
+        return AmigoDAO.getInstance().buscarId(servicio.getName(),idAmigo);
     }
     
     public String savePointAmigos(Class servicio){
-        return AmigoDAO.getInstance().savePoint(servicio);
+        return AmigoDAO.getInstance().savePoint(servicio.getName());
     }
     
     public String volverSaveAmigos(Class servicio){
-        return AmigoDAO.getInstance().volverSave(servicio);
+        return AmigoDAO.getInstance().volverSave(servicio.getName());
     }
     
     public String rollbackAmigos(Class servicio){
-        return AmigoDAO.getInstance().rollback(servicio);
+        return AmigoDAO.getInstance().rollback(servicio.getName());
     }
     
     public String commitAmigos(Class servicio){
-        return AmigoDAO.getInstance().commit(servicio);
+        return AmigoDAO.getInstance().commit(servicio.getName());
     }
 }
