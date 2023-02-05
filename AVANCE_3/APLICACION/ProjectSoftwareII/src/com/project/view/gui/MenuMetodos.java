@@ -13,9 +13,9 @@ public class MenuMetodos extends javax.swing.JPanel {
     public MenuMetodos(String conectadoA) {
         initComponents();
 
-        if (conectadoA == "Oracle") {
+        if ("Oracle".equals(conectadoA)) {
             conectado_a.setText(conectadoA);
-        } else if (conectadoA == "PostgreSQL") {
+        } else if ("PostgreSQL".equals(conectadoA)) {
             conectado_a.setText(conectadoA);
         }
         configurarSpinner();
@@ -116,6 +116,11 @@ public class MenuMetodos extends javax.swing.JPanel {
         comparacion_nums.setText("RESULTADO COMPARACIÓN");
         add(comparacion_nums, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
 
+        tabla_info = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int columnIndex){
+                return false;
+            }
+        };
         tabla_info.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -226,11 +231,11 @@ public class MenuMetodos extends javax.swing.JPanel {
     private void boton_promElemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_promElemActionPerformed
         // TODO add your handling code here:
         Integer promedioElem = 0;
-        if (conectado_a.getText() == "Oracle") {
-            promedioElem = OracleService.getInstance().precioPromedio(Integer.parseInt(campo_promElem.getValue().toString()));
+        if ("Oracle".equals(conectado_a.getText())) {
+            promedioElem = OracleService.getInstance().precioPromedio(Integer.valueOf(campo_promElem.getValue().toString()));
             result_promElem.setText(promedioElem.toString());
-        } else if (conectado_a.getText() == "PostgreSQL") {
-            promedioElem = PostgresqlService.getInstance().precioPromedio(Integer.parseInt(campo_promElem.getValue().toString()));
+        } else if ("PostgreSQL".equals(conectado_a.getText())) {
+            promedioElem = PostgresqlService.getInstance().precioPromedio(Integer.valueOf(campo_promElem.getValue().toString()));
             result_promElem.setText(promedioElem.toString());
         }
     }//GEN-LAST:event_boton_promElemActionPerformed
@@ -238,11 +243,11 @@ public class MenuMetodos extends javax.swing.JPanel {
     private void boton_promEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_promEstActionPerformed
         // TODO add your handling code here:
         Number promedio = 0;
-        if (conectado_a.getText() == "Oracle") {
-            promedio = OracleService.getInstance().promedioCarrera(Integer.parseInt(campo_promEst.getValue().toString()));
+        if ("Oracle".equals(conectado_a.getText())) {
+            promedio = OracleService.getInstance().promedioCarrera(Integer.valueOf(campo_promEst.getValue().toString()));
             result_promEst.setText(promedio.toString());
-        } else if (conectado_a.getText() == "PostgreSQL") {
-            promedio = PostgresqlService.getInstance().promedioCarrera(Integer.parseInt(campo_promEst.getValue().toString()));
+        } else if ("PostgreSQL".equals(conectado_a.getText())) {
+            promedio = PostgresqlService.getInstance().promedioCarrera(Integer.valueOf(campo_promEst.getValue().toString()));
             result_promEst.setText(promedio.toString());
         }
     }//GEN-LAST:event_boton_promEstActionPerformed
@@ -250,11 +255,11 @@ public class MenuMetodos extends javax.swing.JPanel {
     private void boton_compararNumsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_compararNumsActionPerformed
         // TODO add your handling code here:
         String comparacion = "";
-        if (conectado_a.getText() == "Oracle") {
-            comparacion = OracleService.getInstance().compararNumeros(Integer.parseInt(campo_num1.getValue().toString()), Integer.parseInt(campo_num2.getValue().toString()));
+        if ("Oracle".equals(conectado_a.getText())) {
+            comparacion = OracleService.getInstance().compararNumeros(Integer.valueOf(campo_num1.getValue().toString()), Integer.valueOf(campo_num2.getValue().toString()));
             comparacion_nums.setText(comparacion);
-        } else if (conectado_a.getText() == "PostgreSQL") {
-            comparacion = PostgresqlService.getInstance().compararNumeros(Integer.parseInt(campo_num1.getValue().toString()), Integer.parseInt(campo_num2.getValue().toString()));
+        } else if ("PostgreSQL".equals(conectado_a.getText())) {
+            comparacion = PostgresqlService.getInstance().compararNumeros(Integer.valueOf(campo_num1.getValue().toString()), Integer.valueOf(campo_num2.getValue().toString()));
             comparacion_nums.setText(comparacion);
         }
     }//GEN-LAST:event_boton_compararNumsActionPerformed
@@ -262,9 +267,9 @@ public class MenuMetodos extends javax.swing.JPanel {
     private void cargar_infoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargar_infoActionPerformed
         // TODO add your handling code here:
         List<InfoStudentDTO> informacion_estudiantes = new ArrayList<>();
-        if (conectado_a.getText() == "Oracle") {
+        if ("Oracle".equals(conectado_a.getText())) {
             informacion_estudiantes = OracleService.getInstance().informacionEstudiantes();
-        } else if (conectado_a.getText() == "PostgreSQL") {
+        } else if ("PostgreSQL".equals(conectado_a.getText())) {
             informacion_estudiantes = PostgresqlService.getInstance().informacionEstudiantes();
 
         }

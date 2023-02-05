@@ -121,16 +121,16 @@ public class VentanaEmergente extends javax.swing.JFrame {
         Number id;
         String nombre, apellido, telefono, direccion, correo;
 
-        id = Integer.parseInt(campo_id.getText());
+        id = Integer.valueOf(campo_id.getText());
         nombre = campo_nombre.getText();
         apellido = campo_apellido.getText();
         telefono = campo_telefono.getText();
         direccion = campo_direccion.getText();
         correo = campo_correo.getText();
 
-        if (conectado_a == "Oracle") {
+        if ("Oracle".equals(conectado_a)) {
             OracleService.getInstance().actualizarAmigo(new AmigoDTO(id, nombre, apellido, telefono, direccion, correo));
-        } else if (conectado_a == "PostgreSQL") {
+        } else if ("PostgreSQL".equals(conectado_a)) {
             PostgresqlService.getInstance().actualizarAmigo(new AmigoDTO(id, nombre, apellido, telefono, direccion, correo));
         }
 
