@@ -248,6 +248,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tabla_info = new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex, int columnIndex){&#xa;        return false;&#xa;    }&#xa;};"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
