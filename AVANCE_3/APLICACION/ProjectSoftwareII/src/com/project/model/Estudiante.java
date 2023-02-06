@@ -14,11 +14,12 @@ public class Estudiante {
     private String facultad;
     private String programa;
     private Date fecha_inicio;
-
+    private byte[] foto;
+            
     public Estudiante() {
     }
 
-    public Estudiante(Integer codigo, String nombres, String apellido1, String apellido2, String telefono, String facultad, String programa, Date fecha_inicio) {
+    public Estudiante(Integer codigo, String nombres, String apellido1, String apellido2, String telefono, String facultad, String programa, Date fecha_inicio, byte[] foto) {
         this.codigo = codigo;
         this.nombres = nombres;
         this.apellido1 = apellido1;
@@ -27,6 +28,15 @@ public class Estudiante {
         this.facultad = facultad;
         this.programa = programa;
         this.fecha_inicio = fecha_inicio;
+        this.foto = foto;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 
     public Integer getCodigo() {

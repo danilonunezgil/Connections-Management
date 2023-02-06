@@ -2,7 +2,11 @@ package com.project.dao;
 
 import com.project.database.ConexionOracle;
 import com.project.database.ConexionPostgresql;
+import com.project.dto.EstudianteDTO;
 import com.project.dto.InfoStudentDTO;
+import com.project.model.Amigo;
+import com.project.model.Estudiante;
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -119,4 +123,32 @@ public class EstudianteDAO {
         }
         return listadoInfoEstudiantes;
     }
+    
+    public Estudiante buscarId(String servicio, Number idEstudiante) {
+        Estudiante estudiante = new Estudiante();
+        Connection connection = validaMotor(servicio);
+        try {
+            String consulta = "select * from estudiante where id = " + idEstudiante;
+            PreparedStatement statement = connection.prepareStatement(consulta);
+            ResultSet resultado = statement.executeQuery();
+            if (resultado.next()) {
+                estudiante.setCodigo(resultado.getInt(1));
+                estudiante.setNombres(resultado.getString(2));
+                estudiante.setApellido1(resultado.getString(3));
+                estudiante.setApellido2(resultado.getString(4));
+                estudiante.setTelefono(resultado.getString(5));
+                estudiante.setFacultad(resultado.getString(6));
+                estudiante.setPrograma(resultado.getString(7));
+                estudiante.setFecha_inicio(resultado.getDate(8));
+                Blob blob = resultado.getBlob(9);
+                estudiante.setFoto(blob.getBytes(1, (int)blob.length()));
+            }
+            resultado.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return estudiante;
+    }
+    
 }
