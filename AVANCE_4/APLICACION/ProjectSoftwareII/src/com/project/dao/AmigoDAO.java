@@ -36,11 +36,11 @@ public class AmigoDAO {
         return connection;
     }
 
-    public List<Amigo> listar(String clase) {
+    public List<Amigo> listar(String servicio) {
 
         ArrayList<Amigo> listadoAmigos = new ArrayList<>();
         String consulta = "select id, nombre, apellido, telefono, direccion, correo from amigos";
-        Connection connection = validaMotor(clase);
+        Connection connection = validaMotor(servicio);
         try {
             PreparedStatement statement = connection.prepareStatement(consulta);
             ResultSet resultado = statement.executeQuery();
@@ -63,9 +63,9 @@ public class AmigoDAO {
         return listadoAmigos;
     }
 
-    public Amigo insertar(String clase, Amigo amigo) {
+    public Amigo insertar(String servicio, Amigo amigo) {
         String consulta = "insert into amigos(nombre,apellido, telefono, direccion, correo) values(?,?,?,?,?)";
-        Connection connection = validaMotor(clase);
+        Connection connection = validaMotor(servicio);
         try {
             PreparedStatement statement = connection.prepareStatement(consulta);
             statement.setString(1, amigo.getNombre());
@@ -82,9 +82,9 @@ public class AmigoDAO {
         return amigo;
     }
 
-    public Amigo buscarId(String clase, Number idAmigo) {
+    public Amigo buscarId(String servicio, Number idAmigo) {
         Amigo amigo = new Amigo();
-        Connection connection = validaMotor(clase);
+        Connection connection = validaMotor(servicio);
         try {
             String consulta = "select * from amigos where id = " + idAmigo;
             PreparedStatement statement = connection.prepareStatement(consulta);
@@ -105,8 +105,8 @@ public class AmigoDAO {
         return amigo;
     }
 
-    public Amigo actualizar(String clase, Amigo amigo) {
-        Connection connection = validaMotor(clase);
+    public Amigo actualizar(String servicio, Amigo amigo) {
+        Connection connection = validaMotor(servicio);
         try {
             String consulta = "update amigos set nombre = '" + amigo.getNombre() + "', apellido = '" + amigo.getApellido()
                     + "', telefono = '" + amigo.getTelefono() + "', direccion = '" + amigo.getDireccion() + "', correo = '" + amigo.getCorreo()
@@ -121,8 +121,8 @@ public class AmigoDAO {
         return amigo;
     }
 
-    public void eliminar(String clase, Number idAmigo) {
-        Connection connection = validaMotor(clase);
+    public void eliminar(String servicio, Number idAmigo) {
+        Connection connection = validaMotor(servicio);
         try {
             String consulta = "delete from amigos where id = " + idAmigo;
             PreparedStatement statement = connection.prepareStatement(consulta);
@@ -134,53 +134,45 @@ public class AmigoDAO {
         }
     }
 
-    public String savePoint(String clase) {
-        Connection connection = null;
+    public String savePoint(String servicio) {
         String rt = null;
-        if (postgresql.equals(clase)) {
-            connection = ConexionPostgresql.getInstance().conexion();
+        Connection connection = validaMotor(servicio);
+        if (postgresql.equals(servicio)) {
             rt = ConexionPostgresql.savePoint(connection);
-        } else if (oracle.equals(clase)) {
-            connection = ConexionOracle.getInstance().conexion();
+        } else if (oracle.equals(servicio)) {
             rt = ConexionOracle.savePoint(connection);
         }
         return rt;
     }
 
-    public String volverSave(String clase) {
-        Connection connection = null;
+    public String volverSave(String servicio) {
         String rt = null;
-        if (oracle.equals(clase)) {
-            connection = ConexionPostgresql.getInstance().conexion();
+        Connection connection = validaMotor(servicio);
+        if (postgresql.equals(servicio)) {
             rt = ConexionPostgresql.volverSavePoint(connection);
-        } else if (postgresql.equals(clase)) {
-            connection = ConexionOracle.getInstance().conexion();
+        } else if (oracle.equals(servicio)) {
             rt = ConexionOracle.volverSavePoint(connection);
         }
         return rt;
     }
 
-    public String rollback(String clase) {
-        Connection connection = null;
+    public String rollback(String servicio) {
         String rt = null;
-        if (oracle.equals(clase)) {
-            connection = ConexionPostgresql.getInstance().conexion();
+        Connection connection = validaMotor(servicio);
+        if (postgresql.equals(servicio)) {
             rt = ConexionPostgresql.rollback(connection);
-        } else if (postgresql.equals(clase)) {
-            connection = ConexionOracle.getInstance().conexion();
+        } else if (oracle.equals(servicio)) {
             rt = ConexionOracle.rollback(connection);
         }
         return rt;
     }
 
-    public String commit(String clase) {
-        Connection connection = null;
+    public String commit(String servicio) {
         String rt = null;
-        if (oracle.equals(clase)) {
-            connection = ConexionPostgresql.getInstance().conexion();
+        Connection connection = validaMotor(servicio);
+        if (postgresql.equals(servicio)) {
             rt = ConexionPostgresql.commit(connection);
-        } else if (postgresql.equals(clase)) {
-            connection = ConexionOracle.getInstance().conexion();
+        } else if (oracle.equals(servicio)) {
             rt = ConexionOracle.commit(connection);
         }
         return rt;
