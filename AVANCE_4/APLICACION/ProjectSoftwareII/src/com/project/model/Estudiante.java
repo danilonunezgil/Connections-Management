@@ -2,6 +2,7 @@ package com.project.model;
 
 import com.project.dao.EstudianteDAO;
 import com.project.dto.InfoStudentDTO;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -105,9 +106,9 @@ public class Estudiante {
 
     @Override
     public String toString() {
-        return "Estudiante{" + "codigo=" + codigo + ", nombres=" + nombres + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", telefono=" + telefono + ", facultad=" + facultad + ", programa=" + programa + ", fecha_inicio=" + fecha_inicio + '}';
+        return "Estudiante{" + "codigo=" + codigo + ", nombres=" + nombres + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", telefono=" + telefono + ", facultad=" + facultad + ", programa=" + programa + ", fecha_inicio=" + fecha_inicio + ", foto=" + Arrays.toString(foto) + '}';
     }
-    
+
     public Number promedioCarrera(Class servicio,Integer cod_est){
         return EstudianteDAO.getInstance().promedioCarrera(servicio.getName(), cod_est);
     }

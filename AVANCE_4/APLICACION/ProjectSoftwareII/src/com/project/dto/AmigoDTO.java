@@ -15,7 +15,6 @@ public class AmigoDTO extends Amigo{
     }
 
     public AmigoDTO(Number id, String nombre, String apellido, String telefono, String direccion, String correo) {
-        super(id, nombre, apellido, telefono, direccion, correo);
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -25,7 +24,6 @@ public class AmigoDTO extends Amigo{
     }
 
     public AmigoDTO(String nombre, String apellido, String telefono, String direccion, String correo) {
-        super(nombre, apellido, telefono, direccion, correo);
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;

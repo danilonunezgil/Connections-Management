@@ -293,7 +293,7 @@ public class MenuCrud extends javax.swing.JPanel {
             if (amigo.getId() == null && amigo.getNombre() == null && amigo.getApellido() == null) {
                 JOptionPane.showMessageDialog(null, "No existe algún amigo con ese ID");
             } else {
-                VentanaEmergente ve = new VentanaEmergente(amigo,"PosgreSQL");
+                VentanaEmergente ve = new VentanaEmergente(amigo,"PostgreSQL");
                 ve.setVisible(true);
                 ve.setLocationRelativeTo(null);
             }
