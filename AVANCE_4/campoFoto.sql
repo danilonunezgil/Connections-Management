@@ -1,0 +1,4 @@
+--ORACLE
+ALTER TABLE estudiante ADD foto BLOB;
+--POSTGRESQL
+ALTER TABLE estudiante ADD COLUMN foto BYTEA;
