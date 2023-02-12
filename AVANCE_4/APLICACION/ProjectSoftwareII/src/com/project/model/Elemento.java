@@ -176,7 +176,11 @@ public class Elemento {
         return "Elemento{" + "codigo=" + codigo + ", elemento=" + elemento + ", devolutivo=" + devolutivo + ", talla=" + talla + ", uso=" + uso + ", materiales=" + materiales + ", mantenimiento=" + mantenimiento + ", usos=" + usos + ", norma=" + norma + ", atenuacion=" + atenuacion + ", serial=" + serial + ", tallas=" + tallas + ", unidad=" + unidad + ", ruta=" + ruta + ", precio_actual=" + precio_actual + ", cantidad_elementos=" + cantidad_elementos + '}';
     }
 
-    public Integer precioPromedio(Class servicio, Integer cod_ele) {
-        return ElementoDAO.getInstance().precioPromedioElemento(servicio.getName(), cod_ele);
+    public Integer precioPromedioPostgres(Integer cod_ele) {
+        return ElementoDAO.getInstance().precioPromedioElementoPostgres(cod_ele);
+    }
+    
+    public Integer precioPromedioOracle(Integer cod_ele) {
+        return ElementoDAO.getInstance().precioPromedioElementoOracle(cod_ele);
     }
 }
