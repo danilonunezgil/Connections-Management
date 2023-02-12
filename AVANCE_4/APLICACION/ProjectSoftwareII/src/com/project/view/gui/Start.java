@@ -44,6 +44,7 @@ public class Start extends javax.swing.JFrame {
         opc_metodos = new javax.swing.JRadioButton();
         label_est = new javax.swing.JLabel();
         estado_conexion = new javax.swing.JLabel();
+        opc_estudiantes = new javax.swing.JRadioButton();
         contenido = new javax.swing.JPanel();
         logo_software = new javax.swing.JLabel();
         titulo_admdata2 = new javax.swing.JLabel();
@@ -106,6 +107,14 @@ public class Start extends javax.swing.JFrame {
         estado_conexion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         estado_conexion.setText("NO CONECTADO");
 
+        buttonGroup1.add(opc_estudiantes);
+        opc_estudiantes.setText("GESTIÓN DE ESTUDIANTES");
+        opc_estudiantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opc_estudiantesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_opcionesLayout = new javax.swing.GroupLayout(panel_opciones);
         panel_opciones.setLayout(panel_opcionesLayout);
         panel_opcionesLayout.setHorizontalGroup(
@@ -117,7 +126,8 @@ public class Start extends javax.swing.JFrame {
                         .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(opc_crud)
-                                .addComponent(opc_metodos))
+                                .addComponent(opc_metodos)
+                                .addComponent(opc_estudiantes))
                             .addComponent(jLabel_main_menu)))
                     .addGroup(panel_opcionesLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
@@ -129,11 +139,10 @@ public class Start extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addComponent(label_est))
                             .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(logo_java, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(panel_opcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(boton_postgres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(boton_oracle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(boton_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(boton_postgres, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(boton_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(boton_oracle, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(logo_java, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panel_opcionesLayout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(estado_conexion, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -150,19 +159,21 @@ public class Start extends javax.swing.JFrame {
                 .addComponent(opc_crud)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(opc_metodos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(opc_estudiantes)
                 .addGap(18, 18, 18)
                 .addComponent(boton_oracle)
-                .addGap(33, 33, 33)
-                .addComponent(boton_postgres)
-                .addGap(34, 34, 34)
-                .addComponent(boton_cerrar)
                 .addGap(18, 18, 18)
+                .addComponent(boton_postgres)
+                .addGap(18, 18, 18)
+                .addComponent(boton_cerrar)
+                .addGap(22, 22, 22)
                 .addComponent(logo_java, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_est)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(estado_conexion)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         ventana_total.add(panel_opciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 620));
@@ -187,14 +198,14 @@ public class Start extends javax.swing.JFrame {
         contenido.setLayout(contenidoLayout);
         contenidoLayout.setHorizontalGroup(
             contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 730, Short.MAX_VALUE)
+            .addGroup(contenidoLayout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(titulo_admdata, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(158, Short.MAX_VALUE))
             .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(contenidoLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(contenidoLayout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(titulo_admdata, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(titulo_admdata3, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(titulo_admdata2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(contenidoLayout.createSequentialGroup()
@@ -204,19 +215,19 @@ public class Start extends javax.swing.JFrame {
         );
         contenidoLayout.setVerticalGroup(
             contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGroup(contenidoLayout.createSequentialGroup()
+                .addGap(131, 131, 131)
+                .addComponent(titulo_admdata, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(439, Short.MAX_VALUE))
             .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(contenidoLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(contenidoLayout.createSequentialGroup()
-                            .addGap(80, 80, 80)
-                            .addComponent(titulo_admdata, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(titulo_admdata3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(contenidoLayout.createSequentialGroup()
                             .addGap(50, 50, 50)
                             .addComponent(titulo_admdata2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(10, 10, 10)
+                    .addGap(50, 50, 50)
                     .addComponent(logo_software, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
@@ -248,6 +259,17 @@ public class Start extends javax.swing.JFrame {
             contenido.add(mdb, BorderLayout.CENTER);
             contenido.revalidate();
             contenido.repaint();
+
+        } else if (opc_estudiantes.isSelected()) {
+            estado_conexion.setText("FUNCIONANDO");
+            MenuEstudiantes me = new MenuEstudiantes("PostgreSQL");
+            me.setSize(760, 610);
+            me.setLocation(0, 0);
+            contenido.removeAll();
+            contenido.add(me, BorderLayout.CENTER);
+            contenido.revalidate();
+            contenido.repaint();
+
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione primero una opción");
         }
@@ -279,6 +301,15 @@ public class Start extends javax.swing.JFrame {
             contenido.add(mdb, BorderLayout.CENTER);
             contenido.revalidate();
             contenido.repaint();
+        } else if (opc_estudiantes.isSelected()) {
+            estado_conexion.setText("FUNCIONANDO");
+            MenuEstudiantes me = new MenuEstudiantes("Oracle");
+            me.setSize(760, 610);
+            me.setLocation(0, 0);
+            contenido.removeAll();
+            contenido.add(me, BorderLayout.CENTER);
+            contenido.revalidate();
+            contenido.repaint();
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione primero una opción");
         }
@@ -292,6 +323,10 @@ public class Start extends javax.swing.JFrame {
     private void opc_metodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc_metodosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_opc_metodosActionPerformed
+
+    private void opc_estudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc_estudiantesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opc_estudiantesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -341,6 +376,7 @@ public class Start extends javax.swing.JFrame {
     private javax.swing.JLabel logo_software;
     private javax.swing.JLabel logo_u;
     private javax.swing.JRadioButton opc_crud;
+    private javax.swing.JRadioButton opc_estudiantes;
     private javax.swing.JRadioButton opc_metodos;
     private javax.swing.JPanel panel_opciones;
     private javax.swing.JLabel titulo_admdata;
