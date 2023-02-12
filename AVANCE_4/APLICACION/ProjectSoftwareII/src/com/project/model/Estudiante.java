@@ -108,16 +108,29 @@ public class Estudiante {
     public String toString() {
         return "Estudiante{" + "codigo=" + codigo + ", nombres=" + nombres + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", telefono=" + telefono + ", facultad=" + facultad + ", programa=" + programa + ", fecha_inicio=" + fecha_inicio + ", foto=" + Arrays.toString(foto) + '}';
     }
-
-    public Number promedioCarrera(Class servicio,Integer cod_est){
-        return EstudianteDAO.getInstance().promedioCarrera(servicio.getName(), cod_est);
+    
+    
+    public Number promedioCarreraPostgres(Integer cod_est){
+        return EstudianteDAO.getInstance().promedioCarreraPostgres(cod_est);
     }
     
-    public List<InfoStudentDTO> informacionEstudiantes(Class servicio){
-        return EstudianteDAO.getInstance().informacionEstudiantes(servicio.getName());
+    public List<InfoStudentDTO> informacionEstudiantesPostgres(){
+        return EstudianteDAO.getInstance().informacionEstudiantesPostgres();
     }
     
-    public String compararNumeros(Class servicio,Integer numero1, Integer numero2){
-        return EstudianteDAO.getInstance().compararNumeros(servicio.getName(),numero1,numero2);
+    public String compararNumerosPostgres(Integer numero1, Integer numero2){
+        return EstudianteDAO.getInstance().compararNumerosPostgres(numero1,numero2);
+    }
+    
+    public Number promedioCarreraOracle(Integer cod_est){
+        return EstudianteDAO.getInstance().promedioCarreraOracle(cod_est);
+    }
+    
+    public List<InfoStudentDTO> informacionEstudiantesOracle(){
+        return EstudianteDAO.getInstance().informacionEstudiantesOracle();
+    }
+    
+    public String compararNumerosOracle(Integer numero1, Integer numero2){
+        return EstudianteDAO.getInstance().compararNumerosOracle(numero1,numero2);
     }
 }

@@ -86,11 +86,11 @@ public class Amigo {
         return "Amigo{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", direccion=" + direccion + ", correo=" + correo + '}';
     }
     
-    //CRUD PARA TABLA AMIGO
-    public Amigo crear(Class servicio){
-        return AmigoDAO.getInstance().insertar(servicio.getName(),generarRandom());
-    }
-    
+    /**
+    * Método encargado de crear un objeto de tipo Amigo y llenarlo de forma aleatoria con datos establecidos en arreglos
+    * @author Edgar,Danilo y Johan
+    * @return Objeto de tipo Amigo creado
+    */
     public Amigo generarRandom() {
         String[] nombresRand = {"Javier", "Manuel", "Rodrigo", "Camilo", "Lucrecia", "Manuela", "Juliana", "Paola", "Pandy", "Fernanda"};
         String[] apellidosRand = {"Lozada", "Gonzalez", "Nunez", "Gil", "Botero", "Perez", "Reyes", "Gomez", "Hernandez", "Pabon"};
@@ -102,35 +102,175 @@ public class Amigo {
         return amigo;
     }
 
-    public List<Amigo> listar(Class servicio){
-        return AmigoDAO.getInstance().listar( servicio.getName());
+    //CRUD PARA TABLA AMIGO ORACLE
+    
+    /**
+    * Método encargado de crear un objeto de tipo Amigo en oracle
+    * @author Edgar,Danilo y Johan
+    * @return Objeto de tipo Amigo creado
+    */
+    public Amigo crearAmigoOracle(){
+        return AmigoDAO.getInstance().insertarAmigoOracle(generarRandom());
     }
     
-    public Amigo actualizar(Class servicio,AmigoDTO amigoDTO){
-        return AmigoDAO.getInstance().actualizar(servicio.getName(),amigoDTO);
+    
+    /**
+    * Método encargado de listar objetos de tipo Amigo almacenados en oracle
+    * @author Edgar,Danilo y Johan
+    * @return Lista de objetos de tipo Amigo
+    */
+    public List<Amigo> listarAmigoOracle(){
+        return AmigoDAO.getInstance().listarAmigosOracle();
     }
     
-    public void eliminar(Class servicio,Number idAmigo){
-        AmigoDAO.getInstance().eliminar(servicio.getName(),idAmigo);
+    /**
+    * Método encargado de actualizar informacion de objetos de tipo Amigo almacenados en oracle
+    * @author Edgar,Danilo y Johan
+    * @param amigoDTO objeto de tipo AmigoDTO con la informacion que se requiere actualizar
+    * @return Objeto de tipo Amigo con la informacion actualizada
+    */
+    public Amigo actualizarAmigoOracle(AmigoDTO amigoDTO){
+        return AmigoDAO.getInstance().actualizarAmigoOracle(amigoDTO);
     }
     
-    public Amigo buscarId(Class servicio,Number idAmigo){
-        return AmigoDAO.getInstance().buscarId(servicio.getName(),idAmigo);
+    /**
+    * Método encargado de eliminar un objeto de tipo Amigo almacenado en oracle
+    * @author Edgar,Danilo y Johan
+    * @param idAmigo Number con el numero identificador del amigo a eliminar
+    */
+    public void eliminarAmigoOracle(Number idAmigo){
+        AmigoDAO.getInstance().eliminarAmigoOracle(idAmigo);
     }
     
-    public String savePointAmigos(Class servicio){
-        return AmigoDAO.getInstance().savePoint(servicio.getName());
+    /**
+    * Método encargado de buscar por id un objeto de tipo Amigo almacenado en oracle
+    * @author Edgar,Danilo y Johan
+    * @param idAmigo Number con el numero identificador del amigo a buscar
+    * @return Objeto de tipo Amigo encontrado apartir del numero de identificador
+    */
+    public Amigo buscarIdAmigoOracle(Number idAmigo){
+        return AmigoDAO.getInstance().buscarIdAmigoOracle(idAmigo);
     }
     
-    public String volverSaveAmigos(Class servicio){
-        return AmigoDAO.getInstance().volverSave(servicio.getName());
+    /**
+    * Método encargado de realizar savepoint para control de transacciones en oracle
+    * @author Edgar,Danilo y Johan
+    * @return String que contiene mensaje de exito o falla al realizar savepoint
+    */
+    public String savePointOracle(){
+        return AmigoDAO.getInstance().savePointOracle();
     }
     
-    public String rollbackAmigos(Class servicio){
-        return AmigoDAO.getInstance().rollback(servicio.getName());
+    /**
+    * Método encargado de cargar savepoin creado en oracle
+    * @author Edgar,Danilo y Johan
+    * @return String que contiene mensaje de exito o falla al cargar el savepoint
+    */
+    public String volverSaveOracle(){
+        return AmigoDAO.getInstance().volverSaveOracle();
     }
     
-    public String commitAmigos(Class servicio){
-        return AmigoDAO.getInstance().commit(servicio.getName());
+    /**
+    * Método encargado de realizar rollback en oracle
+    * @author Edgar,Danilo y Johan
+    * @return String que contiene mensaje de exito o falla del rollback
+    */
+    public String rollbackOracle(){
+        return AmigoDAO.getInstance().rollbackOracle();
+    }
+    
+    /**
+    * Método encargado de realizar commit en oracle 
+    * @author Edgar,Danilo y Johan
+    * @return String que contiene mensaje de exito o falla al realizar commit
+    */
+    public String commitOracle(){
+        return AmigoDAO.getInstance().commitOracle();
+    }
+    
+    //CRUD PARA TABLA AMIGO POSTGRESQL
+    
+    /**
+    * Método encargado de ingresar un objeto de tipo Amigo en postgresql
+    * @author Edgar,Danilo y Johan
+    * @return Objeto de tipo Amigo creado
+    */
+    public Amigo crearAmigoPostgres(){
+        return AmigoDAO.getInstance().insertarAmigoPostgres(generarRandom());
+    }
+    
+    
+    /**
+    * Método encargado de listar objetos de tipo Amigo almacenados en postgresql
+    * @author Edgar,Danilo y Johan
+    * @return Lista de objetos de tipo Amigo
+    */
+    public List<Amigo> listarAmigoPostgres(){
+        return AmigoDAO.getInstance().listarAmigosPostgres();
+    }
+    
+    /**
+    * Método encargado de actualizar informacion de objetos de tipo Amigo almacenados en postgresql
+    * @author Edgar,Danilo y Johan
+    * @param amigoDTO objeto de tipo AmigoDTO con la informacion que se requiere actualizar
+    * @return Objeto de tipo Amigo con la informacion actualizada
+    */
+    public Amigo actualizarAmigoPostgres(AmigoDTO amigoDTO){
+        return AmigoDAO.getInstance().actualizarAmigoPostgres(amigoDTO);
+    }
+    
+    /**
+    * Método encargado de eliminar un objeto de tipo Amigo almacenado en postgresql
+    * @author Edgar,Danilo y Johan
+    * @param idAmigo Number con el numero identificador del amigo a eliminar
+    */
+    public void eliminarAmigoPostgres(Number idAmigo){
+        AmigoDAO.getInstance().eliminarAmigoPostgres(idAmigo);
+    }
+    
+    /**
+    * Método encargado de buscar por id un objeto de tipo Amigo almacenado en postgresql
+    * @author Edgar,Danilo y Johan
+    * @param idAmigo Number con el numero identificador del amigo a buscar
+    * @return Objeto de tipo Amigo encontrado apartir del numero de identificador
+    */
+    public Amigo buscarIdAmigoPostgres(Number idAmigo){
+        return AmigoDAO.getInstance().buscarIdAmigoPostgres(idAmigo);
+    }
+    
+    /**
+    * Método encargado de realizar savepoint para control de transacciones en postgresql
+    * @author Edgar,Danilo y Johan
+    * @return String que contiene mensaje de exito o falla al realizar savepoint
+    */
+    public String savePointPostgres(){
+        return AmigoDAO.getInstance().savePointPostgres();
+    }
+    
+    /**
+    * Método encargado de cargar savepoin creado en postgresql
+    * @author Edgar,Danilo y Johan
+    * @return String que contiene mensaje de exito o falla al cargar el savepoint
+    */
+    public String volverSavePostgres(){
+        return AmigoDAO.getInstance().volverSavePostgres();
+    }
+    
+    /**
+    * Método encargado de realizar rollback en postgresql
+    * @author Edgar,Danilo y Johan
+    * @return String que contiene mensaje de exito o falla del rollback
+    */
+    public String rollbackPostgres(){
+        return AmigoDAO.getInstance().rollbackPostgres();
+    }
+    
+    /**
+    * Método encargado de realizar commit en postgresql 
+    * @author Edgar,Danilo y Johan
+    * @return String que contiene mensaje de exito o falla al realizar commit
+    */
+    public String commitPostgres(){
+        return AmigoDAO.getInstance().commitPostgres();
     }
 }
