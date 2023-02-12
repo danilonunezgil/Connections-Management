@@ -2,6 +2,10 @@ package com.project.dto;
 
 import com.project.model.Amigo;
 
+/**
+* Clase AmigoDTO encargada de comunicarse con la vista,controlador y el modelo de Amigo
+* @author Edgar,Danilo y Johan
+*/
 public class AmigoDTO extends Amigo{
     
     private Number id;

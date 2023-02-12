@@ -2,6 +2,10 @@ package com.project.model;
 
 import com.project.dao.ElementoDAO;
 
+/**
+* Clase Elemento encargada de comunicarse con el controlador y la clase ElementoDAO
+* @author Edgar,Danilo y Johan
+*/
 public class Elemento {
 
     private Integer codigo;
@@ -175,11 +179,23 @@ public class Elemento {
     public String toString() {
         return "Elemento{" + "codigo=" + codigo + ", elemento=" + elemento + ", devolutivo=" + devolutivo + ", talla=" + talla + ", uso=" + uso + ", materiales=" + materiales + ", mantenimiento=" + mantenimiento + ", usos=" + usos + ", norma=" + norma + ", atenuacion=" + atenuacion + ", serial=" + serial + ", tallas=" + tallas + ", unidad=" + unidad + ", ruta=" + ruta + ", precio_actual=" + precio_actual + ", cantidad_elementos=" + cantidad_elementos + '}';
     }
-
+    
+    /**
+    * Método encargado de consultar el precio promedio de un elemento en postgresql
+    * @author Edgar,Danilo y Johan
+    * @param cod_ele Integer con el identificador del elemento a consultar
+    * @return Integer con el valor del precio promedio del elemento consultado
+    */
     public Integer precioPromedioPostgres(Integer cod_ele) {
         return ElementoDAO.getInstance().precioPromedioElementoPostgres(cod_ele);
     }
     
+    /**
+    * Método encargado de consultar el precio promedio de un elemento en oracle 
+    * @author Edgar,Danilo y Johan
+    * @param cod_ele Integer con el identificador del elemento a consultar
+    * @return Integer con el valor del precio promedio del elemento consultado
+    */
     public Integer precioPromedioOracle(Integer cod_ele) {
         return ElementoDAO.getInstance().precioPromedioElementoOracle(cod_ele);
     }

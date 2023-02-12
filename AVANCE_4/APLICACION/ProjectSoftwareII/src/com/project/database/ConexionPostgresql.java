@@ -6,7 +6,10 @@ import java.sql.SQLException;
 import java.sql.Savepoint;
 import javax.swing.JOptionPane;
 
-
+/**
+* Clase ConexionPostgresql encargada de realizar la conexion con postgres
+* @author Edgar,Danilo y Johan
+*/
 public class ConexionPostgresql {
     
     private static ConexionPostgresql connectInstance;
@@ -17,7 +20,11 @@ public class ConexionPostgresql {
     private final String url = "jdbc:postgresql://localhost:5432/sistemas";
     private final String user = "postgres";
     private final String pass = "password";
-
+    
+    /**
+    * Constructor privado de ConexionPostgresql
+    * @author Edgar,Danilo y Johan
+    */ 
     private ConexionPostgresql() {
         
         try {
@@ -40,6 +47,11 @@ public class ConexionPostgresql {
         }
     }
     
+    /**
+    * Este método se encarga de crear e instanciar un unico objeto ConexionPostgresql
+    * @author Edgar,Danilo y Johan
+    * @return Objeto de tipo ConexionPostgresql
+    */
     public static ConexionPostgresql getInstance(){
         if(connectInstance == null){
             connectInstance = new ConexionPostgresql();
@@ -47,10 +59,21 @@ public class ConexionPostgresql {
       return connectInstance;
     }
     
+    /**
+    * Este método se encarga de retornar la conexion con la base de datos
+    * @author Edgar,Danilo y Johan
+    * @return Objeto de tipo Connection
+    */
     public Connection conexion() {
         return con;
     }
     
+    /**
+    * Este método se encarga de finalizar la conexion con la base de datos
+    * @author Edgar,Danilo y Johan
+    * @param connection Connection contiene la conexion que se desea finalizar
+    * @return String con mensaje de exito o error de la desconexion
+    */
     public static String desconectar(Connection connection){
         String mensaje;
         try {
@@ -62,6 +85,12 @@ public class ConexionPostgresql {
        return mensaje;
     }
     
+    /**
+    * Este método se encarga de confirmar los cambios realizados en la base de datos
+    * @author Edgar,Danilo y Johan
+    * @param connection Connection contiene la conexion a la base de datos que se desea confirmar los cambios
+    * @return String con mensaje de exito o error del commit
+    */
     public static String commit(Connection connection){
         String mensaje;
         try {
@@ -73,6 +102,12 @@ public class ConexionPostgresql {
        return mensaje;
     }
     
+    /**
+    * Este método se encarga de deshacer los cambios realizados en la base de datos
+    * @author Edgar,Danilo y Johan
+    * @param connection Connection contiene la conexion a la base de datos a que se quiere deshacer los cambios
+    * @return String con mensaje de exito o error del rollback
+    */
     public static String rollback(Connection connection){
         String mensaje;
         try {
@@ -84,6 +119,12 @@ public class ConexionPostgresql {
        return mensaje;
     }
     
+    /**
+    * Este método se encarga de crear un punto de guardado con los cambios realizados hasta ese momento en la base de datos
+    * @author Edgar,Danilo y Johan
+    * @param connection Connection contiene la conexion a la base de datos que se quiere aplicar un savepoint
+    * @return String con mensaje de exito o error del savePoint
+    */
     public static String savePoint(Connection connection){
         String mensaje;
         try {
@@ -95,6 +136,12 @@ public class ConexionPostgresql {
        return mensaje;
     }
     
+    /**
+    * Este método se encarga de cargar un punto de guardado existente en la base de datos
+    * @author Edgar,Danilo y Johan
+    * @param connection Connection contiene la conexion a la base de datos a la cual se quiere cargar el punto de guardado
+    * @return String con mensaje de exito o error del rollback(save)
+    */
     public static String volverSavePoint(Connection connection){
         String mensaje;
         try {

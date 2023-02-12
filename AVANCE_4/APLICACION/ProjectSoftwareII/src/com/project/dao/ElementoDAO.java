@@ -33,7 +33,14 @@ public class ElementoDAO {
         }
         return elementoDAO;
     }
-
+    
+    //SECCION ORACLE
+    /**
+    * Método encargado de consultar el precio promedio de un elemento en oracle 
+    * @author Edgar,Danilo y Johan
+    * @param cod_ele Integer con el identificador del elemento a consultar
+    * @return Integer con el valor del precio promedio del elemento consultado
+    */
     public Integer precioPromedioElementoOracle(Integer cod_ele) {
         Integer precio_promedio = null;
         Connection connection = ConexionOracle.getInstance().conexion();
@@ -56,6 +63,13 @@ public class ElementoDAO {
         return precio_promedio;
     }
     
+    //SECCION POSTGRESQL
+    /**
+    * Método encargado de consultar el precio promedio de un elemento en postgresql
+    * @author Edgar,Danilo y Johan
+    * @param cod_ele Integer con el identificador del elemento a consultar
+    * @return Integer con el valor del precio promedio del elemento consultado
+    */
     public Integer precioPromedioElementoPostgres(Integer cod_ele) {
         Integer precio_promedio = null;
         Connection connection = ConexionPostgresql.getInstance().conexion();

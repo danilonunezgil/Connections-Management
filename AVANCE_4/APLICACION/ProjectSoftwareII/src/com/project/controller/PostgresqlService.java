@@ -135,7 +135,7 @@ public class PostgresqlService {
     */
     
     /**
-    * Método encargado de ofrecer el servicio promedioCarrera de la clase Amigo
+    * Método encargado de ofrecer el servicio promedioCarreraPostgres de la clase Estudiante
     * @author Edgar,Danilo y Johan
     * @param cod_est Indetificador del estudiante al cual consultar el promedio
     * @return Number con el promedio del estudiante consultado
@@ -145,7 +145,7 @@ public class PostgresqlService {
     }
     
     /**
-    * Método encargado de ofrecer el servicio precioPromedio de la clase Elemento
+    * Método encargado de ofrecer el servicio precioPromedioPostgres de la clase Elemento
     * @author Edgar,Danilo y Johan
     * @param cod_ele Identificador del elemento al cual consultar el precio promedio
     * @return Integer con el precio promedio del elemento consultado
@@ -155,7 +155,7 @@ public class PostgresqlService {
     }
     
     /**
-    * Método encargado de ofrecer el servicio compararNumeros de la clase Estudiante
+    * Método encargado de ofrecer el servicio compararNumerosPostgres de la clase Estudiante
     * @author Edgar,Danilo y Johan
     * @param numero1 Primer numero a comparar
     * @param numero2 Segundo numero a comparar
@@ -166,7 +166,7 @@ public class PostgresqlService {
     }
     
     /**
-    * Método encargado de ofrecer el servicio informacionEstudiantes de la clase Estudiante
+    * Método encargado de ofrecer el servicio informacionEstudiantesPostgres de la clase Estudiante
     * @author Edgar,Danilo y Johan
     * @return Lista con objetos de tipo InfoStudentDTO
     */

@@ -14,20 +14,41 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+* Clase EstudianteDAO encargada de comunicarse con la base de datos
+* @author Edgar,Danilo y Johan
+*/
 public class EstudianteDAO {
 
     private static EstudianteDAO estudianteDAO;
-
+    
+    /**
+    * Constructor privado de EstudianteDAO
+    * @author Edgar,Danilo y Johan
+    */
     private EstudianteDAO() {
     }
-
+    
+    /**
+    * Este método se encarga de crear e instanciar un unico objeto EstudianteDAO
+    * @author Edgar,Danilo y Johan
+    * @return Objeto de tipo EstudianteDAO
+    */
     public static EstudianteDAO getInstance() {
         if (estudianteDAO == null) {
             estudianteDAO = new EstudianteDAO();
         }
         return estudianteDAO;
     }
-  
+    
+    //SECCION POSTGRESQL
+    
+    /**
+    * Método encargado de consultar el promedio de carrera de un estudiante de en postgresql
+    * @author Edgar,Danilo y Johan
+    * @param cod_est Integer con el indentificador del estudiante a consultar
+    * @return Niumber con el valor del promedio de carrera del estudiante consultado
+    */
     public Number promedioCarreraPostgres(Integer cod_est) {
 
         Number promedio = null;
@@ -51,7 +72,14 @@ public class EstudianteDAO {
         }
         return promedio;
     }
-
+    
+    /**
+    * Método encargado de consultar la comparacion de dos numeros enteros en postgresql
+    * @author Edgar,Danilo y Johan
+    * @param num1 Integer con el valor del primer numero a comparar    
+    * @param num2 Integer con el valor del segundo numero a comparar
+    * @return String con la comparacion realizada
+    */
     public String compararNumerosPostgres(Integer num1, Integer num2) {
         String comparacion = null;
         Connection connection = ConexionPostgresql.getInstance().conexion();
@@ -75,7 +103,12 @@ public class EstudianteDAO {
         }
         return comparacion;
     }
-
+    
+    /**
+    * Método encargado de consultar la informacion de los estudiantes almacenados en postgresql
+    * @author Edgar,Danilo y Johan
+    * @return Lista con objetos de tipo InfoStudentDTO
+    */
     public List<InfoStudentDTO> informacionEstudiantesPostgres() {
 
         ArrayList<InfoStudentDTO> listadoInfoEstudiantes = new ArrayList<>();
@@ -110,6 +143,12 @@ public class EstudianteDAO {
         return listadoInfoEstudiantes;
     }
     
+    /**
+    * Método encargado de buscar un estudiante en postgresql
+    * @author Edgar,Danilo y Johan
+    * @param idEstudiante Number con el identificador del estudiante que se quiere buscar
+    * @return Objeto de tipo Estudiante con toda la informacion del mismo
+    */
     public Estudiante buscarIdEstudiantePostgres(Number idEstudiante) {
         Estudiante estudiante = new Estudiante();
         Connection connection = ConexionPostgresql.getInstance().conexion();
@@ -137,6 +176,14 @@ public class EstudianteDAO {
         return estudiante;
     }
     
+    //SECCION ORACLE
+    
+    /**
+    * Método encargado de consultar el promedio de carrera de un estudiante de en oracle
+    * @author Edgar,Danilo y Johan
+    * @param cod_est Integer con el indentificador del estudiante a consultar
+    * @return Niumber con el valor del promedio de carrera del estudiante consultado
+    */
     public Number promedioCarreraOracle(Integer cod_est) {
 
         Number promedio = null;
@@ -160,7 +207,14 @@ public class EstudianteDAO {
         }
         return promedio;
     }
-
+    
+    /**
+    * Método encargado de consultar la comparacion de dos numeros enteros en oracle
+    * @author Edgar,Danilo y Johan
+    * @param num1 Integer con el valor del primer numero a comparar    
+    * @param num2 Integer con el valor del segundo numero a comparar
+    * @return String con la comparacion realizada
+    */
     public String compararNumerosOracle(Integer num1, Integer num2) {
         String comparacion = null;
         Connection connection = ConexionOracle.getInstance().conexion();
@@ -184,7 +238,12 @@ public class EstudianteDAO {
         }
         return comparacion;
     }
-
+    
+    /**
+    * Método encargado de consultar la informacion de los estudiantes almacenados en oracle
+    * @author Edgar,Danilo y Johan
+    * @return Lista con objetos de tipo InfoStudentDTO
+    */
     public List<InfoStudentDTO> informacionEstudiantesOracle() {
 
         ArrayList<InfoStudentDTO> listadoInfoEstudiantes = new ArrayList<>();
@@ -219,6 +278,12 @@ public class EstudianteDAO {
         return listadoInfoEstudiantes;
     }
     
+    /**
+    * Método encargado de buscar un estudiante en oracle
+    * @author Edgar,Danilo y Johan
+    * @param idEstudiante Number con el identificador del estudiante que se quiere buscar
+    * @return Objeto de tipo Estudiante con toda la informacion del mismo
+    */
     public Estudiante buscarIdEstudianteOracle(Number idEstudiante) {
         Estudiante estudiante = new Estudiante();
         Connection connection = ConexionOracle.getInstance().conexion();

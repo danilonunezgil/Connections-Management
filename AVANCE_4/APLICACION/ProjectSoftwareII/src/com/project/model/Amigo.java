@@ -4,6 +4,10 @@ import com.project.dao.AmigoDAO;
 import com.project.dto.AmigoDTO;
 import java.util.List;
 
+/**
+* Clase Amigo encargada de comunicarse con el controlador y la clase AmigoDAO
+* @author Edgar,Danilo y Johan
+*/
 public class Amigo {
 
     private Number id;
