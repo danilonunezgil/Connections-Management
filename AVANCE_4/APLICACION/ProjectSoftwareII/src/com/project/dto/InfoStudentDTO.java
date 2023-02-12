@@ -1,5 +1,9 @@
 package com.project.dto;
 
+/**
+* Clase InfoStudentDTO encargada de comunicarse con la vista,controlador y el modelo de Estudiante con el fin de generar un informe de los estudiantes
+* @author Edgar,Danilo y Johan
+*/
 public class InfoStudentDTO {
     
     private Integer codigo;

@@ -4,6 +4,10 @@ import com.project.model.Estudiante;
 import java.util.Arrays;
 import java.util.Date;
 
+/**
+* Clase EstudianteDTO encargada de comunicarse con la vista,controlador y el modelo de Estudiante
+* @author Edgar,Danilo y Johan
+*/
 public class EstudianteDTO extends Estudiante{
     
     private Integer codigo;
