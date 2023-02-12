@@ -30,7 +30,6 @@ public class MenuEstudiantes extends javax.swing.JPanel {
         titulo_connect_oracle1 = new javax.swing.JLabel();
         conectado_a = new javax.swing.JLabel();
         label_instruccion = new javax.swing.JLabel();
-        combo_estudiantes = new javax.swing.JComboBox<>();
         boton_cargar = new javax.swing.JButton();
         foto_estudiante = new javax.swing.JLabel();
         conectado_a1 = new javax.swing.JLabel();
@@ -46,6 +45,7 @@ public class MenuEstudiantes extends javax.swing.JPanel {
         telefono = new javax.swing.JLabel();
         fecha_inicio = new javax.swing.JLabel();
         facultad = new javax.swing.JLabel();
+        campo_id = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(730, 610));
@@ -64,9 +64,6 @@ public class MenuEstudiantes extends javax.swing.JPanel {
         label_instruccion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         label_instruccion.setText("Selecciona el Estudiante para visualizar los datos");
         add(label_instruccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, -1));
-
-        combo_estudiantes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(combo_estudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 226, -1));
 
         boton_cargar.setText("CARGAR");
         add(boton_cargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, -1, -1));
@@ -138,14 +135,25 @@ public class MenuEstudiantes extends javax.swing.JPanel {
         facultad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         facultad.setText("label_facultad");
         add(facultad, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, 130, -1));
+
+        campo_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo_idActionPerformed(evt);
+            }
+        });
+        add(campo_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 200, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void campo_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campo_idActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apellidos;
     private javax.swing.JButton boton_cargar;
+    private javax.swing.JTextField campo_id;
     private javax.swing.JLabel codigo;
-    private javax.swing.JComboBox<String> combo_estudiantes;
     private javax.swing.JLabel conectado_a;
     private javax.swing.JLabel conectado_a1;
     private javax.swing.JLabel facultad;
