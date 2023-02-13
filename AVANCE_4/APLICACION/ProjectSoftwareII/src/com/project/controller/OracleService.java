@@ -188,11 +188,11 @@ public class OracleService {
         return estudianteDTO;
     }
     
-    public String guardarFotoCarpetaOracle(EstudianteDTO estudianteDTO){
+    public byte[] guardarFotoCarpetaOracle(EstudianteDTO estudianteDTO){
         return estudiante.guardarFotoCarpetaOracle(estudianteDTO);
     }
     
-    public void guardarFotoEstudianteOracle(){
-  
+    public byte[] guardarFotoBaseOracle(EstudianteDTO estudianteDTO){
+        return estudiante.guardarFotoBaseOracle(estudianteDTO);
     }
 }

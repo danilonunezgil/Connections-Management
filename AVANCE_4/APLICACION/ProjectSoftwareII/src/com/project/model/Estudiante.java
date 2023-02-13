@@ -195,8 +195,12 @@ public class Estudiante {
         return EstudianteDAO.getInstance().buscarIdEstudianteOracle(idEstudiante);
     }
    
-    public String guardarFotoCarpetaOracle(EstudianteDTO estudianteDTO){
+    public byte[] guardarFotoCarpetaOracle(EstudianteDTO estudianteDTO){
         return EstudianteDAO.getInstance().guardarFotoCarpetaOracle(estudianteDTO);
+    }
+    
+    public byte[] guardarFotoBaseOracle(EstudianteDTO estudianteDTO){
+        return EstudianteDAO.getInstance().guardarFotoBaseOracle(estudianteDTO);
     }
     
     public String guardarFotoCarpetaPostgres(EstudianteDTO estudianteDTO){

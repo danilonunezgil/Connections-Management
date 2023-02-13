@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -355,39 +356,41 @@ public class EstudianteDAO {
      * Método encargado de de guardar la foto de un estudiante en oracle
      *
      * @author Edgar,Danilo y Johan
-     * @param idEstudiante Number con el identificador del estudiante al que se
-     * quiere cambiar la foto
-     * @param foto byte[] arreglo de bytes con la informacion de la foto
+     * @param estudiante Number con el identificador del estudiante al que se quiere cambiar la foto
      * @return Strgin con el mensaje de exito o error en el guardado
      */
-    public String guardarFotoEstudianteOracle(Number idEstudiante, byte[] foto) {
-        String mensaje = null;
-        FileInputStream fi = null;
+    public byte[] guardarFotoBaseOracle(Estudiante estudiante) {
+        byte[] img = null;
+        InputStream imagen = new ByteArrayInputStream(estudiante.getFoto());
         Connection connection = ConexionOracle.getInstance().conexion();
         try {
-            String consulta = "update estudiante set foto = ? where id = " + idEstudiante;
+            String consulta = "update estudiante set foto = ? where codigo = ?";
             PreparedStatement statement = connection.prepareStatement(consulta);
+            statement.setBinaryStream(1, imagen);
+            statement.setInt(2, estudiante.getCodigo());
             statement.executeUpdate();
             statement.close();
+            connection.commit();
+            img = estudiante.getFoto();
             System.out.println(connection);
         } catch (SQLException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
-        return mensaje;
+        return img;
     }
-
-    public String guardarFotoCarpetaOracle(Estudiante estudiante) {
-        String mensaje = null;
+    
+    public byte[] guardarFotoCarpetaOracle(Estudiante estudiante) {
         String ruta = "C:\\ProjectSoftware\\Fotos\\Estudiantes\\Oracle";
         int newW = 210;
         int newH = 210;
+        byte[] img = null;
         try {
             File directorio = new File(ruta);
             if (!directorio.exists()) {
                 if (directorio.mkdirs()) {
-                    mensaje = "Directorio creado";
+                    System.out.println("DIRECTORIO CREADO");
                 } else {
-                    mensaje = "Error al crear directorio";
+                    System.out.println("ERROR AL CREAR DIRECTORIO");
                 }
             }
             String tituloFoto = estudiante.getNombres() + estudiante.getApellido1() + estudiante.getCodigo();
@@ -401,11 +404,14 @@ public class EstudianteDAO {
             g.drawImage(image, 0, 0, newW, newH, 0, 0, w, h, null);
             g.dispose();
             ImageIO.write(foto, "jpg", new File(ruta + "\\" + tituloFoto + ".jpg"));
-            mensaje = "Foto almacenada";
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(foto, "jpg", baos);
+            img = baos.toByteArray();
+            System.out.println("FOTO ALMACENADA");
         } catch (IOException ex) {
-            mensaje = ex.getMessage();
+            System.out.println(ex.getMessage());
         }
-        return mensaje;
+        return img;
     }
     
     public String guardarFotoCarpetaPostgres(Estudiante estudiante) {
@@ -417,9 +423,9 @@ public class EstudianteDAO {
             File directorio = new File(ruta);
             if (!directorio.exists()) {
                 if (directorio.mkdirs()) {
-                    mensaje = "Directorio creado";
+                    mensaje = "DIRECTORIO CREADO";
                 } else {
-                    mensaje = "Error al crear directorio";
+                    mensaje = "ERROR AL CREAR DIRECTORIO";
                 }
             }
             String tituloFoto = estudiante.getNombres() + estudiante.getApellido1() + estudiante.getCodigo();
@@ -433,7 +439,7 @@ public class EstudianteDAO {
             g.drawImage(image, 0, 0, newW, newH, 0, 0, w, h, null);
             g.dispose();
             ImageIO.write(foto, "jpg", new File(ruta + "\\" + tituloFoto + ".jpg"));
-            mensaje = "Foto almacenada";
+            mensaje = "FOTO ALMACENADA";
         } catch (IOException ex) {
             mensaje = ex.getMessage();
         }
