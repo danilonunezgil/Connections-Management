@@ -277,4 +277,5 @@ public class Amigo {
     public String commitPostgres(){
         return AmigoDAO.getInstance().commitPostgres();
     }
+   
 }

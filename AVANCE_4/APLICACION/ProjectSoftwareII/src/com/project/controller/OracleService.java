@@ -4,6 +4,7 @@ import com.project.model.Amigo;
 import com.project.model.Elemento;
 import com.project.model.Estudiante;
 import com.project.dto.AmigoDTO;
+import com.project.dto.EstudianteDTO;
 import com.project.dto.InfoStudentDTO;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -174,5 +175,24 @@ public class OracleService {
     */
     public List<InfoStudentDTO> informacionEstudiantes(){
         return estudiante.informacionEstudiantesOracle();
+    }
+    
+    /**
+    * Método encargado ofrecer el servicio buscarIdEstudianteOracle de la clase Estudiante
+    * @author Edgar,Danilo y Johan
+    * @param idEstudiante Number con el identificador del estudiante que se quiere buscar
+    * @return Objeto de tipo EstudianteDTO con toda la informacion del mismo
+    */
+    public EstudianteDTO buscarIdEstudianteOracle(Number idEstudiante){
+        EstudianteDTO estudianteDTO = new EstudianteDTO(estudiante.buscarIdEstudianteOracle(idEstudiante));
+        return estudianteDTO;
+    }
+    
+    public String guardarFotoCarpetaOracle(EstudianteDTO estudianteDTO){
+        return estudiante.guardarFotoCarpetaOracle(estudianteDTO);
+    }
+    
+    public void guardarFotoEstudianteOracle(){
+  
     }
 }
