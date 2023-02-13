@@ -17,8 +17,9 @@ public class PostgresqlMenu {
         System.out.println("|-------------MENU POSTGRESQL-------------|");
         System.out.println("|1. CRUD Y TRANSACCIONES                  |");
         System.out.println("|2. FUNCIONES Y PROCEDIMIENTOS            |");
-        System.out.println("|3. REGRESAR                              |");
-        System.out.println("|4. CERRAR                                |");
+        System.out.println("|3. GESTIÓN DE ESTUDIANTES                |");
+        System.out.println("|4. REGRESAR                              |");
+        System.out.println("|5. CERRAR                                |");
         System.out.println("|-----------------------------------------|");
         System.out.print("INGRESE LA OPCION: ");
         int opc = leer.nextInt();
@@ -30,11 +31,14 @@ public class PostgresqlMenu {
                 menuFunProd();
                 break;
             case 3:
+                menuGestionEstu();
+                break;
+            case 4:
                 //String mensaje = controlador.desconectar();
                 //System.out.println(mensaje);
                 start.menuPrincipal();
                 break;
-            case 4:
+            case 5:
                 //String mensaje = PostgresqlService.getInstance().desconectar();
                 //System.out.println(mensaje);
                 System.out.println("|-----------------------------------------|");
@@ -47,7 +51,10 @@ public class PostgresqlMenu {
                 break;
         }
     }
-
+    
+    public void menuGestionEstu(){
+    }
+    
     public void menuFunProd() {
         System.out.println("|-----------------------------------------|");
         System.out.println("|-------FUNCIONES Y PROCEDIMIENTOS--------|");

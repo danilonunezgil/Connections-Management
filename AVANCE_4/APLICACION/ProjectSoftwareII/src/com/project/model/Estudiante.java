@@ -1,7 +1,9 @@
 package com.project.model;
 
 import com.project.dao.EstudianteDAO;
+import com.project.dto.EstudianteDTO;
 import com.project.dto.InfoStudentDTO;
+import java.io.File;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -192,4 +194,13 @@ public class Estudiante {
     public Estudiante buscarIdEstudianteOracle(Number idEstudiante){
         return EstudianteDAO.getInstance().buscarIdEstudianteOracle(idEstudiante);
     }
+   
+    public String guardarFotoCarpetaOracle(EstudianteDTO estudianteDTO){
+        return EstudianteDAO.getInstance().guardarFotoCarpetaOracle(estudianteDTO);
+    }
+    
+    public String guardarFotoCarpetaPostgres(EstudianteDTO estudianteDTO){
+       return EstudianteDAO.getInstance().guardarFotoCarpetaPostgres(estudianteDTO);
+    }
+  
 }

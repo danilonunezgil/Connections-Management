@@ -2,8 +2,18 @@ package com.project.dao;
 
 import com.project.database.ConexionOracle;
 import com.project.database.ConexionPostgresql;
+import com.project.dto.EstudianteDTO;
 import com.project.dto.InfoStudentDTO;
 import com.project.model.Estudiante;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -12,43 +22,55 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
-* Clase EstudianteDAO encargada de comunicarse con la base de datos
-* @author Edgar,Danilo y Johan
-*/
+ * Clase EstudianteDAO encargada de comunicarse con la base de datos
+ *
+ * @author Edgar,Danilo y Johan
+ */
 public class EstudianteDAO {
 
     private static EstudianteDAO estudianteDAO;
-    
+
     /**
-    * Constructor privado de EstudianteDAO
-    * @author Edgar,Danilo y Johan
-    */
+     * Constructor privado de EstudianteDAO
+     *
+     * @author Edgar,Danilo y Johan
+     */
     private EstudianteDAO() {
     }
-    
+
     /**
-    * Este método se encarga de crear e instanciar un unico objeto EstudianteDAO
-    * @author Edgar,Danilo y Johan
-    * @return Objeto de tipo EstudianteDAO
-    */
+     * Este método se encarga de crear e instanciar un unico objeto
+     * EstudianteDAO
+     *
+     * @author Edgar,Danilo y Johan
+     * @return Objeto de tipo EstudianteDAO
+     */
     public static EstudianteDAO getInstance() {
         if (estudianteDAO == null) {
             estudianteDAO = new EstudianteDAO();
         }
         return estudianteDAO;
     }
-    
+
     //SECCION POSTGRESQL
-    
     /**
-    * Método encargado de consultar el promedio de carrera de un estudiante de en postgresql
-    * @author Edgar,Danilo y Johan
-    * @param cod_est Integer con el indentificador del estudiante a consultar
-    * @return Niumber con el valor del promedio de carrera del estudiante consultado
-    */
+     * Método encargado de consultar el promedio de carrera de un estudiante de
+     * en postgresql
+     *
+     * @author Edgar,Danilo y Johan
+     * @param cod_est Integer con el indentificador del estudiante a consultar
+     * @return Niumber con el valor del promedio de carrera del estudiante
+     * consultado
+     */
     public Number promedioCarreraPostgres(Integer cod_est) {
 
         Number promedio = null;
@@ -72,14 +94,16 @@ public class EstudianteDAO {
         }
         return promedio;
     }
-    
+
     /**
-    * Método encargado de consultar la comparacion de dos numeros enteros en postgresql
-    * @author Edgar,Danilo y Johan
-    * @param num1 Integer con el valor del primer numero a comparar    
-    * @param num2 Integer con el valor del segundo numero a comparar
-    * @return String con la comparacion realizada
-    */
+     * Método encargado de consultar la comparacion de dos numeros enteros en
+     * postgresql
+     *
+     * @author Edgar,Danilo y Johan
+     * @param num1 Integer con el valor del primer numero a comparar
+     * @param num2 Integer con el valor del segundo numero a comparar
+     * @return String con la comparacion realizada
+     */
     public String compararNumerosPostgres(Integer num1, Integer num2) {
         String comparacion = null;
         Connection connection = ConexionPostgresql.getInstance().conexion();
@@ -103,12 +127,14 @@ public class EstudianteDAO {
         }
         return comparacion;
     }
-    
+
     /**
-    * Método encargado de consultar la informacion de los estudiantes almacenados en postgresql
-    * @author Edgar,Danilo y Johan
-    * @return Lista con objetos de tipo InfoStudentDTO
-    */
+     * Método encargado de consultar la informacion de los estudiantes
+     * almacenados en postgresql
+     *
+     * @author Edgar,Danilo y Johan
+     * @return Lista con objetos de tipo InfoStudentDTO
+     */
     public List<InfoStudentDTO> informacionEstudiantesPostgres() {
 
         ArrayList<InfoStudentDTO> listadoInfoEstudiantes = new ArrayList<>();
@@ -142,13 +168,15 @@ public class EstudianteDAO {
         }
         return listadoInfoEstudiantes;
     }
-    
+
     /**
-    * Método encargado de buscar un estudiante en postgresql
-    * @author Edgar,Danilo y Johan
-    * @param idEstudiante Number con el identificador del estudiante que se quiere buscar
-    * @return Objeto de tipo Estudiante con toda la informacion del mismo
-    */
+     * Método encargado de buscar un estudiante en postgresql
+     *
+     * @author Edgar,Danilo y Johan
+     * @param idEstudiante Number con el identificador del estudiante que se
+     * quiere buscar
+     * @return Objeto de tipo Estudiante con toda la informacion del mismo
+     */
     public Estudiante buscarIdEstudiantePostgres(Number idEstudiante) {
         Estudiante estudiante = new Estudiante();
         Connection connection = ConexionPostgresql.getInstance().conexion();
@@ -166,7 +194,7 @@ public class EstudianteDAO {
                 estudiante.setPrograma(resultado.getString(7));
                 estudiante.setFecha_inicio(resultado.getDate(8));
                 Blob blob = resultado.getBlob(9);
-                estudiante.setFoto(blob.getBytes(1, (int)blob.length()));
+                estudiante.setFoto(blob.getBytes(1, (int) blob.length()));
             }
             resultado.close();
             statement.close();
@@ -175,15 +203,17 @@ public class EstudianteDAO {
         }
         return estudiante;
     }
-    
+
     //SECCION ORACLE
-    
     /**
-    * Método encargado de consultar el promedio de carrera de un estudiante de en oracle
-    * @author Edgar,Danilo y Johan
-    * @param cod_est Integer con el indentificador del estudiante a consultar
-    * @return Niumber con el valor del promedio de carrera del estudiante consultado
-    */
+     * Método encargado de consultar el promedio de carrera de un estudiante de
+     * en oracle
+     *
+     * @author Edgar,Danilo y Johan
+     * @param cod_est Integer con el indentificador del estudiante a consultar
+     * @return Niumber con el valor del promedio de carrera del estudiante
+     * consultado
+     */
     public Number promedioCarreraOracle(Integer cod_est) {
 
         Number promedio = null;
@@ -207,14 +237,16 @@ public class EstudianteDAO {
         }
         return promedio;
     }
-    
+
     /**
-    * Método encargado de consultar la comparacion de dos numeros enteros en oracle
-    * @author Edgar,Danilo y Johan
-    * @param num1 Integer con el valor del primer numero a comparar    
-    * @param num2 Integer con el valor del segundo numero a comparar
-    * @return String con la comparacion realizada
-    */
+     * Método encargado de consultar la comparacion de dos numeros enteros en
+     * oracle
+     *
+     * @author Edgar,Danilo y Johan
+     * @param num1 Integer con el valor del primer numero a comparar
+     * @param num2 Integer con el valor del segundo numero a comparar
+     * @return String con la comparacion realizada
+     */
     public String compararNumerosOracle(Integer num1, Integer num2) {
         String comparacion = null;
         Connection connection = ConexionOracle.getInstance().conexion();
@@ -238,12 +270,14 @@ public class EstudianteDAO {
         }
         return comparacion;
     }
-    
+
     /**
-    * Método encargado de consultar la informacion de los estudiantes almacenados en oracle
-    * @author Edgar,Danilo y Johan
-    * @return Lista con objetos de tipo InfoStudentDTO
-    */
+     * Método encargado de consultar la informacion de los estudiantes
+     * almacenados en oracle
+     *
+     * @author Edgar,Danilo y Johan
+     * @return Lista con objetos de tipo InfoStudentDTO
+     */
     public List<InfoStudentDTO> informacionEstudiantesOracle() {
 
         ArrayList<InfoStudentDTO> listadoInfoEstudiantes = new ArrayList<>();
@@ -277,18 +311,20 @@ public class EstudianteDAO {
         }
         return listadoInfoEstudiantes;
     }
-    
+
     /**
-    * Método encargado de buscar un estudiante en oracle
-    * @author Edgar,Danilo y Johan
-    * @param idEstudiante Number con el identificador del estudiante que se quiere buscar
-    * @return Objeto de tipo Estudiante con toda la informacion del mismo
-    */
+     * Método encargado de buscar un estudiante en oracle
+     *
+     * @author Edgar,Danilo y Johan
+     * @param idEstudiante Number con el identificador del estudiante que se
+     * quiere buscar
+     * @return Objeto de tipo Estudiante con toda la informacion del mismo
+     */
     public Estudiante buscarIdEstudianteOracle(Number idEstudiante) {
         Estudiante estudiante = new Estudiante();
         Connection connection = ConexionOracle.getInstance().conexion();
         try {
-            String consulta = "select * from estudiante where id = " + idEstudiante;
+            String consulta = "select * from estudiante where codigo = " + idEstudiante;
             PreparedStatement statement = connection.prepareStatement(consulta);
             ResultSet resultado = statement.executeQuery();
             if (resultado.next()) {
@@ -301,7 +337,11 @@ public class EstudianteDAO {
                 estudiante.setPrograma(resultado.getString(7));
                 estudiante.setFecha_inicio(resultado.getDate(8));
                 Blob blob = resultado.getBlob(9);
-                estudiante.setFoto(blob.getBytes(1, (int)blob.length()));
+                if (blob != null) {
+                    estudiante.setFoto(blob.getBytes(1, (int) blob.length()));
+                } else {
+                    estudiante.setFoto(null);
+                }
             }
             resultado.close();
             statement.close();
@@ -309,5 +349,94 @@ public class EstudianteDAO {
             e.getMessage();
         }
         return estudiante;
+    }
+
+    /**
+     * Método encargado de de guardar la foto de un estudiante en oracle
+     *
+     * @author Edgar,Danilo y Johan
+     * @param idEstudiante Number con el identificador del estudiante al que se
+     * quiere cambiar la foto
+     * @param foto byte[] arreglo de bytes con la informacion de la foto
+     * @return Strgin con el mensaje de exito o error en el guardado
+     */
+    public String guardarFotoEstudianteOracle(Number idEstudiante, byte[] foto) {
+        String mensaje = null;
+        FileInputStream fi = null;
+        Connection connection = ConexionOracle.getInstance().conexion();
+        try {
+            String consulta = "update estudiante set foto = ? where id = " + idEstudiante;
+            PreparedStatement statement = connection.prepareStatement(consulta);
+            statement.executeUpdate();
+            statement.close();
+            System.out.println(connection);
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return mensaje;
+    }
+
+    public String guardarFotoCarpetaOracle(Estudiante estudiante) {
+        String mensaje = null;
+        String ruta = "C:\\ProjectSoftware\\Fotos\\Estudiantes\\Oracle";
+        int newW = 210;
+        int newH = 210;
+        try {
+            File directorio = new File(ruta);
+            if (!directorio.exists()) {
+                if (directorio.mkdirs()) {
+                    mensaje = "Directorio creado";
+                } else {
+                    mensaje = "Error al crear directorio";
+                }
+            }
+            String tituloFoto = estudiante.getNombres() + estudiante.getApellido1() + estudiante.getCodigo();
+            InputStream in = new ByteArrayInputStream(estudiante.getFoto());
+            BufferedImage image = ImageIO.read(in);
+            int w = image.getWidth();
+            int h = image.getHeight();
+            BufferedImage foto = new BufferedImage(newW, newH, image.getType());
+            Graphics2D g = foto.createGraphics();
+            g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g.drawImage(image, 0, 0, newW, newH, 0, 0, w, h, null);
+            g.dispose();
+            ImageIO.write(foto, "jpg", new File(ruta + "\\" + tituloFoto + ".jpg"));
+            mensaje = "Foto almacenada";
+        } catch (IOException ex) {
+            mensaje = ex.getMessage();
+        }
+        return mensaje;
+    }
+    
+    public String guardarFotoCarpetaPostgres(Estudiante estudiante) {
+        String mensaje = null;
+        String ruta = "C:\\ProjectSoftware\\Fotos\\Estudiantes\\Postgres";
+        int newW = 210;
+        int newH = 210;
+        try {
+            File directorio = new File(ruta);
+            if (!directorio.exists()) {
+                if (directorio.mkdirs()) {
+                    mensaje = "Directorio creado";
+                } else {
+                    mensaje = "Error al crear directorio";
+                }
+            }
+            String tituloFoto = estudiante.getNombres() + estudiante.getApellido1() + estudiante.getCodigo();
+            InputStream in = new ByteArrayInputStream(estudiante.getFoto());
+            BufferedImage image = ImageIO.read(in);
+            int w = image.getWidth();
+            int h = image.getHeight();
+            BufferedImage foto = new BufferedImage(newW, newH, image.getType());
+            Graphics2D g = foto.createGraphics();
+            g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g.drawImage(image, 0, 0, newW, newH, 0, 0, w, h, null);
+            g.dispose();
+            ImageIO.write(foto, "jpg", new File(ruta + "\\" + tituloFoto + ".jpg"));
+            mensaje = "Foto almacenada";
+        } catch (IOException ex) {
+            mensaje = ex.getMessage();
+        }
+        return mensaje;
     }
 }
