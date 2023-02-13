@@ -4,7 +4,6 @@ import com.project.controller.OracleService;
 import com.project.dto.AmigoDTO;
 import com.project.dto.EstudianteDTO;
 import com.project.dto.InfoStudentDTO;
-import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -18,8 +17,7 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class OracleMenu {
 
@@ -85,40 +83,37 @@ public class OracleMenu {
                     } catch (IOException ex) {
                         System.out.println(ex.getMessage());
                     }
-                    ImageIcon imageIcon = new ImageIcon(img);
-                    JFrame jFrame = new JFrame();
-                    jFrame.setLayout(new FlowLayout());
-                    jFrame.setSize(500, 500);
-                    JLabel jLabel = new JLabel();
-                    jLabel.setIcon(imageIcon);
-                    jFrame.add(jLabel);
-                    jFrame.setVisible(true);
-                    jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    ImageIcon icono = new ImageIcon(img);
+                    System.out.println("VISUALIZANDO FOTO");
+                    JOptionPane.showMessageDialog(null, null, "FOTO", JOptionPane.INFORMATION_MESSAGE, icono);
                     menuFoto(estudianteDTO);
-                }else{
+                } else {
                     System.out.println("EL ESTUDIANTE NO TIENE FOTO");
                     menuFoto(estudianteDTO);
                 }
                 break;
             case 2:
+                System.out.println("SELECCIONE LA IMAGEN");
                 String ruta = null;
                 JFileChooser j = new JFileChooser();
                 int ap = j.showOpenDialog(j);
-                if(ap == JFileChooser.APPROVE_OPTION){
-                    ruta = j.getSelectedFile().getAbsolutePath(); 
+                if (ap == JFileChooser.APPROVE_OPTION) {
+                    ruta = j.getSelectedFile().getAbsolutePath();
+                    File archivo = new File(ruta);
+                    estudianteDTO.setFoto(new byte[(int) archivo.length()]);
+                    try {
+                        InputStream inte = new FileInputStream(archivo);
+                        inte.read(estudianteDTO.getFoto());
+                    } catch (IOException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    estudianteDTO.setFoto(OracleService.getInstance().guardarFotoCarpetaOracle(estudianteDTO));
+                    estudianteDTO.setFoto(OracleService.getInstance().guardarFotoBaseOracle(estudianteDTO));
+                    menuFoto(estudianteDTO);
+                }else{
+                    System.out.println("OPERACION CANCELADA");
+                    menuFoto(estudianteDTO);
                 }
-                File archivo = new File(ruta);
-                estudianteDTO.setFoto(new byte[(int)archivo.length()]);
-                try{
-                InputStream inte = new FileInputStream(archivo);
-                inte.read(estudianteDTO.getFoto());
-                }catch(IOException ex){
-                    System.out.println(ex.getMessage());
-                }
-                String mensaje = OracleService.getInstance().guardarFotoCarpetaOracle(estudianteDTO);
-                System.out.println(mensaje);
-                
-                menuFoto(estudianteDTO);
                 break;
             case 3:
                 menuGestionEstu();
@@ -161,7 +156,7 @@ public class OracleMenu {
                 System.out.println("FALCUTAD: " + estudianteDTO.getFacultad());
                 System.out.println("PROGRAMA: " + estudianteDTO.getPrograma());
                 System.out.println("FECHA INICIO: " + estudianteDTO.getFecha_inicio());
-                System.out.println("FOTO: " + Arrays.toString(estudianteDTO.getFoto()));
+                System.out.println("FOTO: " + estudianteDTO.getFoto());
                 menuFoto(estudianteDTO);
                 break;
             case 2:
