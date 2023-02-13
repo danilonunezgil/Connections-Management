@@ -1,11 +1,23 @@
 package com.project.view.console;
 
+import com.project.controller.OracleService;
 import com.project.controller.PostgresqlService;
 import com.project.dto.AmigoDTO;
+import com.project.dto.EstudianteDTO;
 import com.project.dto.InfoStudentDTO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 public class PostgresqlMenu {
 
@@ -17,7 +29,7 @@ public class PostgresqlMenu {
         System.out.println("|-------------MENU POSTGRESQL-------------|");
         System.out.println("|1. CRUD Y TRANSACCIONES                  |");
         System.out.println("|2. FUNCIONES Y PROCEDIMIENTOS            |");
-        System.out.println("|3. GESTIÓN DE ESTUDIANTES                |");
+        System.out.println("|3. GESTION DE ESTUDIANTES                |");
         System.out.println("|4. REGRESAR                              |");
         System.out.println("|5. CERRAR                                |");
         System.out.println("|-----------------------------------------|");
@@ -52,7 +64,116 @@ public class PostgresqlMenu {
         }
     }
     
+    public void menuFoto(EstudianteDTO estudianteDTO) {
+        System.out.println("|-----------------------------------------|");
+        System.out.println("|---------------MENU DE FOTO--------------|");
+        System.out.println("|1. VER FOTO                              |");
+        System.out.println("|2. CAMBIAR FOTO                          |");
+        System.out.println("|3. REGRESAR                              |");
+        System.out.println("|4. CERRAR                                |");
+        System.out.println("|-----------------------------------------|");
+        System.out.print("INGRESE LA OPCION: ");
+        int opc = leer.nextInt();
+        switch (opc) {
+            case 1:
+                if (estudianteDTO.getFoto() != null) {
+                    BufferedImage img = null;
+                    try {
+                        img = ImageIO.read(new ByteArrayInputStream(estudianteDTO.getFoto()));
+                    } catch (IOException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    ImageIcon icono = new ImageIcon(img);
+                    System.out.println("VISUALIZANDO FOTO");
+                    JOptionPane.showMessageDialog(null, null, "FOTO", JOptionPane.INFORMATION_MESSAGE, icono);
+                    menuFoto(estudianteDTO);
+                } else {
+                    System.out.println("EL ESTUDIANTE NO TIENE FOTO");
+                    menuFoto(estudianteDTO);
+                }
+                break;
+            case 2:
+                System.out.println("SELECCIONE LA IMAGEN");
+                String ruta = null;
+                JFileChooser j = new JFileChooser();
+                int ap = j.showOpenDialog(j);
+                if (ap == JFileChooser.APPROVE_OPTION) {
+                    ruta = j.getSelectedFile().getAbsolutePath();
+                    File archivo = new File(ruta);
+                    estudianteDTO.setFoto(new byte[(int) archivo.length()]);
+                    try {
+                        InputStream inte = new FileInputStream(archivo);
+                        inte.read(estudianteDTO.getFoto());
+                    } catch (IOException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    estudianteDTO.setFoto(PostgresqlService.getInstance().guardarFotoCarpetaPostgres(estudianteDTO));
+                    estudianteDTO.setFoto(PostgresqlService.getInstance().guardarFotoBasePostgres(estudianteDTO));
+                    menuFoto(estudianteDTO);
+                }else{
+                    System.out.println("OPERACION CANCELADA");
+                    menuFoto(estudianteDTO);
+                }
+                break;
+            case 3:
+                menuGestionEstu();
+                break;
+            case 4:
+                //String mensaje = OracleService.getInstance().desconectar();
+                //System.out.println(mensaje);
+                System.out.println("|-----------------------------------------|");
+                System.out.println("|-----------PROGRAMA FINALIZADO-----------|");
+                System.out.println("|-----------------------------------------|");
+                break;
+            default:
+                System.out.println("DIGITE UNA OPCION VALIDA");
+                menuFoto(estudianteDTO);
+                break;
+        }
+    }
+    
     public void menuGestionEstu(){
+        System.out.println("|-----------------------------------------|");
+        System.out.println("|---------GESTION DE ESTUDIANTES----------|");
+        System.out.println("|1. CONSULTAR ESTUDIANTE                  |");
+        System.out.println("|2. REGRESAR                              |");
+        System.out.println("|3. CERRAR                                |");
+        System.out.println("|-----------------------------------------|");
+        System.out.print("INGRESE LA OPCION: ");
+        int opc = leer.nextInt();
+        switch (opc) {
+            case 1:
+                System.out.print("INGRESE EL CODIGO DEL ESTUDIANTE: ");
+                int cod_est = leer.nextInt();
+                EstudianteDTO estudianteDTO = PostgresqlService.getInstance().buscarIdEstudiantePostgres(cod_est);
+                System.out.println(estudianteDTO.toString());
+                System.out.println("|-----------------------------------------|");
+                System.out.println("|---------INFORMACION ESTUDIANTE----------|");
+                System.out.println("NOMBRES: " + estudianteDTO.getNombres());
+                System.out.println("PRIMER APELLIDO: " + estudianteDTO.getApellido1());
+                System.out.println("SEGUNDO APELLIDO: " + estudianteDTO.getApellido2());
+                System.out.println("TELEFONO: " + estudianteDTO.getTelefono());
+                System.out.println("FALCUTAD: " + estudianteDTO.getFacultad());
+                System.out.println("PROGRAMA: " + estudianteDTO.getPrograma());
+                System.out.println("FECHA INICIO: " + estudianteDTO.getFecha_inicio());
+                System.out.println("FOTO: " + estudianteDTO.getFoto());
+                menuFoto(estudianteDTO);
+                break;
+            case 2:
+                menu();
+                break;
+            case 3:
+                //String mensaje = OracleService.getInstance().desconectar();
+                //System.out.println(mensaje);
+                System.out.println("|-----------------------------------------|");
+                System.out.println("|-----------PROGRAMA FINALIZADO-----------|");
+                System.out.println("|-----------------------------------------|");
+                break;
+            default:
+                System.out.println("DIGITE UNA OPCION VALIDA");
+                menuGestionEstu();
+                break;
+        }
     }
     
     public void menuFunProd() {

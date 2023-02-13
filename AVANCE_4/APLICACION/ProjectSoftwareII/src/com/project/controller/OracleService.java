@@ -188,10 +188,22 @@ public class OracleService {
         return estudianteDTO;
     }
     
+    /**
+    * Método encargado ofrecer el servicio guardarFotoCarpetaOracle de la clase Estudiante
+    * @author Edgar,Danilo y Johan
+    * @param estudianteDTO Objeto de tipo estudiante con la informacion del codigo del estudiante y la foto a guardar
+    * @return Arreglo de bytes con toda la informacion de la foto guardada en la carpeta
+    */
     public byte[] guardarFotoCarpetaOracle(EstudianteDTO estudianteDTO){
         return estudiante.guardarFotoCarpetaOracle(estudianteDTO);
     }
     
+    /**
+    * Método encargado ofrecer el servicio guardarFotoBaseOracle de la clase Estudiante
+    * @author Edgar,Danilo y Johan
+    * @param estudianteDTO Objeto de tipo estudiante con la informacion del codigo del estudiante y la foto a guardar
+    * @return Arreglo de bytes con toda la informacion de la foto guardada en la carpeta
+    */
     public byte[] guardarFotoBaseOracle(EstudianteDTO estudianteDTO){
         return estudiante.guardarFotoBaseOracle(estudianteDTO);
     }
