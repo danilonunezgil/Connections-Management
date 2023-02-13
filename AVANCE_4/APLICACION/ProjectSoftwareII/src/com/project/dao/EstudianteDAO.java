@@ -182,7 +182,7 @@ public class EstudianteDAO {
         Estudiante estudiante = new Estudiante();
         Connection connection = ConexionPostgresql.getInstance().conexion();
         try {
-            String consulta = "select * from estudiante where id = " + idEstudiante;
+            String consulta = "select * from estudiante where codigo = " + idEstudiante;
             PreparedStatement statement = connection.prepareStatement(consulta);
             ResultSet resultado = statement.executeQuery();
             if (resultado.next()) {
@@ -194,8 +194,12 @@ public class EstudianteDAO {
                 estudiante.setFacultad(resultado.getString(6));
                 estudiante.setPrograma(resultado.getString(7));
                 estudiante.setFecha_inicio(resultado.getDate(8));
-                Blob blob = resultado.getBlob(9);
-                estudiante.setFoto(blob.getBytes(1, (int) blob.length()));
+                byte[] blob = resultado.getBytes(9);
+                if (blob != null) {
+                    estudiante.setFoto(blob);
+                } else {
+                    estudiante.setFoto(null);
+                }
             }
             resultado.close();
             statement.close();
@@ -353,12 +357,12 @@ public class EstudianteDAO {
     }
 
     /**
-     * Método encargado de de guardar la foto de un estudiante en oracle
-     *
-     * @author Edgar,Danilo y Johan
-     * @param estudiante Number con el identificador del estudiante al que se quiere cambiar la foto
-     * @return Strgin con el mensaje de exito o error en el guardado
-     */
+    * Método encargado de guardar la foto de un estudiante en oracle
+    * @author Edgar,Danilo y Johan
+    * @param estudiante Number con el identificador del estudiante al que se
+    * quiere cambiar la foto
+    * @return byte[] arreglo de bytes con la informacion de la foto guardada
+    */
     public byte[] guardarFotoBaseOracle(Estudiante estudiante) {
         byte[] img = null;
         InputStream imagen = new ByteArrayInputStream(estudiante.getFoto());
@@ -379,6 +383,13 @@ public class EstudianteDAO {
         return img;
     }
     
+    /**
+    * Método encargado de guardar la foto de un estudiante en la carpeta de oracle
+    * @author Edgar,Danilo y Johan
+    * @param estudiante Number con el identificador del estudiante al que se
+    * quiere cambiar la foto
+    * @return byte[] arreglo de bytes con la informacion de la foto guardada
+    */
     public byte[] guardarFotoCarpetaOracle(Estudiante estudiante) {
         String ruta = "C:\\ProjectSoftware\\Fotos\\Estudiantes\\Oracle";
         int newW = 210;
@@ -413,19 +424,53 @@ public class EstudianteDAO {
         }
         return img;
     }
+
+    /**
+    * Método encargado de guardar la foto de un estudiante en postgresql
+    * @author Edgar,Danilo y Johan
+    * @param estudiante Number con el identificador del estudiante al que se
+    * quiere cambiar la foto
+    * @return byte[] arreglo de bytes con la informacion de la foto guardada
+    */
+    public byte[] guardarFotoBasePostgres(Estudiante estudiante) {
+        byte[] img = null;
+        InputStream imagen = new ByteArrayInputStream(estudiante.getFoto());
+        Connection connection = ConexionPostgresql.getInstance().conexion();
+        try {
+            String consulta = "update estudiante set foto = ? where codigo = ?";
+            PreparedStatement statement = connection.prepareStatement(consulta);
+            statement.setBinaryStream(1, imagen);
+            statement.setInt(2, estudiante.getCodigo());
+            statement.executeUpdate();
+            statement.close();
+            connection.commit();
+            img = estudiante.getFoto();
+            System.out.println(connection);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return img;
+    }
     
-    public String guardarFotoCarpetaPostgres(Estudiante estudiante) {
-        String mensaje = null;
+    /**
+    * Método encargado de guardar la foto de un estudiante en la carpeta de postgres
+    * @author Edgar,Danilo y Johan
+    * @param estudiante Number con el identificador del estudiante al que se
+    * quiere cambiar la foto
+    * @return byte[] arreglo de bytes con la informacion de la foto guardada
+    */
+    public byte[] guardarFotoCarpetaPostgres(Estudiante estudiante) {
         String ruta = "C:\\ProjectSoftware\\Fotos\\Estudiantes\\Postgres";
         int newW = 210;
         int newH = 210;
+        byte[] img = null;
         try {
             File directorio = new File(ruta);
             if (!directorio.exists()) {
                 if (directorio.mkdirs()) {
-                    mensaje = "DIRECTORIO CREADO";
+                    System.out.println("DIRECTORIO CREADO");
                 } else {
-                    mensaje = "ERROR AL CREAR DIRECTORIO";
+                    System.out.println("ERROR AL CREAR DIRECTORIO");
                 }
             }
             String tituloFoto = estudiante.getNombres() + estudiante.getApellido1() + estudiante.getCodigo();
@@ -439,10 +484,13 @@ public class EstudianteDAO {
             g.drawImage(image, 0, 0, newW, newH, 0, 0, w, h, null);
             g.dispose();
             ImageIO.write(foto, "jpg", new File(ruta + "\\" + tituloFoto + ".jpg"));
-            mensaje = "FOTO ALMACENADA";
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(foto, "jpg", baos);
+            img = baos.toByteArray();
+            System.out.println("FOTO ALMACENADA");
         } catch (IOException ex) {
-            mensaje = ex.getMessage();
+            System.out.println(ex.getMessage());
         }
-        return mensaje;
+        return img;
     }
 }

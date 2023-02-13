@@ -4,6 +4,7 @@ import com.project.model.Amigo;
 import com.project.model.Elemento;
 import com.project.model.Estudiante;
 import com.project.dto.AmigoDTO;
+import com.project.dto.EstudianteDTO;
 import com.project.dto.InfoStudentDTO;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -172,5 +173,36 @@ public class PostgresqlService {
     */
     public List<InfoStudentDTO> informacionEstudiantes() {
         return estudiante.informacionEstudiantesPostgres();
+    }
+    
+    /**
+    * Método encargado ofrecer el servicio buscarIdEstudiantePostgres de la clase Estudiante
+    * @author Edgar,Danilo y Johan
+    * @param idEstudiante Number con el identificador del estudiante que se quiere buscar
+    * @return Objeto de tipo EstudianteDTO con toda la informacion del mismo
+    */
+    public EstudianteDTO buscarIdEstudiantePostgres(Number idEstudiante){
+        EstudianteDTO estudianteDTO = new EstudianteDTO(estudiante.buscarIdEstudiantePostgres(idEstudiante));
+        return estudianteDTO;
+    }
+    
+    /**
+    * Método encargado ofrecer el servicio guardarFotoCarpetaPostgres de la clase Estudiante
+    * @author Edgar,Danilo y Johan
+    * @param estudianteDTO Objeto de tipo estudiante con la informacion del codigo del estudiante y la foto a guardar
+    * @return Arreglo de bytes con toda la informacion de la foto guardada en la carpeta
+    */
+    public byte[] guardarFotoCarpetaPostgres(EstudianteDTO estudianteDTO){
+        return estudiante.guardarFotoCarpetaPostgres(estudianteDTO);
+    }
+    
+    /**
+    * Método encargado ofrecer el servicio guardarFotoBasePostgres de la clase Estudiante
+    * @author Edgar,Danilo y Johan
+    * @param estudianteDTO Objeto de tipo estudiante con la informacion del codigo del estudiante y la foto a guardar
+    * @return Arreglo de bytes con toda la informacion de la foto guardada en la carpeta
+    */
+    public byte[] guardarFotoBasePostgres(EstudianteDTO estudianteDTO){
+        return estudiante.guardarFotoBasePostgres(estudianteDTO);
     }
 }

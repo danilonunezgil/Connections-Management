@@ -195,16 +195,43 @@ public class Estudiante {
         return EstudianteDAO.getInstance().buscarIdEstudianteOracle(idEstudiante);
     }
    
+    /**
+    * Método encargado de guardar la foto del estudiante en una ruta determinada para oracle
+    * @author Edgar,Danilo y Johan
+    * @param estudianteDTO Objeto de tipo estudiante con la informacion del codigo del estudiante y la foto a guardar
+    * @return Arreglo de bytes con toda la informacion de la foto guardada en la carpeta
+    */
     public byte[] guardarFotoCarpetaOracle(EstudianteDTO estudianteDTO){
         return EstudianteDAO.getInstance().guardarFotoCarpetaOracle(estudianteDTO);
     }
     
+    /**
+    * Método encargado de guardar la foto del estudiante en la base de datos oracle
+    * @author Edgar,Danilo y Johan
+    * @param estudianteDTO Objeto de tipo estudiante con la informacion del codigo del estudiante y la foto a guardar
+    * @return Arreglo de bytes con toda la informacion de la foto guardada en la base de datos
+    */
     public byte[] guardarFotoBaseOracle(EstudianteDTO estudianteDTO){
         return EstudianteDAO.getInstance().guardarFotoBaseOracle(estudianteDTO);
     }
     
-    public String guardarFotoCarpetaPostgres(EstudianteDTO estudianteDTO){
+    /**
+    * Método encargado de guardar la foto del estudiante en una rutra determinada para postgres
+    * @author Edgar,Danilo y Johan
+    * @param estudianteDTO Objeto de tipo estudiante con la informacion del codigo del estudiante y la foto a guardar
+    * @return Arreglo de bytes con toda la informacion de la foto guardada en la base de datos
+    */
+    public byte[] guardarFotoCarpetaPostgres(EstudianteDTO estudianteDTO){
        return EstudianteDAO.getInstance().guardarFotoCarpetaPostgres(estudianteDTO);
     }
-  
+    
+    /**
+    * Método encargado de guardar la foto del estudiante en la base de datos postgres
+    * @author Edgar,Danilo y Johan
+    * @param estudianteDTO Objeto de tipo estudiante con la informacion del codigo del estudiante y la foto a guardar
+    * @return Arreglo de bytes con toda la informacion de la foto guardada en la base de datos
+    */
+    public byte[] guardarFotoBasePostgres(EstudianteDTO estudianteDTO){
+        return EstudianteDAO.getInstance().guardarFotoBasePostgres(estudianteDTO);
+    }
 }
