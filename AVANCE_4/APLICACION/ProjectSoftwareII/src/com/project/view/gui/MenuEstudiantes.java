@@ -1,4 +1,9 @@
 package com.project.view.gui;
+import com.project.controller.OracleService;
+import com.project.controller.PostgresqlService;
+import com.project.dto.EstudianteDTO;
+
+import javax.swing.SpinnerNumberModel;
 
 public class MenuEstudiantes extends javax.swing.JPanel {
 
@@ -8,6 +13,15 @@ public class MenuEstudiantes extends javax.swing.JPanel {
     public MenuEstudiantes(String conectadoA) {
         initComponents();
         conectado_a.setText(conectadoA);
+        configurarSpinner();
+
+    }
+
+    public void configurarSpinner() {
+        SpinnerNumberModel nm = new SpinnerNumberModel();
+        nm.setMinimum(1);
+        campo_codigo.setModel(nm);
+        campo_codigo.setValue(1);
     }
 
     /**
@@ -59,6 +73,11 @@ public class MenuEstudiantes extends javax.swing.JPanel {
         add(label_instruccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, -1));
 
         boton_cargar.setText("CARGAR");
+        boton_cargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_cargarActionPerformed(evt);
+            }
+        });
         add(boton_cargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, -1, -1));
 
         foto_estudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/project/view/gui/images/user.jpeg"))); // NOI18N
@@ -66,13 +85,11 @@ public class MenuEstudiantes extends javax.swing.JPanel {
 
         segundoApellido.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         segundoApellido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        segundoApellido.setText("SEGUNDO APELLIDO");
-        add(segundoApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 560, 200, -1));
+        add(segundoApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 560, 200, -1));
 
         primerApellido.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         primerApellido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        primerApellido.setText("PRIMER APELLIDO");
-        add(primerApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 530, 200, -1));
+        add(primerApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 530, 200, -1));
 
         label_codigo.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         label_codigo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -101,32 +118,26 @@ public class MenuEstudiantes extends javax.swing.JPanel {
 
         nombres.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         nombres.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        nombres.setText("NOMBRES");
-        add(nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, 130, -1));
+        add(nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, 130, -1));
 
         codigo.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         codigo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        codigo.setText("CÓDIGO");
         add(codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 130, -1));
 
         programa.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         programa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        programa.setText("label_programa");
         add(programa, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, 130, -1));
 
         telefono.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         telefono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        telefono.setText("label_telefono");
         add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 130, -1));
 
         fecha_inicio.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         fecha_inicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        fecha_inicio.setText("label_inicio");
         add(fecha_inicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 130, -1));
 
         facultad.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         facultad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        facultad.setText("label_facultad");
         add(facultad, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 130, -1));
         add(campo_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 120, -1));
 
@@ -142,6 +153,26 @@ public class MenuEstudiantes extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void boton_cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_cargarActionPerformed
+
+        if ("Oracle".equals(conectado_a.getText())) {
+            EstudianteDTO est = OracleService.getInstance().buscarIdEstudianteOracle((Number) campo_codigo.getValue());
+            
+            codigo.setText(est.getCodigo().toString());
+            nombres.setText(est.getNombres().toUpperCase());
+            primerApellido.setText(est.getApellido1().toUpperCase());
+            segundoApellido.setText(est.getApellido2().toUpperCase());
+            telefono.setText(est.getTelefono());
+            facultad.setText(est.getFacultad());
+            programa.setText(est.getPrograma());
+            fecha_inicio.setText(est.getFecha_inicio().toString());
+            //foto.setText(est.getFecha_inicio());
+            
+        } else if("PostgreSQL".equals(conectado_a.getText())){
+            
+        }
+    }//GEN-LAST:event_boton_cargarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
