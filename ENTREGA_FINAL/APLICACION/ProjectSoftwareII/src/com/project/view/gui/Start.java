@@ -2,6 +2,7 @@ package com.project.view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -13,11 +14,11 @@ public class Start extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("PROYECTO PROFUNDIZACIÓN SOFTWARE II");
-
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("images/virtual.png")));
         pintarLogo("/com/project/view/gui/images/java-oracle-logo.png", 155, 156, logo_java);
         pintarLogo("/com/project/view/gui/images/unillanos-logo.png", 270, 90, logo_u);
         pintarLogo("/com/project/view/gui/images/software_logo.png", 400, 400, logo_software);
-
+        
     }
 
     public void pintarLogo(String ruta, int ancho, int altura, JLabel etiqueta) {
