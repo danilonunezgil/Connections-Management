@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -110,7 +109,7 @@ public class OracleMenu {
                     estudianteDTO.setFoto(OracleService.getInstance().guardarFotoCarpetaOracle(estudianteDTO));
                     estudianteDTO.setFoto(OracleService.getInstance().guardarFotoBaseOracle(estudianteDTO));
                     menuFoto(estudianteDTO);
-                }else{
+                } else {
                     System.out.println("OPERACION CANCELADA");
                     menuFoto(estudianteDTO);
                 }
@@ -146,18 +145,24 @@ public class OracleMenu {
                 System.out.print("INGRESE EL CODIGO DEL ESTUDIANTE: ");
                 int cod_est = leer.nextInt();
                 EstudianteDTO estudianteDTO = OracleService.getInstance().buscarIdEstudianteOracle(cod_est);
-                System.out.println(estudianteDTO.toString());
-                System.out.println("|-----------------------------------------|");
-                System.out.println("|---------INFORMACION ESTUDIANTE----------|");
-                System.out.println("NOMBRES: " + estudianteDTO.getNombres());
-                System.out.println("PRIMER APELLIDO: " + estudianteDTO.getApellido1());
-                System.out.println("SEGUNDO APELLIDO: " + estudianteDTO.getApellido2());
-                System.out.println("TELEFONO: " + estudianteDTO.getTelefono());
-                System.out.println("FALCUTAD: " + estudianteDTO.getFacultad());
-                System.out.println("PROGRAMA: " + estudianteDTO.getPrograma());
-                System.out.println("FECHA INICIO: " + estudianteDTO.getFecha_inicio());
-                System.out.println("FOTO: " + estudianteDTO.getFoto());
-                menuFoto(estudianteDTO);
+                Number codigo = cod_est;
+                if (codigo.equals(estudianteDTO.getCodigo())) {
+                    System.out.println(estudianteDTO.toString());
+                    System.out.println("|-----------------------------------------|");
+                    System.out.println("|---------INFORMACION ESTUDIANTE----------|");
+                    System.out.println("NOMBRES: " + estudianteDTO.getNombres());
+                    System.out.println("PRIMER APELLIDO: " + estudianteDTO.getApellido1());
+                    System.out.println("SEGUNDO APELLIDO: " + estudianteDTO.getApellido2());
+                    System.out.println("TELEFONO: " + estudianteDTO.getTelefono());
+                    System.out.println("FALCUTAD: " + estudianteDTO.getFacultad());
+                    System.out.println("PROGRAMA: " + estudianteDTO.getPrograma());
+                    System.out.println("FECHA INICIO: " + estudianteDTO.getFecha_inicio());
+                    System.out.println("FOTO: " + estudianteDTO.getFoto());
+                    menuFoto(estudianteDTO);
+                } else {
+                    System.out.println("NO HAY UN AMIGO CON ESE ID");
+                    menuGestionEstu();
+                }
                 break;
             case 2:
                 menu();

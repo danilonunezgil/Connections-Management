@@ -63,7 +63,7 @@ public class PostgresqlMenu {
                 break;
         }
     }
-    
+
     public void menuFoto(EstudianteDTO estudianteDTO) {
         System.out.println("|-----------------------------------------|");
         System.out.println("|---------------MENU DE FOTO--------------|");
@@ -110,7 +110,7 @@ public class PostgresqlMenu {
                     estudianteDTO.setFoto(PostgresqlService.getInstance().guardarFotoCarpetaPostgres(estudianteDTO));
                     estudianteDTO.setFoto(PostgresqlService.getInstance().guardarFotoBasePostgres(estudianteDTO));
                     menuFoto(estudianteDTO);
-                }else{
+                } else {
                     System.out.println("OPERACION CANCELADA");
                     menuFoto(estudianteDTO);
                 }
@@ -131,8 +131,8 @@ public class PostgresqlMenu {
                 break;
         }
     }
-    
-    public void menuGestionEstu(){
+
+    public void menuGestionEstu() {
         System.out.println("|-----------------------------------------|");
         System.out.println("|---------GESTION DE ESTUDIANTES----------|");
         System.out.println("|1. CONSULTAR ESTUDIANTE                  |");
@@ -146,18 +146,24 @@ public class PostgresqlMenu {
                 System.out.print("INGRESE EL CODIGO DEL ESTUDIANTE: ");
                 int cod_est = leer.nextInt();
                 EstudianteDTO estudianteDTO = PostgresqlService.getInstance().buscarIdEstudiantePostgres(cod_est);
-                System.out.println(estudianteDTO.toString());
-                System.out.println("|-----------------------------------------|");
-                System.out.println("|---------INFORMACION ESTUDIANTE----------|");
-                System.out.println("NOMBRES: " + estudianteDTO.getNombres());
-                System.out.println("PRIMER APELLIDO: " + estudianteDTO.getApellido1());
-                System.out.println("SEGUNDO APELLIDO: " + estudianteDTO.getApellido2());
-                System.out.println("TELEFONO: " + estudianteDTO.getTelefono());
-                System.out.println("FALCUTAD: " + estudianteDTO.getFacultad());
-                System.out.println("PROGRAMA: " + estudianteDTO.getPrograma());
-                System.out.println("FECHA INICIO: " + estudianteDTO.getFecha_inicio());
-                System.out.println("FOTO: " + estudianteDTO.getFoto());
-                menuFoto(estudianteDTO);
+                Number codigo = cod_est;
+                if (codigo.equals(estudianteDTO.getCodigo())) {
+                    System.out.println(estudianteDTO.toString());
+                    System.out.println("|-----------------------------------------|");
+                    System.out.println("|---------INFORMACION ESTUDIANTE----------|");
+                    System.out.println("NOMBRES: " + estudianteDTO.getNombres());
+                    System.out.println("PRIMER APELLIDO: " + estudianteDTO.getApellido1());
+                    System.out.println("SEGUNDO APELLIDO: " + estudianteDTO.getApellido2());
+                    System.out.println("TELEFONO: " + estudianteDTO.getTelefono());
+                    System.out.println("FALCUTAD: " + estudianteDTO.getFacultad());
+                    System.out.println("PROGRAMA: " + estudianteDTO.getPrograma());
+                    System.out.println("FECHA INICIO: " + estudianteDTO.getFecha_inicio());
+                    System.out.println("FOTO: " + estudianteDTO.getFoto());
+                    menuFoto(estudianteDTO);
+                } else {
+                    System.out.println("NO HAY UN AMIGO CON ESE ID");
+                    menuGestionEstu();
+                }
                 break;
             case 2:
                 menu();
@@ -175,7 +181,7 @@ public class PostgresqlMenu {
                 break;
         }
     }
-    
+
     public void menuFunProd() {
         System.out.println("|-----------------------------------------|");
         System.out.println("|-------FUNCIONES Y PROCEDIMIENTOS--------|");
@@ -338,7 +344,6 @@ public class PostgresqlMenu {
                     menuTransaccion();
                     break;
 
-
                 case 2:
                     System.out.println("NUEVO REGISTRO: ");
                     AmigoDTO amigoDTO = PostgresqlService.getInstance().ingresarAmigo();
@@ -346,7 +351,6 @@ public class PostgresqlMenu {
                     System.out.printf("|%12s|%12s|%12s|%12s|%12s|%n", amigoDTO.getNombre(), amigoDTO.getApellido(), amigoDTO.getTelefono(), amigoDTO.getDireccion(), amigoDTO.getCorreo());
                     menuTransaccion();
                     break;
-
 
                 case 3:
                     System.out.print("INGRESE EL ID DEL AMIGO A ACTUALIZAR: ");
