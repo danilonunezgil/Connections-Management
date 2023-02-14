@@ -24,8 +24,8 @@ public class MenuEstudiantes extends javax.swing.JPanel {
         label_instruccion = new javax.swing.JLabel();
         boton_cargar = new javax.swing.JButton();
         foto_estudiante = new javax.swing.JLabel();
-        conectado_a1 = new javax.swing.JLabel();
-        apellidos = new javax.swing.JLabel();
+        segundoApellido = new javax.swing.JLabel();
+        primerApellido = new javax.swing.JLabel();
         label_codigo = new javax.swing.JLabel();
         label_telefono = new javax.swing.JLabel();
         label_inicio = new javax.swing.JLabel();
@@ -37,7 +37,8 @@ public class MenuEstudiantes extends javax.swing.JPanel {
         telefono = new javax.swing.JLabel();
         fecha_inicio = new javax.swing.JLabel();
         facultad = new javax.swing.JLabel();
-        campo_id = new javax.swing.JTextField();
+        campo_codigo = new javax.swing.JSpinner();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(730, 610));
@@ -63,15 +64,15 @@ public class MenuEstudiantes extends javax.swing.JPanel {
         foto_estudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/project/view/gui/images/user.jpeg"))); // NOI18N
         add(foto_estudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 210, 190));
 
-        conectado_a1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        conectado_a1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        conectado_a1.setText("SEGUNDO APELLIDO");
-        add(conectado_a1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 540, 200, -1));
+        segundoApellido.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        segundoApellido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        segundoApellido.setText("SEGUNDO APELLIDO");
+        add(segundoApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 560, 200, -1));
 
-        apellidos.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        apellidos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        apellidos.setText("PRIMER APELLIDO");
-        add(apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 500, 200, -1));
+        primerApellido.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        primerApellido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        primerApellido.setText("PRIMER APELLIDO");
+        add(primerApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 530, 200, -1));
 
         label_codigo.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         label_codigo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -81,12 +82,12 @@ public class MenuEstudiantes extends javax.swing.JPanel {
         label_telefono.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         label_telefono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_telefono.setText("TELÉFONO");
-        add(label_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 130, -1));
+        add(label_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 130, -1));
 
         label_inicio.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         label_inicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_inicio.setText("FECHA INICIO");
-        add(label_inicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 160, -1));
+        add(label_inicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 160, -1));
 
         label_facultad.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         label_facultad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -101,7 +102,7 @@ public class MenuEstudiantes extends javax.swing.JPanel {
         nombres.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         nombres.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nombres.setText("NOMBRES");
-        add(nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 460, 130, -1));
+        add(nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, 130, -1));
 
         codigo.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         codigo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -111,46 +112,47 @@ public class MenuEstudiantes extends javax.swing.JPanel {
         programa.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         programa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         programa.setText("label_programa");
-        add(programa, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 450, 130, -1));
+        add(programa, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, 130, -1));
 
         telefono.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         telefono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         telefono.setText("label_telefono");
-        add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 130, -1));
+        add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 130, -1));
 
         fecha_inicio.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         fecha_inicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         fecha_inicio.setText("label_inicio");
-        add(fecha_inicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, 130, -1));
+        add(fecha_inicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 130, -1));
 
         facultad.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         facultad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         facultad.setText("label_facultad");
-        add(facultad, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, 130, -1));
+        add(facultad, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 130, -1));
+        add(campo_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 120, -1));
 
-        campo_id.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("CAMBIAR FOTO");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campo_idActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        add(campo_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 200, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void campo_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_idActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campo_idActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel apellidos;
     private javax.swing.JButton boton_cargar;
-    private javax.swing.JTextField campo_id;
+    private javax.swing.JSpinner campo_codigo;
     private javax.swing.JLabel codigo;
     private javax.swing.JLabel conectado_a;
-    private javax.swing.JLabel conectado_a1;
     private javax.swing.JLabel facultad;
     private javax.swing.JLabel fecha_inicio;
     private javax.swing.JLabel foto_estudiante;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel label_codigo;
     private javax.swing.JLabel label_facultad;
     private javax.swing.JLabel label_inicio;
@@ -158,7 +160,9 @@ public class MenuEstudiantes extends javax.swing.JPanel {
     private javax.swing.JLabel label_programa;
     private javax.swing.JLabel label_telefono;
     private javax.swing.JLabel nombres;
+    private javax.swing.JLabel primerApellido;
     private javax.swing.JLabel programa;
+    private javax.swing.JLabel segundoApellido;
     private javax.swing.JLabel telefono;
     private javax.swing.JLabel titulo_connect_oracle1;
     // End of variables declaration//GEN-END:variables
