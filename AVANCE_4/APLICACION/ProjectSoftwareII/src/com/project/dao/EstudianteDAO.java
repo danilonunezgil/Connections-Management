@@ -2,17 +2,14 @@ package com.project.dao;
 
 import com.project.database.ConexionOracle;
 import com.project.database.ConexionPostgresql;
-import com.project.dto.EstudianteDTO;
 import com.project.dto.InfoStudentDTO;
 import com.project.model.Estudiante;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
@@ -23,13 +20,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 /**
  * Clase EstudianteDAO encargada de comunicarse con la base de datos
@@ -182,7 +174,12 @@ public class EstudianteDAO {
         Estudiante estudiante = new Estudiante();
         Connection connection = ConexionPostgresql.getInstance().conexion();
         try {
-            String consulta = "select * from estudiante where codigo = " + idEstudiante;
+           String consulta = """
+                             select est.codigo, est.nombres, est.apellido1, est.apellido2 ,est.telefono,
+                             (select nombre from facultad where id_facultad = est.facultad) as facultad,
+                             (select nombre from programa where id_programa = est.programa and facultad = est.facultad) as programa,
+                             est.fecha_inicio,est.foto
+                             from estudiante est where est.codigo =""" + idEstudiante;
             PreparedStatement statement = connection.prepareStatement(consulta);
             ResultSet resultado = statement.executeQuery();
             if (resultado.next()) {
@@ -204,7 +201,7 @@ public class EstudianteDAO {
             resultado.close();
             statement.close();
         } catch (SQLException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         return estudiante;
     }
@@ -329,7 +326,12 @@ public class EstudianteDAO {
         Estudiante estudiante = new Estudiante();
         Connection connection = ConexionOracle.getInstance().conexion();
         try {
-            String consulta = "select * from estudiante where codigo = " + idEstudiante;
+            String consulta = """
+                              select est.codigo, est.nombres, est.apellido1, est.apellido2 ,est.telefono,
+                              (select nombre from facultad where id_facultad = est.facultad) as facultad,
+                              (select nombre from programa where id_programa = est.programa and facultad = est.facultad) as programa,
+                              est.fecha_inicio,est.foto
+                              from estudiante est where est.codigo =""" + idEstudiante;
             PreparedStatement statement = connection.prepareStatement(consulta);
             ResultSet resultado = statement.executeQuery();
             if (resultado.next()) {
@@ -351,18 +353,19 @@ public class EstudianteDAO {
             resultado.close();
             statement.close();
         } catch (SQLException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         return estudiante;
     }
 
     /**
-    * Método encargado de guardar la foto de un estudiante en oracle
-    * @author Edgar,Danilo y Johan
-    * @param estudiante Number con el identificador del estudiante al que se
-    * quiere cambiar la foto
-    * @return byte[] arreglo de bytes con la informacion de la foto guardada
-    */
+     * Método encargado de guardar la foto de un estudiante en oracle
+     *
+     * @author Edgar,Danilo y Johan
+     * @param estudiante Number con el identificador del estudiante al que se
+     * quiere cambiar la foto
+     * @return byte[] arreglo de bytes con la informacion de la foto guardada
+     */
     public byte[] guardarFotoBaseOracle(Estudiante estudiante) {
         byte[] img = null;
         InputStream imagen = new ByteArrayInputStream(estudiante.getFoto());
@@ -382,14 +385,16 @@ public class EstudianteDAO {
         }
         return img;
     }
-    
+
     /**
-    * Método encargado de guardar la foto de un estudiante en la carpeta de oracle
-    * @author Edgar,Danilo y Johan
-    * @param estudiante Number con el identificador del estudiante al que se
-    * quiere cambiar la foto
-    * @return byte[] arreglo de bytes con la informacion de la foto guardada
-    */
+     * Método encargado de guardar la foto de un estudiante en la carpeta de
+     * oracle
+     *
+     * @author Edgar,Danilo y Johan
+     * @param estudiante Number con el identificador del estudiante al que se
+     * quiere cambiar la foto
+     * @return byte[] arreglo de bytes con la informacion de la foto guardada
+     */
     public byte[] guardarFotoCarpetaOracle(Estudiante estudiante) {
         String ruta = "C:\\ProjectSoftware\\Fotos\\Estudiantes\\Oracle";
         int newW = 210;
@@ -426,12 +431,13 @@ public class EstudianteDAO {
     }
 
     /**
-    * Método encargado de guardar la foto de un estudiante en postgresql
-    * @author Edgar,Danilo y Johan
-    * @param estudiante Number con el identificador del estudiante al que se
-    * quiere cambiar la foto
-    * @return byte[] arreglo de bytes con la informacion de la foto guardada
-    */
+     * Método encargado de guardar la foto de un estudiante en postgresql
+     *
+     * @author Edgar,Danilo y Johan
+     * @param estudiante Number con el identificador del estudiante al que se
+     * quiere cambiar la foto
+     * @return byte[] arreglo de bytes con la informacion de la foto guardada
+     */
     public byte[] guardarFotoBasePostgres(Estudiante estudiante) {
         byte[] img = null;
         InputStream imagen = new ByteArrayInputStream(estudiante.getFoto());
@@ -451,14 +457,16 @@ public class EstudianteDAO {
         }
         return img;
     }
-    
+
     /**
-    * Método encargado de guardar la foto de un estudiante en la carpeta de postgres
-    * @author Edgar,Danilo y Johan
-    * @param estudiante Number con el identificador del estudiante al que se
-    * quiere cambiar la foto
-    * @return byte[] arreglo de bytes con la informacion de la foto guardada
-    */
+     * Método encargado de guardar la foto de un estudiante en la carpeta de
+     * postgres
+     *
+     * @author Edgar,Danilo y Johan
+     * @param estudiante Number con el identificador del estudiante al que se
+     * quiere cambiar la foto
+     * @return byte[] arreglo de bytes con la informacion de la foto guardada
+     */
     public byte[] guardarFotoCarpetaPostgres(Estudiante estudiante) {
         String ruta = "C:\\ProjectSoftware\\Fotos\\Estudiantes\\Postgres";
         int newW = 210;
